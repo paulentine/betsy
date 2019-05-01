@@ -3,16 +3,18 @@ Rails.application.routes.draw do
 
   root "homepages#index"
 
-  resources :products
+  resources :orders
   resources :products do
     resources :reviews, only: [:create]
   end
+  resources :merchants, except: [:destroy, :edit, :update] do
+    resources :orders, only: [:index, :show]
+  end
 
-  post "/logout", to: "merchants#logout", as: "logout"
-  get "/login", to: "merchants#login_form", as: "login"
-  post "/login", to: "merchants#login"
-  get "/merchants/current", to: "merchants#current", as: "current_user"
+  get "/orders/confirmation", to:"orders#confirmation", as:"order_confirmation"
+  
+  get "/auth/github", as: "github_login"
+  get "/auth/:provider/callback", to: "merchants#create"
+  delete "/logout", to: "merchants#destroy", as: "logout"
 
-  resources :merchants
-  resources :orders
 end
