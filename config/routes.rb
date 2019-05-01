@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   end
 
   resources :order
+
+  get "/orders/confirmation", to:"orders#confirmation", as:"order_confirmation"
 end

@@ -29,16 +29,20 @@ class OrdersController < ApplicationController
         if successful
             flash[:status] = :success
             flash[:message] = "Successfully created order with ID ##{@order.id}"
-            redirect_to ORDER CONFIRMATION SCREEN_path(@work.id)
+            redirect_to order_confirmation_path(@order.id)
         else
             flash.now[:status] = :error
             flash.now[:message] = "Could not create order"
             render :new, status: :bad_request
         end
     end
+
+    def confirmation
+        
+    end
     
     # Show is entirely the find_order helper
-    # def show; end
+     def show; end
     
     private
     
