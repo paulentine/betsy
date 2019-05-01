@@ -4,8 +4,24 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+order1: 
+  email: tim@gmail.com 
+  name: Tim Riggins
+  address: 7252 Burleson Manor Rd., Manor, Texas
+  zipcode: 80435
+  cc_num: 12345678910
+  cc_cvv: 435
+  cc_expiration: 08/19/20
+        
+
+
+order2:
+  email: matt@gmail.com 
+  name: Matt Saracen
+  address: 3009 Kuhlman Ave., Austin, Texas
+  zipcode: 78702
+  cc_num: 10987654321
+  cc_cvv: 689
+  cc_expiration: 06/25/21
+
+
