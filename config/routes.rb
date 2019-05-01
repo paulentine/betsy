@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "merchants#destroy", as: "logout"
   
   resources :merchants, except: [:destroy, :edit, :update] do
-    resources :orders, [:index, :show]
+    # resources :orders, [:index, :show]
   end
 
   resources :order

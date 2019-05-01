@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
     before_action :find_order, only: [:show, :destroy]
+    skip_before_action :require_login
     
     def index
         
