@@ -22,13 +22,6 @@ class OrdersController < ApplicationController
     def create
         @order = Order.new(order_params)
 
-        if @order.products.each do |product|
-            #############
-            flash.now[:status] = :error
-            flash.now[:message] = "Could not create order"
-            render :new, status: :bad_request
-        end
-
         successful = @order.save
         if successful
             flash[:status] = :success
