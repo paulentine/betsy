@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-  before_action :find_merchant, only: [:show, :edit, :update]
+  before_action :find_merchant, only: [:show]
   skip_before_action :require_login, only: [:create]
 
   def index
@@ -54,19 +54,8 @@ class MerchantsController < ApplicationController
     redirect_to root_path
   end
 
-  # Show and edit are entirely handled by find_merchant helper method
+  # Show is entirely handled by find_merchant helper method
 
-  def update
-    if @merchant.update(merchant_params)
-      flash[:status] = :success
-      flash[:message] = "Successfully updated merchant #{@merchant.id}"
-      redirect_to work_path(@work)
-    else
-      flash.now[:status] = :error
-      flash.now[:message] = "Could not edit merchant #{@merchant.id}"
-      render :edit, status: :bad_request
-    end
-  end
 
   private
 
