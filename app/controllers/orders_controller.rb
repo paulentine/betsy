@@ -2,19 +2,16 @@ class OrdersController < ApplicationController
     before_action :find_order, only: [:show, :destroy]
     
     def index
-        # Load a list of books from somewhere
+        
         if params[:merchant_id]
-        # @books = Book.where(author_id: params[:author_id])
-    
-        # - or -
     
         merchant = Merchant.find_by(id: params[:merchant_id])
-        if merchant
-            @orders = merchant.orders
-        else
-            head :not_found
-            return
-        end
+            if merchant
+                @orders = merchant.orders
+            else
+                head :not_found
+                return
+            end
         end
     end
     
@@ -24,6 +21,13 @@ class OrdersController < ApplicationController
     
     def create
         @order = Order.new(order_params)
+
+        if @order.products.each do |product|
+            #############
+            flash.now[:status] = :error
+            flash.now[:message] = "Could not create order"
+            render :new, status: :bad_request
+        end
 
         successful = @order.save
         if successful
@@ -38,7 +42,7 @@ class OrdersController < ApplicationController
     end
 
     def confirmation
-        
+
     end
     
     # Show is entirely the find_order helper

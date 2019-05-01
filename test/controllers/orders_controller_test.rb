@@ -1,6 +1,9 @@
 require "test_helper"
 
 describe OrdersController do
+  before do
+    @merchant = Merchant.first
+  end
   describe "index" do
     it "can get index" do
       get orders_path
@@ -31,7 +34,7 @@ describe OrdersController do
 
     it "will redirect for an invalid order" do
       # Act
-      get work_path(-1)
+      get order_path(-1)
 
       # Assert
       must_respond_with :not_found
@@ -96,36 +99,29 @@ describe OrdersController do
 
     end
 
-    it "sends back bad_request if no book data is sent" do
-      book_data = {
-        book: {
-          title: "",
+    it "sends back bad_request if no order data is sent" do
+      order_data = {
+        order: {
+            email: "",
+            name: "",
+            address: "",
+            zipcode: "",
+            cc_num: "",
+            cc_cvv: "",
+            cc_expiration: "",
         },
       }
-      expect(Book.new(book_data[:book])).wont_be :valid?
+      expect(Order.new(order_data[:order])).wont_be :valid?
 
       # Act
       expect {
-        post books_path, params: book_data
-      }.wont_change "Book.count"
+        post orders_path, params: order_data
+      }.wont_change "Order.count"
 
       # Assert
       must_respond_with :bad_request
 
       check_flash(:error)
-    end
-  end
-
-  describe "edit" do
-    it "responds with OK for a real book" do
-      get edit_book_path(@book)
-      must_respond_with :ok
-    end
-
-    it "responds with NOT FOUND for a fake book" do
-      book_id = Book.last.id + 1
-      get edit_book_path(book_id)
-      must_respond_with :not_found
     end
   end
 end
