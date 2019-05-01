@@ -68,6 +68,7 @@ class ProductsController < ApplicationController
       flash[:status] = :error
       flash[:message] = "You cannot delete a product that is not yours"
       redirect_to product_path(@product)
+    end
   end
 
 
