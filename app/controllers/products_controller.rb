@@ -46,7 +46,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  # def show ; end
+  def show ; end
 
   def edit
     unless @product.merchant_id == @current_merchant.id
@@ -87,6 +87,7 @@ class ProductsController < ApplicationController
       flash[:status] = :error
       flash[:message] = "You cannot delete a product that is not yours"
       redirect_to product_path(@product)
+    end
   end
 
 
@@ -104,4 +105,5 @@ class ProductsController < ApplicationController
       return
     end
   end
+end
 end

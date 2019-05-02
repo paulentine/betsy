@@ -1,3 +1,26 @@
 <%# Intent for this page:
 
-User enters look up Id and order details are shown. %>
+Merchants looking at individual orders %>
+
+<h2 class="page-header"> Details for Order # <%= @order.id%>
+
+<table class="individual-order-table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email Address</th>
+        <th>Mailing Address</th>
+        <th>Last 4 Digits of CC Number</th>
+        <th>Credit Card Exp. Date</th>
+    </tr>
+    </thead>
+  <tbody>
+    <tr>
+        <td><%= @order.name %></td>
+        <td><%= @order.email%></td>
+        <td><%= @order.address%>, <%= @order.zipcode %></td>
+        <td><%= Order.last4_ccnum(@order.cc_num) %></td>
+        <td><%= @order.cc_expiration %></td>
+    </tr>
+  </tbody>
+</table>
