@@ -11,10 +11,12 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
   end
 
-  get "/orders/confirmation", to:"orders#confirmation", as:"order_confirmation"
-  
+  get "/orders/confirmation", to: "orders#confirmation", as: "order_confirmation"
+
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create"
   delete "/logout", to: "merchants#destroy", as: "logout"
 
+  get "products/category/:id", to: "products#category", as: "category"
+  resources :categories, :except => [:destroy]
 end
