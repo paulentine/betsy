@@ -1,5 +1,7 @@
-class Order < ApplicationRecord
-  has_and_belongs_to_many :products
+# frozen_string_literal: true
 
-  validates :orders_products, presence: true
+class Order < ApplicationRecord
+  has_many :order_items # plural
+
+  # validates :orders_products, presence: true
 end
