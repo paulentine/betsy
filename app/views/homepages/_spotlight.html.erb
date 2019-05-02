@@ -4,3 +4,18 @@ Similar to how we did top 10 items in media categories with Mediaranker,
 we plan to provide 5 products under highlighted categories.
 
 This is the code I used in Media Ranker. Will adjust for this purpose. %>
+
+<ul>
+
+Product.find_by category: 'Food'
+Product.find_by category: 'Nature'
+Product.find_by category: 'Art'
+
+
+  <% 5.times do |product| %>
+ 
+    <li>
+      <h4><%= link_to product.sample.name, product_path(product) %> <small> sold by <%= product.merchant %></small></h4>
+    </li>
+  <% end %>
+</ul>
