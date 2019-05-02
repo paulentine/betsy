@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
     before_action :find_order, only: [:show, :destroy]
-    skip_before_action :require_login
+    skip_before_action :require_login, only: [:new, :create, :confirmation,]
     
     def index
         
@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
     end
 
     def confirmation
-        
+        # To Do: Confirmation page
     end
     
     # Show is entirely the find_order helper
@@ -56,4 +56,8 @@ class OrdersController < ApplicationController
         return
         end
     end  
+
+    def cart
+        @cart = session[:cart]
+    end
 end
