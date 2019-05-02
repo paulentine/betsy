@@ -2,6 +2,25 @@ class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
   skip_before_action :require_login, only: [:index, :show]
 
+  def cart
+    session[:cart] = []
+  end
+
+  def self.add_to_cart
+    if self.quantity >= 1
+      session[:cart].each do |item|
+        if item.has_key?(self.id)
+          item[self.id] += 1
+        else
+          session[:cart] << { self.id => 1 }
+        end
+      self.quantity -= 1
+    else 
+      flash[:status] = :error
+      flash[:message] = "This item is out of stock."
+      redirect_to product_path(self)
+    end
+  end
 
   def index
     @products = Product.all
@@ -27,7 +46,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  # def show ; end
+  def show ; end
 
   def edit
     unless @product.merchant_id == @current_merchant.id
@@ -86,4 +105,5 @@ class ProductsController < ApplicationController
       return
     end
   end
+end
 end
