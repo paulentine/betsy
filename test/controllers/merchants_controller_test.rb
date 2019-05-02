@@ -1,7 +1,49 @@
 require "test_helper"
 
 describe MerchantsController do
-  # it "must be a real test" do
-  #   flunk "Need real tests"
-  # end
+  describe "auth callback" do
+    it "can log in an existing user" do
+      # Arrange
+      merchant = merchants(:merchant1)
+
+       # Act
+      expect {
+        perform_login(merchant)
+      }.wont_change "Merchant.count"
+
+       # Assert
+      expect(session[:merchant_id]).must_equal merchant.id
+      must_redirect_to root_path
+    end
+
+    it "creates a new user" do
+      start_count = Merchant.count
+      merchant = Merchant.new(username: "test_user", email: "test@user.com", uid: 99999, provider: "github")
+    
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
+      get auth_callback_path(:github)
+    
+      must_redirect_to root_path
+    
+      # Should have created a new merchant
+      Merchant.count.must_equal start_count + 1
+    
+      # The new merchant's ID should be set in the session
+      session[:merchant_id].must_equal Merchant.last.id
+    end
+    
+  end
+
+  describe "current" do
+    it "responds with OK for a logged-in merchant" do
+      # Arrange
+      perform_login
+
+      # Act
+      get current_merchant_path
+
+      # Assert
+      must_respond_with :found
+    end
+  end
 end

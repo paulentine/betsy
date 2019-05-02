@@ -4,11 +4,8 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-merchant1: 
-  username: blair_waldorf
-  email: blair@constance.com
-  uid: 12345
-  provider: github
+one: {}
+# column: value
 #
 two: {}
 # column: value
