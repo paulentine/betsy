@@ -27,8 +27,6 @@ class ActiveSupport::TestCase
     expect(flash[:message]).wont_be_nil
   end
 
-<<<<<<< HEAD
-=======
   def setup
     # Once you have enabled test mode, all requests
     # to OmniAuth will be short circuited to use the mock authentication hash.
@@ -47,27 +45,17 @@ class ActiveSupport::TestCase
     }
   end
 
->>>>>>> 09b86589d49e34ad2e5ce6aab02ebc0259c22727
   def perform_login(merchant = nil)
     merchant ||= Merchant.first
 
     # Create mock data for this user as though it had come from github
     mock_auth_hash = {
-<<<<<<< HEAD
-      uid: merchant.uid,
-      provider: merchant.provider,
-      info: {
-        name: merchant.username,
-        email: merchant.email,
-      },
-=======
       info: {
         username: merchant.username,
         email: merchant.email,
       },
       uid: merchant.uid,
       provider: merchant.provider,
->>>>>>> 09b86589d49e34ad2e5ce6aab02ebc0259c22727
     }
 
     # Tell OmniAuth to use this data for the next request

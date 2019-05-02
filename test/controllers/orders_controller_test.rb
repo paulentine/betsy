@@ -1,6 +1,10 @@
 require "test_helper"
 
 describe OrdersController do
+  before do
+    @merchant = Merchant.first
+  end
+
   describe "new" do
     it "can get the new order page" do
 
@@ -71,7 +75,6 @@ describe OrdersController do
   describe "Logged in users" do
     before do
       perform_login
-      @merchant = Merchant.first
     end
     describe "index" do
       it "can get index" do
