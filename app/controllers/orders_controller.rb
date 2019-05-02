@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
     end
 
     def confirmation
-
+        
     end
     
     # Show is entirely the find_order helper
