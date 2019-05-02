@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get "/orders/confirmation", to: "orders#confirmation", as: "order_confirmation"
 
-  get "/auth/github", as: "github_login"
+  get "/auth/github", as: "login"
   get "/auth/:provider/callback", to: "merchants#create", as: "callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
 
