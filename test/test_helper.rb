@@ -39,12 +39,12 @@ class ActiveSupport::TestCase
 
     # Create mock data for this user as though it had come from github
     mock_auth_hash = {
-      uid: merchant.uid,
-      provider: merchant.provider,
       info: {
         username: merchant.username,
         email: merchant.email,
       },
+      uid: merchant.uid,
+      provider: merchant.provider,
     }
 
     # Tell OmniAuth to use this data for the next request
