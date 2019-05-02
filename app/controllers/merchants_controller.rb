@@ -12,14 +12,14 @@ class MerchantsController < ApplicationController
     merchant = Merchant.find_by(uid: auth_hash[:uid], provider: "github")
     if merchant
       # Merchant was found in the database
-      flash[:success] = "Logged in as returning merchant #{merchant.name}"
+      flash[:success] = "Logged in as returning merchant #{merchant.username}"
     else
       # Merchant doesn't match anything in the DB
       # Attempt to create a new merchant
       merchant = Merchant.build_from_github(auth_hash)
 
       if merchant.save
-        flash[:success] = "Logged in as new merchant #{merchant.name}"
+        flash[:success] = "Logged in as new merchant #{merchant.username}"
       else
         # Couldn't save the merchant for some reason. If we
         # hit this it probably means there's a bug with the
@@ -48,7 +48,7 @@ class MerchantsController < ApplicationController
   end
 
   def destroy # Destroy action = logout
-    session[:user_id] = nil
+    session[:merchant_id] = nil
     flash[:success] = "Successfully logged out!"
 
     redirect_to root_path
