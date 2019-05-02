@@ -117,12 +117,12 @@ describe OrdersController do
   describe "guest users" do
     it "requires login for index" do
       get merchant_orders_path(@merchant.id)
-      must_redirect_to github_login_path
+      must_redirect_to login_path
     end
 
     it "requires login for show" do
-      get merchant_order_path(Order.first)
-      must_redirect_to github_login_path
+      get merchant_order_path(id: Order.first.id, merchant_id: @merchant.id)
+      must_redirect_to login_path
     end
   end
 end
