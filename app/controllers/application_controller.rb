@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :require_login
+  before_action :list_categories, :list_merchants, :current_order
+
+  def list_categories
+    @categories = Category.all
+  end
 
   def current_merchant
     @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
