@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :require_login
+  before_action :list_categories, :list_merchants, :current_order
+
+  def list_categories
+    @categories = Category.all
+  end
 
   def current_merchant
     @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
@@ -8,7 +13,7 @@ class ApplicationController < ActionController::Base
   def require_login
     if current_merchant.nil?
       flash[:error] = "You must be logged in to view this section"
-      redirect_to github_login_path
+      redirect_to login_path
     end
   end
 end
