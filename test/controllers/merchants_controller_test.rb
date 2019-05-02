@@ -35,7 +35,7 @@ describe MerchantsController do
   end
 
   describe "current" do
-    it "responds with 302 Found for a logged-in merchant" do
+    it "responds with OK for a logged-in merchant" do
       # Arrange
       perform_login
 
