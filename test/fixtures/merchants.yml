@@ -7,6 +7,8 @@
 merchant1: 
   username: blair_waldorf
   email: blair@constance.com
+  uid: 12345
+  provider: github
 #
 two: {}
 # column: value
