@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get "/orders/confirmation", to: "orders#confirmation", as: "order_confirmation"
 
+  get "/merchant/current", to: "merchants#current", as: "current_merchant"
+
   get "/auth/github", as: "login"
   get "/auth/:provider/callback", to: "merchants#create", as: "callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
