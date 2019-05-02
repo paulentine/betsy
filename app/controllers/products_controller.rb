@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  # def show ; end
+  def show ; end
 
   def edit
     unless @product.merchant_id == @current_merchant.id
@@ -86,4 +86,5 @@ class ProductsController < ApplicationController
       return
     end
   end
+end
 end
