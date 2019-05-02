@@ -61,7 +61,7 @@ class ActiveSupport::TestCase
     # Tell OmniAuth to use this data for the next request
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash)
 
-    get auth_callback_path("github")
+    get callback_path("github")
 
     return merchant
   end
