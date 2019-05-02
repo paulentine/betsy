@@ -70,7 +70,7 @@ describe OrdersController do
 
   describe "Logged in users" do
     before do
-      perform_login(merchant(:merchant1))
+      perform_login
       @merchant = Merchant.first
     end
     describe "index" do
@@ -113,7 +113,7 @@ describe OrdersController do
 
   describe "guest users" do
     it "requires login for index" do
-      get merchant_orders_path
+      get merchant_orders_path(@merchant.id)
       must_redirect_to github_login_path
     end
 

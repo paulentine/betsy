@@ -26,4 +26,25 @@ class ActiveSupport::TestCase
     expect(flash[:status]).must_equal(expected_status)
     expect(flash[:message]).wont_be_nil
   end
+
+  def perform_login(merchant = nil)
+    merchant ||= Merchant.first
+
+    # Create mock data for this user as though it had come from github
+    mock_auth_hash = {
+      uid: merchant.uid,
+      provider: merchant.provider,
+      info: {
+        name: merchant.username,
+        email: merchant.email,
+      },
+    }
+
+    # Tell OmniAuth to use this data for the next request
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash)
+
+    get auth_callback_path("github")
+
+    return merchant
+  end
 end
