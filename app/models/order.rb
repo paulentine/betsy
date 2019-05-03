@@ -33,7 +33,7 @@ class Order < ApplicationRecord
     OrderItem.where(product_id.where(merchant_id: session[:merchant_id])
     (Order.where(status: status))
   end
-I need all orderitems from orders with the status.
+I need all orderitems from orders with the status
 
   def self.total_number_of_orders_by_status(status)
     return "TO DO"
