@@ -51,7 +51,7 @@ input_orders = [
         name: "Texas Forever Tour",
         price: 50.0,
         quantity: 3,
-        description: "Tour the filming locations of Friday Night Lights"
+        description: "Tour of the Riggins farm"
     },
   ]
 

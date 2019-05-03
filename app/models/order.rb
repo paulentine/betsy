@@ -36,6 +36,14 @@ class Order < ApplicationRecord
 I need all orderitems from orders with the status
 
   def self.total_number_of_orders_by_status(status)
-    return "TO DO"
+    all_order_items = OrderItem.where(order_id: Order.where(status: status).id)
+
+    all_unique_orders = []
+    all_order_items.each do |order_item|
+      if all_unique_orders.exclude(order_item.order_id)
+        all_unique_orders << order_item.order_id
+      end
+    end
+    return all_unique_orders.length
   end
 end
