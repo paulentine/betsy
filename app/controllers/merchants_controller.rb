@@ -8,6 +8,9 @@ class MerchantsController < ApplicationController
 
   def create
     auth_hash = request.env["omniauth.auth"]
+    if auth_hash == nil
+      puts "auth_hash not initialized :'("
+    end
 
     merchant = Merchant.find_by(uid: auth_hash[:uid], provider: "github")
     if merchant
@@ -56,13 +59,12 @@ class MerchantsController < ApplicationController
 
   # Show is entirely handled by find_merchant helper method
 
-
   private
 
   def merchant_params
     return params.require(:merchant).permit(:username, :email)
   end
-    
+
   def find_merchant
     @merchant = Merchant.find_by(id: params[:id])
     unless @merchant

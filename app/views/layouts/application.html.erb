@@ -36,8 +36,12 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Merchant</a>
               <div class="dropdown-menu" >
-                <% @users.each do |user| %>
-                  <%= link_to "#{user.username}", merchant_path(user.id), class: "dropdown-item" %>
+                <% if @merchants%>
+                  <% @merchants.each do |merchant| %>
+                    <%= link_to "#{merchant.username}", merchant_path(merchant.id), class: "dropdown-item" %>
+                  <%end%>
+                <% else %>
+                  <p>hiii</p>
                 <% end %>
               </div>
           </li>
@@ -54,13 +58,13 @@
           <% if session[:user_id] %>
             <%= link_to "Log out", logout_path, method: "delete" %>
           <% else %>
-            <%= link_to "Login with Github", github_login_path, class: "nav-link" %>
+            <%= link_to "Login with Github", login_path, class: "nav-link" %>
           <% end %>
           </li>
 
           <%# TO DO: make sure this link will only appear when logged in %>
           <li>
-            <%= link_to "View Dashboard", merchant_path, class: "nav-link" %>
+            <%= link_to "View Dashboard", merchant_path(merchant.id), class: "nav-link" %>
           </li>
 
         </ul>

@@ -9,6 +9,4 @@ merchant1:
   email: blair@constance.com
   uid: 12345
   provider: github
-#
-two: {}
-# column: value
+

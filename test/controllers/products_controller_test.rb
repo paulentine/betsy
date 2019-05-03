@@ -8,19 +8,17 @@ describe ProductsController do
       must_respond_with :ok
     end
 
-    it "renders even if all products have a status of deleted" do
-      @products.each do |product|
-        product.deleted = true
-      end
+    it "renders even if are zero products" do
+      Product.destroy_all
 
       get products_path
 
       must_respond_with :ok
     end
   end
-  
+
   describe "show" do
-    it "returns a 404 status code if the product doesn't exist" do
+    it "returns a 404 status code the product doesn't exist" do
       product_id = "FAKE ID"
 
       get product_path(product_id)
@@ -29,18 +27,20 @@ describe ProductsController do
     end
 
     it "works for a Product instance that exists" do
-      product = products(:one)
-      
+      product = products(:product1)
+      puts product.id
       get product_path(product)
 
       must_respond_with :ok
     end
   end
 
-describe "Must be logged in" do
+  describe "Logged in user" do
     before do
       @merchant = perform_login
     end
+
+    # binding.pry
 
     describe "new" do
       it "retruns status code 200" do
@@ -51,18 +51,21 @@ describe "Must be logged in" do
 
     describe "create" do
       it "creates a new product" do
+        test_merchant = merchants(:merchant1)
         product_data = {
           product: {
-            name: "product",
+            name: "randommmmm",
             price: 10,
-            merchant_id: Merchant.first.id,
-            deleted: false
+            merchant_id: test_merchant.id
           },
         }
 
+        # Book.new(book_data[:book])
+        # binding.pry
+
         expect {
           post products_path, params: product_data
-        }.must_change "Products.count", +1
+        }.must_change "Product.count", +1
 
         product = Product.last
 
@@ -78,7 +81,7 @@ describe "Must be logged in" do
       it "sends back bad_request if no product data is sent" do
         product_data = {
           product: {
-            name: ""
+            name: "",
           },
         }
         expect(Product.new(product_data[:product])).wont_be :valid?
