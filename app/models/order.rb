@@ -25,8 +25,11 @@ class Order < ApplicationRecord
   end
 
   def self.total_revenue_by_status(status)
-    
+    return "TO DO"
   end
 
+
   def self.total_number_of_orders_by_status(status)
+    return "TO DO"
+  end
 end
