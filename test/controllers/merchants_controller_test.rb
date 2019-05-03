@@ -21,7 +21,7 @@ describe MerchantsController do
       merchant = Merchant.new(username: "test_user", email: "test@user.com", uid: 99999, provider: "github")
     
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
-      get auth_callback_path(:github)
+      get callback_path(:github)
     
       must_redirect_to root_path
     
@@ -35,7 +35,7 @@ describe MerchantsController do
   end
 
   describe "current" do
-    it "responds with 302 Found for a logged-in merchant" do
+    it "responds with OK for a logged-in merchant" do
       # Arrange
       perform_login
 

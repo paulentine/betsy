@@ -47,6 +47,8 @@ class ActiveSupport::TestCase
 
   def perform_login(merchant = nil)
     merchant ||= Merchant.first
+    puts Merchant.first
+    puts "totally performed login"
 
     # Create mock data for this user as though it had come from github
     mock_auth_hash = {
@@ -61,8 +63,9 @@ class ActiveSupport::TestCase
     # Tell OmniAuth to use this data for the next request
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash)
 
-    get auth_callback_path("github")
+    get callback_path("github")
 
+    puts merchant.username
     return merchant
   end
 end

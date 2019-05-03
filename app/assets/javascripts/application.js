@@ -57,3 +57,19 @@ function deletingEffect() {
 };
 
 typingEffect();
+
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cycle.all.2.74.js"></script>
+<script>
+$(document).ready(function() {
+	$('#slideshow').cycle({
+	fx: 'fade',
+	pager: '#smallnav',
+	pause:   1,
+	speed: 1800,
+	timeout:  3500
+	});
+});
+</script>
