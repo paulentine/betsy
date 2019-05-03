@@ -5,6 +5,7 @@ This is the order fulfillment page for the merchant %>
 Total Revenue
 Total Revenue by status
 Total number of orders by status
+
 Filter orders displayed by status
 Link to each individual order
 A list of orders including at least one of my products:
@@ -14,3 +15,21 @@ DateTime the order was placed
 Link to transition the order item to marked as shipped
 The current status of the order ("pending", "paid", "complete", "cancelled")
 
+<table class="fulfillment_table">
+    <thead>
+    <tr>
+        <th>Total Revenue</th>
+        <th>Total Revenue by Status</th>
+        <th>Total Number of Orders by Status</th>
+    </tr>
+    </thead>
+  
+  <tbody>
+    <tr>
+        <td><%= Order.total_revenue %></td>
+        <td><%= Order.total_revenue_by_status(status)%></td>
+        <td><%= self.total_number_of_orders_by_status(status)%></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
