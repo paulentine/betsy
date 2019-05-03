@@ -122,7 +122,7 @@ input_orders = [
 
   products_failures = []
   input_products.each do |input_products|
-    product = Product.new(name: input_products[:name], price: input_products[:price], quantity: input_products[:quantity], description: input_products[:description])
+    product = Product.new(name: input_products[:name], quantity: input_products[:quantity], description: input_products[:description], price: input_products[:price])
     successful = product.save
     if successful
       puts "Created product: #{product.inspect}"
