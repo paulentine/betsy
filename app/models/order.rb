@@ -30,7 +30,7 @@ class Order < ApplicationRecord
     item_price = 0
     total_revenue = 0
     # orders_with_status = Order.where(status: status)
-    OrderItem.where(product_id.where(merchant_id: session[:merchant_id])
+    OrderItem.where(product_id.where(merchant_id: session[:merchant_id]))
     (Order.where(status: status))
   end
 I need all orderitems from orders with the status
