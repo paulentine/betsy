@@ -40,8 +40,6 @@ describe ProductsController do
       @merchant = perform_login
     end
 
-    # binding.pry
-
     describe "new" do
       it "retruns status code 200" do
         get new_product_path
@@ -51,7 +49,7 @@ describe ProductsController do
 
     describe "create" do
       it "creates a new product" do
-        test_merchant = merchants(:merchant1)
+        test_merchant = Merchant.first
         product_data = {
           product: {
             name: "randommmmm",
@@ -59,9 +57,6 @@ describe ProductsController do
             merchant_id: test_merchant.id
           },
         }
-
-        # Book.new(book_data[:book])
-        # binding.pry
 
         expect {
           post products_path, params: product_data
@@ -94,6 +89,112 @@ describe ProductsController do
 
         check_flash(:error)
       end
+    end
+
+    describe "destroy" do
+      it "mark product as deleted when the product belongs to the current merchant" do
+        product_data = {
+          product: {
+          name: "product to be deleted",
+          price: 10,
+          merchant_id: Merchant.first.id
+          },
+        }
+        product = Product.create(product_data[:product])
+        
+        # product.destroy
+        # product.save
+
+
+        expect {
+          delete product_path(product)
+        }.wont_change "Product.count"
+
+        check_flash
+
+        must_respond_with :redirect
+        must_redirect_to merchant_path(Merchant.first)
+
+        product.reload
+        expect(product.deleted).must_equal true
+      end
+
+      it "doesn't allow a merchant to delete a product if it is not theirs" do
+        product_data = {
+          product: {
+          name: "product to be deleted",
+          price: 10,
+          merchant_id: Merchant.last.id
+          },
+        }
+        product = Product.create(product_data[:product])
+      
+        product.destroy
+        product.save
+        
+        expect(product.deleted).wont_equal true
+
+        check_flash(:error)
+
+        must_respond_with :redirect
+        must_redirect_to product_path(product)
+      end
+    end
+  end
+
+  describe "guest users" do
+    it "requires login for new" do
+      get new_product_path
+
+      must_respond_with :redirect
+      must_redirect_to login_path
+    end
+
+    it "requires login for create" do
+      product_data = {
+        product: {
+          name: "this is a new product",
+          price: 10.00,
+        },
+      }
+
+      expect {
+        post products_path, params: product_data
+      }.wont_change "Product.count"
+
+      must_respond_with :redirect
+      must_redirect_to login_path
+    end
+
+    it "requires login for edit" do
+      get edit_product_path(Product.first)
+
+      must_respond_with :redirect
+      must_redirect_to login_path
+    end
+
+    it "requires login for update" do
+      old_product= Product.first.title
+      product_data = {
+        product: {
+          name: old_product + " an edit",
+          price: 10.00,
+        },
+      }
+
+      patch product_path(Product.first), params: product_data
+
+      expect(Product.first.name).must_equal old_product
+      must_respond_with :redirect
+      must_redirect_to login_path
+    end
+
+    it "requires login for delete" do
+      expect {
+        delete product_path(Product.first)
+      }.wont_change "Product.count"
+      must_respond_with :redirect
+      must_redirect_to login_path
     end
   end
 end

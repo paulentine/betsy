@@ -9,3 +9,9 @@ merchant1:
   email: blair@constance.com
   uid: 12345
   provider: github
+
+merchant2: 
+  username: chuck_bass
+  email: chuck@stjudes.com
+  uid: 56789
+  provider: github
