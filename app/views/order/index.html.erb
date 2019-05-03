@@ -28,7 +28,7 @@ The current status of the order ("pending", "paid", "complete", "cancelled")
     <tr>
         <td><%= Order.total_revenue %></td>
         <td><%= Order.total_revenue_by_status(status)%></td>
-        <td><%= self.total_number_of_orders_by_status(status)%></td>
+        <td><%= Order.total_number_of_orders_by_status(status)%></td>
     </tr>
   </tbody>
   <% end %>

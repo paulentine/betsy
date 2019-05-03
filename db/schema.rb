@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_202723) do
     t.string "cc_num"
     t.string "cc_cvv"
     t.string "cc_expiration"
-    t.string "status"
+    t.string "status" 
   end
 
   create_table "products", force: :cascade do |t|
