@@ -37,19 +37,21 @@ input_orders = [
   input_products = [
     {
         name: "Walking Tour of Pike Place Market",
-        price: 100,
+        price: 100.0,
         quantity: 5,
-        # description: "Stroll around Pike Place Market and learn about the history of the area"
+        description: "Stroll around Pike Place Market and learn about the history of the area"
     },
     {
         name: "Wine and Cheese Tasting",
-        price: 200,
+        price: 200.0,
         quantity: 5,
+        description: "Try local wines and cheese"
     },
     {
         name: "Texas Forever Tour",
-        price: 50,
+        price: 50.0,
         quantity: 3,
+        description: "Tour the filming locations of Friday Night Lights"
     },
   ]
 
@@ -120,7 +122,7 @@ input_orders = [
 
   products_failures = []
   input_products.each do |input_products|
-    product = Product.new(name: input_products[:name], price: input_products[:price], quantity: input_products[:product])
+    product = Product.new(name: input_products[:name], price: input_products[:price], quantity: input_products[:quantity], description: input_products[:description])
     successful = product.save
     if successful
       puts "Created product: #{product.inspect}"
@@ -150,7 +152,7 @@ input_orders = [
 
   order_items_failures = []
   input_order_items.each do |input_order_items|
-    order_items = OrderItems.new(quantity: input_order_items[:category], order_id: input_order_items[:order_id], product_id: input_order_items[:product_id])
+    order_items = OrderItem.new(quantity: input_order_items[:category], order_id: input_order_items[:order_id], product_id: input_order_items[:product_id])
     successful = order_items.save
     if successful
       puts "Created order_item: #{order_item.inspect}"
