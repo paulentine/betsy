@@ -40,18 +40,19 @@ class ProductsController < ApplicationController
       flash[:message] = "Product added successfully"
       redirect_to product_path(@product.id)
     else
-      flash.now[:status] = :error
-      flash.now[:message] = "Product could not be added. Try again."
-      render :new, status: :bad_request
+      puts "AHHHHHHH"
+      # flash.now[:status] = :error
+      # flash.now[:message] = "Product could not be added. Try again."
+      # render :new, status: :bad_request
     end
   end
 
-  def show ; end
+  # def show; end
 
   def edit
     unless @product.merchant_id == @current_merchant.id
       # does this get handled here or should we handle it in the view instead?
-      # if a product doesn't belong to the current user, then they don't see the 
+      # if a product doesn't belong to the current user, then they don't see the
       # edit/delete button on their view?
       flash[:status] = :error
       flash[:message] = "You cannot delete a product that is not yours"
@@ -79,10 +80,10 @@ class ProductsController < ApplicationController
       flash[:status] = :success
       flash[:message] = "Successfully deleted #{@product.name}"
       # not sure about this path? vv
-      redirect_to merchant_path(Merchant.find(@product.merchant_id)) 
+      redirect_to merchant_path(Merchant.find(@product.merchant_id))
     else
       # does this get handled here or should we handle it in the view instead?
-      # if a product doesn't belong to the current user, then they don't see the 
+      # if a product doesn't belong to the current user, then they don't see the
       # edit/delete button on their view?
       flash[:status] = :error
       flash[:message] = "You cannot delete a product that is not yours"
@@ -90,14 +91,15 @@ class ProductsController < ApplicationController
     end
   end
 
-
   private
 
   def product_params
+    puts "product_prams totall called"
     return params.require(:product).permit(:name, :price, merchant_id: [])
   end
 
   def find_product
+    puts "find_product totally called."
     @product = Product.find_by(id: params[:id])
 
     unless @product
@@ -105,5 +107,4 @@ class ProductsController < ApplicationController
       return
     end
   end
-end
 end
