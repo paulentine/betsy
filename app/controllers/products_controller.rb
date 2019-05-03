@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
         end
         self.quantity -= 1
       end
-    else 
+    else
       flash[:status] = :error
       flash[:message] = "This item is out of stock."
       redirect_to product_path(self)
@@ -33,6 +33,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.merchant_id = @current_merchant.id
 
     successful = @product.save
 

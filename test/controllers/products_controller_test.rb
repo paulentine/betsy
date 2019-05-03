@@ -28,7 +28,7 @@ describe ProductsController do
 
     it "works for a Product instance that exists" do
       product = products(:product1)
-      puts product.id
+
       get product_path(product)
 
       must_respond_with :ok
@@ -53,20 +53,12 @@ describe ProductsController do
           product: {
             name: "My Product",
             price: 10.0,
-            merchant_id: @merchant.id
           },
         }
 
-        puts "iiiiiiiiii"
-        puts Product.count
-
         expect {
-          # post products_path, params: product_data -- THIS DOESNT CHANGE COUNT
-          Product.create(product_data[:product]) # THIS DOES CHANGE COUNT
+          post products_path, params: product_data
         }.must_change "Product.count", +1
-
-        puts "HEEEEEEEY"
-        puts Product.count
 
         new_product = Product.last
 
@@ -101,16 +93,15 @@ describe ProductsController do
       it "mark product as deleted when the product belongs to the current merchant" do
         product_data = {
           product: {
-          name: "product to be deleted",
-          price: 10,
-          merchant_id: Merchant.first.id
+            name: "product to be deleted",
+            price: 10,
+            merchant_id: Merchant.first.id,
           },
         }
         product = Product.create(product_data[:product])
-        
+
         # product.destroy
         # product.save
-
 
         expect {
           delete product_path(product)
@@ -130,22 +121,22 @@ describe ProductsController do
           product: {
             name: "product to be deleted",
             price: 10,
-            merchant_id: Merchant.last.id
-            },
+            merchant_id: Merchant.last.id,
+          },
         }
         product = Product.create(product_data[:product])
-      
+
         expect {
           delete product_path(product)
         }.wont_change "Product.count"
-        
+
         check_flash(:error)
 
         must_respond_with :redirect
         must_redirect_to product_path(product)
-  
+
         product.reload
-  
+
         product.deleted.must_equal false
       end
     end
@@ -183,7 +174,7 @@ describe ProductsController do
     end
 
     it "requires login for update" do
-      old_product= Product.first.name
+      old_product = Product.first.name
       product_data = {
         product: {
           name: old_product + " an edit",
