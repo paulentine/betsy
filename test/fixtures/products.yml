@@ -7,8 +7,6 @@
 product1:
   name: "product"
   price: 10
-  merchant_id: merchant1
+  merchant: merchant1
+  deleted: false
   quantity: 5
-
-two: {}
-# column: value

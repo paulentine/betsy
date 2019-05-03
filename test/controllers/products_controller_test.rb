@@ -19,7 +19,7 @@ describe ProductsController do
 
   describe "show" do
     it "returns a 404 status code the product doesn't exist" do
-      product_id = "FAKE ID"
+      product_id = 1337
 
       get product_path(product_id)
 
@@ -49,12 +49,11 @@ describe ProductsController do
 
     describe "create" do
       it "creates a new product" do
-        test_merchant = Merchant.first
         product_data = {
           product: {
-            name: "randommmmm",
+            name: "My Product",
             price: 10,
-            merchant_id: test_merchant.id
+            merchant: @merchant
           },
         }
 
@@ -62,15 +61,15 @@ describe ProductsController do
           post products_path, params: product_data
         }.must_change "Product.count", +1
 
-        product = Product.last
+        new_product = Product.last
 
         must_respond_with :redirect
-        must_redirect_to product_path(product.id)
+        must_redirect_to product_path(new_product.id)
 
         check_flash
 
-        expect(product.name).must_equal product_data[:product][:name]
-        expect(product.price).must_equal product_data[:product][:price]
+        expect(new_product.name).must_equal product_data[:product][:name]
+        expect(new_product.price).must_equal product_data[:product][:price]
       end
 
       it "sends back bad_request if no product data is sent" do
@@ -122,22 +121,25 @@ describe ProductsController do
       it "doesn't allow a merchant to delete a product if it is not theirs" do
         product_data = {
           product: {
-          name: "product to be deleted",
-          price: 10,
-          merchant_id: Merchant.last.id
-          },
+            name: "product to be deleted",
+            price: 10,
+            merchant_id: Merchant.last.id
+            },
         }
         product = Product.create(product_data[:product])
       
-        product.destroy
-        product.save
+        expect {
+          delete product_path(product)
+        }.wont_change "Product.count"
         
-        expect(product.deleted).wont_equal true
-
         check_flash(:error)
 
         must_respond_with :redirect
         must_redirect_to product_path(product)
+  
+        product.reload
+  
+        product.deleted.must_equal false
       end
     end
   end
@@ -174,7 +176,7 @@ describe ProductsController do
     end
 
     it "requires login for update" do
-      old_product= Product.first.title
+      old_product= Product.first.name
       product_data = {
         product: {
           name: old_product + " an edit",
