@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_02_173925) do
+ActiveRecord::Schema.define(version: 2019_05_03_232819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_05_02_173925) do
     t.string "cc_num"
     t.string "cc_cvv"
     t.string "cc_expiration"
+    t.string "status", default: "pending"
   end
 
   create_table "products", force: :cascade do |t|
