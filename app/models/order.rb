@@ -16,7 +16,7 @@ class Order < ApplicationRecord
     item_quantity = 0
     item_price = 0
     total_revenue = 0
-    all_order_items = OrderItem.where(product_id.where(merchant_id: session[:merchant_id]))
+    all_order_items = OrderItem.where(product_id: product_id.where(merchant_id: session[:merchant_id]))
     all_order_items.each do |order_item|
       item_price = order_item.product_id.price
       item_quantity = order_item.quantity
@@ -27,22 +27,43 @@ class Order < ApplicationRecord
     end
   end
 
-#   def self.total_revenue_by_status(status)
-#     order_item_hash = {}
-#     item_quantity = 0
-#     item_price = 0
-#     total_revenue = 0
-#     # orders_with_status = Order.where(status: status)
-#     OrderItem.where(product_id.where(merchant_id: session[:merchant_id]))
-#     (Order.where(status: status))
-#   end
-# I need all orderitems from orders with the status
+  def self.total_revenue_by_status(status)
+    order_item_hash = {}
+    item_quantity = 0
+    item_price = 0
+    total_revenue = 0
+    all_order_items_for_merchant = OrderItem.where(product_id: product_id.where(merchant_id: session[:merchant_id]))
+    order_items_with_status = []
+    all_order_items_for_merchant.each do |order_item|
+      if order_item.order.pending == status
+        order_items_with_status << order_item
+      end
+    end
+    all_order_items_with_status.each do |order_item|
+      item_price = order_item.product_id.price
+      item_quantity = order_item.quantity
+      order_item_hash[:item_price] = quantity
+    end
+    order_item_hash.each do |price, quantity|
+      total_revenue += quantity * price
+    end
+    return total_revenue
+  end
 
+  
   def self.total_number_of_orders_by_status(status)
-    all_order_items = OrderItem.where(order_id: Order.where(status: status).id)
-
+    order_item_hash = {}
+    item_quantity = 0
+    item_price = 0
+    total_orders = 0
+    all_order_items_for_merchant = OrderItem.where(product_id: product_id.where(merchant_id: session[:merchant_id]))
+    all_order_items_for_merchant.each do |order_item|
+      if order_item.order.pending == status
+        order_items_with_status << order_item
+      end
+    end
     all_unique_orders = []
-    all_order_items.each do |order_item|
+    order_items_with_status.each do |order_item|
       if all_unique_orders.exclude(order_item.order_id)
         all_unique_orders << order_item.order_id
       end

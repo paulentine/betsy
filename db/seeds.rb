@@ -7,6 +7,7 @@ input_orders = [
         cc_num: "12345678910",
         cc_cvv: "435",
         cc_expiration: "08/19/20",
+        status: "pending",
     },
     {
         email: "matt@gmail.com", 
@@ -16,6 +17,7 @@ input_orders = [
         cc_num: "10987654321",
         cc_cvv: "689",
         cc_expiration: "06/25/21",
+        status: "pending",
     },
   ]
   
@@ -39,19 +41,22 @@ input_orders = [
         name: "Walking Tour of Pike Place Market",
         price: 100.0,
         quantity: 5,
-        description: "Stroll around Pike Place Market and learn about the history of the area"
+        description: "Stroll around Pike Place Market and learn about the history of the area",
+        merchant_id: 1,
     },
     {
         name: "Wine and Cheese Tasting",
         price: 200.0,
         quantity: 5,
-        description: "Try local wines and cheese"
+        description: "Try local wines and cheese",
+        merchant_id: 2,
     },
     {
         name: "Texas Forever Tour",
         price: 50.0,
         quantity: 3,
-        description: "Tour of the Riggins farm"
+        description: "Tour of the Riggins farm",
+        merchant_id: 3,
     },
   ]
 
@@ -122,7 +127,7 @@ input_orders = [
 
   products_failures = []
   input_products.each do |input_products|
-    product = Product.new(name: input_products[:name], quantity: input_products[:quantity], description: input_products[:description], price: input_products[:price])
+    product = Product.new(name: input_products[:name], quantity: input_products[:quantity], description: input_products[:description], price: input_products[:price], merchant_id: input_products[:merchant_id])
     successful = product.save
     if successful
       puts "Created product: #{product.inspect}"
