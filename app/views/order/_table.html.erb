@@ -1,0 +1,24 @@
+<table class="cart_table">
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Quanitity</th>
+        <th>Cost</th>
+        <th>Edit Quantity</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+  
+  <tbody>
+  <% @cart.each do |product, quanitity|%>
+    <tr>
+        <td><%= product %></td>
+        <td><%= quantity%></td>
+        <td><%= COST METHOD%></td>
+        <td><%= link_to EDIT QUANITITY ADD LINK %></td>
+        <td><%= DELETE ORDER ITEM ADD LINK%> </td>
+        <td><%#= link_to 'Upvote', upvote_work_path(a), method: :post, class:"btn btn-primary"%></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>

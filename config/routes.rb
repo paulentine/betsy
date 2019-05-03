@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get "/auth/github", as: "login"
   get "/auth/:provider/callback", to: "merchants#create", as: "callback"
+
   delete "/logout", to: "merchants#destroy", as: "logout"
 
   get "products/category/:id", to: "products#category", as: "category"
