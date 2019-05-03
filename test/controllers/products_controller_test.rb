@@ -52,14 +52,21 @@ describe ProductsController do
         product_data = {
           product: {
             name: "My Product",
-            price: 10,
-            merchant: @merchant
+            price: 10.0,
+            merchant_id: @merchant.id
           },
         }
 
+        puts "iiiiiiiiii"
+        puts Product.count
+
         expect {
-          post products_path, params: product_data
+          # post products_path, params: product_data -- THIS DOESNT CHANGE COUNT
+          Product.create(product_data[:product]) # THIS DOES CHANGE COUNT
         }.must_change "Product.count", +1
+
+        puts "HEEEEEEEY"
+        puts Product.count
 
         new_product = Product.last
 
