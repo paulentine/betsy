@@ -25,9 +25,15 @@ class Order < ApplicationRecord
   end
 
   def self.total_revenue_by_status(status)
-    return "TO DO"
+    order_item_hash = {}
+    item_quantity = 0
+    item_price = 0
+    total_revenue = 0
+    # orders_with_status = Order.where(status: status)
+    OrderItem.where(product_id.where(merchant_id: session[:merchant_id])
+    (Order.where(status: status))
   end
-
+I need all orderitems from orders with the status.
 
   def self.total_number_of_orders_by_status(status)
     return "TO DO"
