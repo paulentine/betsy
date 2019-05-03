@@ -8,24 +8,71 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Open+Sans" rel="stylesheet">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
   </head>
 
   <body>
   
     <header>
+
+<%# dragon icon %>
+<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="48" height="48"
+viewBox="0 0 192 192"
+style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,192v-192h192v192z" fill="none"></path><g fill="#f29f4d"><g id="surface1"><path d="M160,112c-21.32812,-2.32812 -48,-32 -48,-32h4c10.32812,6.10938 14.25,12 14.25,12c0,0 1.75,-4.65625 1.75,-8c0,0 9.71875,0.46875 14.15625,12c2.34375,-5.01562 1.84375,-9.70312 1.84375,-9.70312c0,0 8.78125,6.45312 10.14062,13.70312c2.59375,-7.4375 1.85938,-12 1.85938,-12c7.59375,2.48438 10.14062,16 10.14062,16c0,0 1.85938,-1.96875 1.85938,-8c6.03125,5.1875 4,12 4,12c0,0 4.57812,-5.53125 4,-16c-0.57812,-10.46875 -16,-16 -16,-16l-14.46875,-5.78125c-2.59375,-1.04688 -3.60938,-4.03125 -2.4375,-6.5625c0.53125,-1.10938 0.90625,-2.35938 0.90625,-3.65625c0,-4.20312 -24.45312,-36 -64,-36c0,0 28,6.20312 28,16c0,9.79688 -8,8 -8,8c0,0 -47.59375,-2.09375 -64,-36c0,0 5.28125,29.01562 43.6875,41.65625c-9.3125,1.60937 -17.07812,4.28125 -23.54688,7.67187c-2.32812,-0.73437 -6.07812,-1.32812 -12.14062,-1.32812c-15.75,0 -28,12 -28,12c0,0 8.29688,-4 20,-4c4.14062,0 6.82812,0.5 8.60938,1.14062c-5.40625,4.65625 -9.39062,9.79688 -12.32812,14.875c-0.09375,0 -0.17188,-0.01562 -0.28125,-0.01562c-19.40625,0 -24,20 -24,20c5.14062,-7.89062 15.6875,-8.17188 18.96875,-8.0625c-2.96875,9.14062 -2.96875,16.0625 -2.96875,16.0625c-16.20312,6.14062 -16,28 -16,28c3.59375,-12.98438 12.70312,-15.59375 17.28125,-16.01562c1.07812,5.01562 2.73437,9.51562 4.71875,13.6875c-10.54688,9.67188 -10,26.32812 -10,26.32812c5.4375,-14.54688 13.78125,-15.875 15.60938,-15.98438c6.14062,10.28125 12.39062,19.5625 12.39062,31.98438h88c0,-49.625 -64,-36.59375 -64,-72c0,0 0.53125,-16.75 20,-24c0,0 12.85938,40 36,40c3.17188,0 6.17188,-2.67188 8,-4c-10.17188,0 -16,-4 -16,-4c0,0 7.17188,-2 8,-4c-7,0.32812 -12,-4 -12,-4c0,0 4.32812,-0.32812 8,-4c-13.75,-0.48438 -18.04688,-12.59375 -19.39062,-19.42188c3.82812,3.64063 26.78125,25.01563 43.39062,31.42188c18.17188,7 19.67188,8.5 20,12c0.67188,-6.67188 -5.5,-10 -8,-12c8.82812,0 16,4 16,4c-4.5,-5.17188 -6.6875,-6.54688 -20,-8zM172,88c-7.85938,0 -8,-8 -8,-8c0,0 8,0.82812 8,8zM136,64h-5.5625c-1.5625,0 -3.0625,-0.625 -4.17188,-1.73438l-6.26562,-6.26562c0,0 14.32812,-0.82812 16,8z"></path></g></g></g></svg>
+    
       <div>
-        <h1>Expy</h1>
+        <h1 class= "main-title">Expy</h1>
         <div class="flex">
 	      <p class="header-sub-title" id="word"></p><p class="header-sub-title blink">|</p>
         </div>
       </div>
+        
+    </header>
 
-        <nav>
-        <ul>
-          <li class="nav-item">
-            <%= link_to "Home", root_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+    <!-- Navbar Container -->
+    <div class="container">
+
+        <!-- Navbar Header [contains both toggle button and navbar brand] -->
+        <div class="navbar-header">
+            <!-- Toggle Button [handles opening navbar components on mobile screens]-->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded"false">
+                <i class="glyphicon glyphicon-align-center"></i>
+            </button>
+
+            <!-- Navbar Brand -->
+            <a href="#" class="navbar-brand">
+                Menu
+            </a>
+        </div>
+
+
+        <!-- Navbar Collapse [contains navbar components such as navbar menu and forms ] -->
+        <div class="collapse navbar-collapse" id="exampleNavComponents">
+
+            <!-- Navbar Menu -->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active">
+                    <%= link_to "Home", root_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Category</a>
               <div class="dropdown-menu" >
                 <% @categories.each do |category| %>
@@ -38,15 +85,14 @@
               <div class="dropdown-menu" >
                 <% if @merchants%>
                   <% @merchants.each do |merchant| %>
-                    <%= link_to "#{merchant.username}", merchant_path(merchant.id), class: "dropdown-item" %>
+                    <%= link_to "#{@current_merchant.username}", merchant_path(@current_merchant.id), class: "dropdown-item" %>
                   <%end%>
                 <% else %>
                   <p>hiii</p>
                 <% end %>
               </div>
           </li>
-
-          <li class="nav-item">
+           <li class="nav-item">
             <%= link_to "Cart", new_order_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
@@ -63,13 +109,62 @@
           </li>
 
           <%# TO DO: make sure this link will only appear when logged in %>
-          <li>
-            <%= link_to "View Dashboard", merchant_path(merchant.id), class: "nav-link" %>
-          </li>
+          <%# <li>
+            <%= link_to "View Dashboard", merchant_path(@current_merchant.id), class: "nav-link" %>
+          <%# </li> %> %>
+                <!-- Navbar link with a dropdown menu -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
 
-        </ul>
-      </nav>
-    </header>
+            <!-- Navbar Form -->
+            <form action="#" class="navbar-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+
+            <!-- Navbar Button -->
+            <button type="button" class="btn btn-default navbar-btn navbar-right">Sign in</button>
+
+        </div>
+    </div>
+</nav>
+            
+
+</div>
+
+
+     <%# <section class="nav-container">
+        <nav>
+            <ul>
+              <li>
+                  <a href="index.html">Home</a>
+              </li>
+              <li>
+                  <a href="about.html">About</a>
+              </li>
+              <li>
+                  <a href="portfolio.html">Portfolio</a>
+              </li>
+              <li>
+                  <a href="journal.html">Journal</a>
+              </li>
+            </ul>
+          </nav>
+    </section>
+ %>
 
     <main>
       <% alert_type = flash[:status] == :error ? :danger : flash[:status] %>
@@ -82,6 +177,15 @@
     <footer>
       &copy; Expy 2019
     </footer>
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  
   </body>
 
 </html>
