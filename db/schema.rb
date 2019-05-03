@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_232819) do
     t.bigint "merchant_id"
     t.boolean "deleted", default: false
     t.integer "quantity"
+    t.string "description"
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
   end
 
