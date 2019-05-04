@@ -62,6 +62,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    @product.merchant_id = @current_merchant.id
     if @product.update(product_params)
       flash[:status] = :success
       flash[:message] = "Successfully updated #{@product.name}"

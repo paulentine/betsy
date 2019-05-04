@@ -89,6 +89,73 @@ describe ProductsController do
       end
     end
 
+    describe "update" do
+      let(:product_data) {
+        {
+          product: {
+            name: "changed and new",
+          },
+        }
+      }
+
+      let(:product) { products(:product1) }
+      # binding.pry
+      it "changes the data on the model" do
+        # product = Product.create!(name: "test product", price: 10.00)
+        product.assign_attributes(product_data[:product])
+        expect(product).must_be :valid?
+        product.reload
+
+        # Act
+        patch product_path(product), params: product_data
+
+        # Assert
+        must_respond_with :redirect
+        must_redirect_to product_path(product)
+
+        check_flash
+
+        product.reload
+        expect(product.name).must_equal(product_data[:product][:name])
+      end
+
+      it "responds with NOT FOUND for a fake product" do
+        product_id = "FAKE ID"
+        patch product_path(product_id), params: product_data
+        must_respond_with :not_found
+      end
+
+      it "responds with BAD REQUEST for bad data" do
+        # Arrange
+        product_data[:product][:name] = ""
+
+        # Assumptions
+        product.assign_attributes(product_data[:product])
+        expect(product).wont_be :valid?
+        product.reload
+
+        # Act
+        patch product_path(product), params: product_data
+
+        # Assert
+        must_respond_with :bad_request
+
+        check_flash(:error)
+      end
+    end
+
+
+
+
+
+
+
+
+
+
+
+
+
     describe "destroy" do
       it "mark product as deleted when the product belongs to the current merchant" do
         product_data = {
