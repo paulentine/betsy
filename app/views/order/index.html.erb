@@ -1,3 +1,36 @@
 <%# Intent for this page:
 
 This is the order fulfillment page for the merchant %>
+
+Total Revenue
+Total Revenue by status
+Total number of orders by status
+
+Filter orders displayed by status
+
+Link to each individual order
+A list of orders including at least one of my products:
+    Each order item sold by me with a quantity and line-item subtotal
+    A link to the item description page
+    DateTime the order was placed
+    Link to transition the order item to marked as shipped
+    The current status of the order ("pending", "paid", "complete", "cancelled")
+
+<table class="fulfillment_revenue_table">
+    <thead>
+    <tr>
+        <th>Total Revenue</th>
+        <th>Total Revenue by Status</th>
+        <th>Total Number of Orders by Status</th>
+    </tr>
+    </thead>
+  
+  <tbody>
+    <tr>
+        <td><%= Order.total_revenue %></td>
+        <td><%= Order.total_revenue_by_status(status)%></td>
+        <td><%= Order.total_number_of_orders_by_status(status)%></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
