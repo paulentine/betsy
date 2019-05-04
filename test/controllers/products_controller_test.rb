@@ -15,10 +15,6 @@ describe ProductsController do
       must_respond_with :ok
     end
   end
-
-  describe "new" do
-    it "retruns status code 200" do
-      get new_product_path
       
   describe "show" do
     it "returns a 404 status code the product doesn't exist" do
@@ -92,6 +88,19 @@ describe ProductsController do
       end
     end
 
+    describe "edit" do
+      it "responds with OK for a real product" do
+        get edit_product_path(products(:product1))
+        must_respond_with :ok
+      end
+
+      it "responds with NOT FOUND for a fake product" do
+        product_id = "FAKE ID"
+        get edit_product_path(product_id)
+        must_respond_with :not_found
+      end
+    end
+
     describe "update" do
       let(:product_data) {
         {
@@ -146,18 +155,6 @@ describe ProductsController do
         check_flash(:error)
       end
     end
-
-
-
-
-
-
-
-
-
-
-
-
 
     describe "destroy" do
       it "mark product as deleted when the product belongs to the current merchant" do
