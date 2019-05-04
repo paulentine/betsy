@@ -10,13 +10,16 @@ describe ProductsController do
 
     it "renders even if are zero products" do
       Product.destroy_all
-
       get products_path
 
       must_respond_with :ok
     end
   end
 
+  describe "new" do
+    it "retruns status code 200" do
+      get new_product_path
+      
   describe "show" do
     it "returns a 404 status code the product doesn't exist" do
       product_id = 1337
