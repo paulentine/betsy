@@ -2,22 +2,25 @@
 
 Show product details
 This page includes the option to add to cart and leave a review on a product %>
+<html>
+    <body>
+        <div class="container">
+            <h2 class="type">Are you interested in this experience?</h2>
+            <br>
+            <p class = "product_title"><%= @product.name%></p>
 
-<h1><%= @product.name%></h1>
-
-<img src=<%=@product.image_url%> alt="image of <%=@product.name%>">
-
-<section class = "product-details">
-    <h3>Description</h3>
-    <p> <%=@product.description%> </p>
-    <p> <%=@product.quantity%> in stock</p>
-    <h3><%=@product.price%>
-</section>
-
-<%= form_with model: @order_product, url: order_products_path, method: :post do |f|%>
-    <%= f.label :quantity%>
-    <%= f.number_field :quantity, in: 1..20, step: 1 %>
-    <%= f.hidden_field :product_id, value: @product.id%>
-    <%= f.hidden_field :order_id, value: @current_order.id%>
-    <%= f.submit "Add to cart"%>
-<% end %>
+            <section class = "product-details">
+                <p>Product Details</p>
+                <p>Sold By:</p>
+                <p> <%=@product.merchant.username%> </p>
+                <p><%= link_to "Go to this merchant's shop", merchants_path, class: "nav-link" %></p>
+                
+                <p>Description</p>
+                <p> <%=@product.description%> </p>
+                <p> <%=@product.quantity%> in stock</p>
+                <h3><%=@product.price%>
+            </section>
+            <p><%= link_to "Add to Cart", orders_path, class: "nav-link" %></p>
+        </div>
+    </body>
+</html> 

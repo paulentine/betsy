@@ -3,18 +3,10 @@
 This is the Explore Experiences page from our design meeting.
 A few options to explore categories, with a random product list below. %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Quantity</th>
-  </tr>
+<div class="product">
   <% @products.each do |product| %>
-  <tr>
-    <td><%= link_to product.name, product_path(product.id) %></td>
-    <td><%= link_to product.price, product_path(product.id) %></td>
-    <td><%= link_to product.quantity, product_path(product.id) %></td>
-  </tr>
+    <article><%= link_to product.name, product_path(product.id) %>
+    </article>
   <% end %>
+</div>
 
-</table>

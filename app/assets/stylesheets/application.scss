@@ -30,12 +30,18 @@ body {
   padding: 0;
 }
 
-header h1 {
+
+header h1{
   color: #FBA100;
   font-family: 'Bungee Shade', cursive;
   text-align: justify;
   font-size: 10em;
 }
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Open Sans', sans-serif;
+}
+
 
 li {
   list-style-type: none;
@@ -70,6 +76,10 @@ nav a {
   font-family: 'Bungee Shade', cursive;
   text-align: justify;
   font-size: 4em;
+}
+
+.vertical-menu .dropdown-menu{
+  background-color: rgba(70, 59, 114, 0.47);
 }
 
 li {
