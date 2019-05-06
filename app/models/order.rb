@@ -25,6 +25,7 @@ class Order < ApplicationRecord
     order_item_hash.each do |price, quantity|
       total_revenue += quantity * price
     end
+    return total_revenue
   end
 
   def self.total_revenue_by_status(status)
