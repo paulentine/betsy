@@ -17,10 +17,17 @@ A list of orders including at least one of my products:
     </thead>
   
   <tbody>
+    <% all_order_items_for_merchant = OrderItem.where(product_id: product_id.where(merchant_id: session[:merchant_id])) %>
+    <% all_unique_orders = [] %>
+    <% all_order_items_for_merchant.each do |order_item| %>
+     <% if all_unique_orders.exclude(order_item.order_id) %>
+        <% all_unique_orders << order_item.order_id %>
+      <% end %>
+    <% end %>
+    <% all_unique_orders.each do |order|%>
     <tr>
-        <td><%= Order.total_revenue %></td>
-        <td><%= Order.total_revenue_by_status(status)%></td>
-        <td><%= Order.total_number_of_orders_by_status(status)%></td>
+        <td><%= link_to order.id, order_items_order_path(order), method: :get%></td>
+        <td><%= order.status%></td>
     </tr>
   </tbody>
   <% end %>

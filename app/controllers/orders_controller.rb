@@ -38,6 +38,9 @@ class OrdersController < ApplicationController
     def confirmation
         # To Do: Confirmation page
     end
+
+    def order_items_order
+    end
     
     # Show is entirely the find_order helper
      def show; end
