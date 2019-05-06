@@ -1,79 +1,72 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-// TYPING EFFECT CODE BEGINS HERE
+var TxtType = function(el, toRotate, period) {
+	this.toRotate = toRotate;
+	this.el = el;
+	this.loopNum = 0;
+	this.period = parseInt(period, 10) || 2000;
+	this.txt = '';
+	this.tick();
+	this.isDeleting = false;
+};
 
-// List of sentences
-var _CONTENT = [ 
-	"Explore", 
-	"Experiment", 
-	"Express", 
-	"Experience",
-	"EXPY",
-];
+TxtType.prototype.tick = function() {
+	var i = this.loopNum % this.toRotate.length;
+	var fullTxt = this.toRotate[i];
 
-// Current sentence being processed
-var _PART = 0;
-
-// Character number of the current sentence being processed 
-var _PART_INDEX = 0;
-
-// Holds the handle returned from setInterval
-var _INTERVAL_VAL;
-
-// Element that holds the text
-var _ELEMENT = document.querySelector("#text");
-
-// Cursor element 
-var _CURSOR = document.querySelector("#cursor");
-
-// Implements typing effect
-function Type() { 
-	// Get substring with 1 characater added
-	var text =  _CONTENT[_PART].substring(0, _PART_INDEX + 1);
-	_ELEMENT.innerHTML = text;
-	_PART_INDEX++;
-
-	// If full sentence has been displayed then start to delete the sentence after some time
-	if(text === _CONTENT[_PART]) {
-		// Hide the cursor
-		_CURSOR.style.display = 'none';
-
-		clearInterval(_INTERVAL_VAL);
-		setTimeout(function() {
-			_INTERVAL_VAL = setInterval(Delete, 50);
-		}, 1000);
+	if (this.isDeleting) {
+	this.txt = fullTxt.substring(0, this.txt.length - 1);
+	} else {
+	this.txt = fullTxt.substring(0, this.txt.length + 1);
 	}
-}
 
-// Implements deleting effect
-function Delete() {
-	// Get substring with 1 characater deleted
-	var text =  _CONTENT[_PART].substring(0, _PART_INDEX - 1);
-	_ELEMENT.innerHTML = text;
-	_PART_INDEX--;
+	this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
 
-	// If sentence has been deleted then start to display the next sentence
-	if(text === '') {
-		clearInterval(_INTERVAL_VAL);
+	var that = this;
+	var delta = 200 - Math.random() * 100;
 
-		// If current sentence was last then display the first one, else move to the next
-		if(_PART == (_CONTENT.length - 1))
-			_PART = 0;
-		else
-			_PART++;
-		
-		_PART_INDEX = 0;
+	if (this.isDeleting) { delta /= 2; }
 
-		// Start to display the next sentence after some time
-		setTimeout(function() {
-			_CURSOR.style.display = 'inline-block';
-			_INTERVAL_VAL = setInterval(Type, 100);
-		}, 200);
+	if (!this.isDeleting && this.txt === fullTxt) {
+	delta = this.period;
+	this.isDeleting = true;
+	} else if (this.isDeleting && this.txt === '') {
+	this.isDeleting = false;
+	this.loopNum++;
+	delta = 500;
 	}
-}
 
-// Start the typing effect on load
-_INTERVAL_VAL = setInterval(Type, 100);
+	setTimeout(function() {
+	that.tick();
+	}, delta);
+};
 
-// CODE FOR TYPING EFFECT ENDS
+window.onload = function() {
+	var elements = document.getElementsByClassName('typewrite');
+	for (var i=0; i<elements.length; i++) {
+			var toRotate = elements[i].getAttribute('data-type');
+			var period = elements[i].getAttribute('data-period');
+			if (toRotate) {
+				new TxtType(elements[i], JSON.parse(toRotate), period);
+			}
+	}
+	// INJECT CSS
+	var css = document.createElement("style");
+	css.type = "text/css";
+	css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+	document.body.appendChild(css);
+};
+
+// VIDEO
+
+// fallback: show controls if autoplay fails
+// (needed for Samsung Internet for Android, as of v6.4)
+window.addEventListener('load', async () => {
+  let video = document.querySelector('video[muted][autoplay]');
+  try {
+    await video.play();
+  } catch (err) {
+    video.controls = true;
+  }
+});

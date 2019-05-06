@@ -42,40 +42,17 @@
   font-size: 1em;
 }
 
-// TYPING EFFECT CODE BEGINS HERE
-
-#container {
-	text-align: center;
+div .top a {
+  font-size: .75em;
+  color: #FBA100;
+  justify-content: right;
+  text-decoration: none;
 }
 
-#text {
-	display: inline-block;
-	vertical-align: middle;
-	color: #FBA100;
-  letter-spacing: 2px;
+.top h1 {
+  text-align: center;
 }
 
-#cursor {
-	display: inline-block;
-	vertical-align: middle;
-	width: .05em;
-	height: 50px;
-	background-color: #FBA100;
-	animation: blink .75s step-end infinite;
+video {
+  height: 4em;
 }
-
-@keyframes blink {
-	from, to { 
-		background-color: transparent 
-	}
-	50% { 
-		background-color: #FBA100; 
-	}
-}
-
-header div {
-	padding-top: 10%;
-	padding-bottom: 10%;
-}
-
-// TYPING EFFECT CODE ENDS HERE

@@ -78,6 +78,10 @@ nav a {
   font-size: 4em;
 }
 
+.vertical-menu .dropdown-menu{
+  background-color: rgba(70, 59, 114, 0.47);
+}
+
 li {
 	display: block;
 	transition-duration: 0.5s;
