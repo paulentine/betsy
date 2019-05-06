@@ -7,6 +7,6 @@
 product1:
   name: "product"
   price: 10
-  merchant: merchant1
+  merchant: merchant2
   deleted: false
   quantity: 5
