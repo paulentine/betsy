@@ -1,9 +1,8 @@
 class OrdersController < ApplicationController
-    before_action :find_order, only: [:show, :destroy]
+    before_action :find_order, only: [:show, :destroy, :order_items_order, :confirmation]
     skip_before_action :require_login, only: [:new, :create, :confirmation]
     
     def index
-        
         if params[:merchant_id]
     
         merchant = Merchant.find_by(id: params[:merchant_id])
@@ -35,11 +34,14 @@ class OrdersController < ApplicationController
         end
     end
 
-    def confirmation
-        # To Do: Confirmation page
+    def confirmation 
     end
 
     def order_items_order
+    end
+
+    def merchant_orders_list
+
     end
     
     # Show is entirely the find_order helper
@@ -48,11 +50,11 @@ class OrdersController < ApplicationController
     private
     
     def order_params
-        return params.require(:order).permit(:email, :name, :address, :zipcode, :cc_num, :cc_cvv, :cc_expiration, :status)
+        return params.require(:order).permit(:id, :email, :name, :address, :zipcode, :cc_num, :cc_cvv, :cc_expiration, :status)
     end
     
     def find_order
-        @order = Order.find_by(id: params[:id])
+        @order = Order.find(params[:order_id])
     
         unless @order
         head :not_found
