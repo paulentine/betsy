@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
   end
 
+  get "/orders/order-items-for-order", to: "orders#order_items_order", as: "order_items_order"
   get "/orders/confirmation", to: "orders#confirmation", as: "order_confirmation"
 
   get "/merchant/current", to: "merchants#current", as: "current_merchant"
