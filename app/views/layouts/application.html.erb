@@ -31,14 +31,6 @@
   
   <div class="top">
    <header>
-     
-     
-      <div>
-        <h1 class= "main-title">Expy</h1>
-        <div class="flex">
-	      <p class="header-sub-title" id="word"></p><p class="header-sub-title blink">|</p>
-        </div>
-      </div>
   
       <nav class="vertical-menu">
 
@@ -84,9 +76,15 @@
                   <% if session[:user_id] %>
                     <li class="nav-item">
                       <%= link_to "Log Out", logout_path, method: "delete" %></li>
-
+                    <li class="nav-item">
+                      <%= link_to "Merchant Dashboard" %></li>
+                  <% else %>
+                    <li class="nav-item">
+                      <%= link_to "Merchant Login", login_path %></li>
+                  <% end %>
+                  </ul>
                </div>
-  </nav> 
+  </nav>
 
   <body>
     
