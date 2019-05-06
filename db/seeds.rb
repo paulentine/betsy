@@ -157,7 +157,7 @@ puts "#{categories_failures.length} categories failed to save"
 
 order_items_failures = []
 input_order_items.each do |input_order_item|
-  order_item = OrderItem.new(quantity: input_order_item[:category], order_id: input_order_item[:order_id], product_id: input_order_item[:product_id])
+  order_item = OrderItem.new(quantity: input_order_item[:quantity], order_id: input_order_item[:order_id], product_id: input_order_item[:product_id])
   successful = order_item.save
   if successful
     puts "Created order_items: #{order_item.inspect}"
