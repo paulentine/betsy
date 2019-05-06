@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
     before_action :find_order, only: [:show, :destroy]
-    skip_before_action :require_login, only: [:new, :create, :confirmation,]
+    skip_before_action :require_login, only: [:new, :create, :confirmation]
     
     def index
         
@@ -37,6 +37,9 @@ class OrdersController < ApplicationController
 
     def confirmation
         # To Do: Confirmation page
+    end
+
+    def order_items_order
     end
     
     # Show is entirely the find_order helper
