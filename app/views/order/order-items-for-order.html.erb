@@ -1,0 +1,32 @@
+ Each order item sold by me with a quantity and line-item subtotal
+    A link to the item description page
+    DateTime the order was placed
+    Link to transition the order item to marked as shipped
+    The current status of the order ("pending", "paid", "complete", "cancelled")
+
+    <table class="order_items_from_order_table">
+    <thead>
+    <tr>
+        <th>Order Item ID</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Line Item Subtotal</th>
+        <th>Date the Order was Placed</th>
+        <th>Current Status of Order</th>
+    </tr>
+    </thead>
+  
+  <tbody>
+    <% order_items = OrderItem.where(id: @order.id)%>
+    <% order_items.each do |item|%>
+    <tr>
+        <td><%= item.id %></td>
+        <td><%= link_to Product.find(item.product_id).name, product_path(item.product_id), method: :get %></td>
+        <td><%= item.quantity%></td>
+        <td><% (Product.find(item.product_id).price * item.quantity) %></td>
+        <td><%= item.created_at %></td>
+        <td><%= Order.where(product_id: item.product_id).first.status %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
