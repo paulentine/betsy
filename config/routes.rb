@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
   root "homepages#index"
   resources :products do
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:new, :create]
   end
+
+  
   resources :orders
 
   resources :merchants, except: [:destroy, :edit, :update] do
