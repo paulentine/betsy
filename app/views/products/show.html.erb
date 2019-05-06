@@ -2,22 +2,21 @@
 
 Show product details
 This page includes the option to add to cart and leave a review on a product %>
+<html>
+    <body>
+        <div class="container">
+            <h1 class = "product_title"><%= @product.name%></h1>
 
-<h1><%= @product.name%></h1>
-
-<img src=<%=@product.image_url%> alt="image of <%=@product.name%>">
-
-<section class = "product-details">
-    <h3>Description</h3>
-    <p> <%=@product.description%> </p>
-    <p> <%=@product.quantity%> in stock</p>
-    <h3><%=@product.price%>
-</section>
-
-<%= form_with model: @order_product, url: order_products_path, method: :post do |f|%>
-    <%= f.label :quantity%>
-    <%= f.number_field :quantity, in: 1..20, step: 1 %>
-    <%= f.hidden_field :product_id, value: @product.id%>
-    <%= f.hidden_field :order_id, value: @current_order.id%>
-    <%= f.submit "Add to cart"%>
-<% end %>
+            <section class = "product-details">
+                <h3>Sold By:</h3>
+                <p> <%=@product.merchant.username%> </p>
+                <h5> See More from this Merchant</h5>
+                
+                <h3>Description</h3>
+                <p> <%=@product.description%> </p>
+                <p> <%=@product.quantity%> in stock</p>
+                <h3><%=@product.price%>
+            </section>
+        </div>
+    </body>
+</html>
