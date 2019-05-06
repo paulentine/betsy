@@ -7,6 +7,7 @@ input_orders = [
         cc_num: "12345678910",
         cc_cvv: "435",
         cc_expiration: "08/19/20",
+        status: "pending",
     },
     {
         email: "matt@gmail.com", 
@@ -16,6 +17,7 @@ input_orders = [
         cc_num: "10987654321",
         cc_cvv: "689",
         cc_expiration: "06/25/21",
+        status: "pending",
     },
   ]
   
@@ -28,9 +30,68 @@ input_orders = [
     },
     {
         username: "serena_vanderwoodsen",
-        email: "sernea@constance.com",
+        email: "serena@constance.com",
         uid: "56789",
         provider: "github",
+    },
+  ]
+
+  input_products = [
+    {
+        name: "Walking Tour of Pike Place Market",
+        price: 100.0,
+        quantity: 5,
+        description: "Stroll around Pike Place Market and learn about the history of the area",
+        merchant_id: 1,
+    },
+    {
+        name: "Wine and Cheese Tasting",
+        price: 200.0,
+        quantity: 5,
+        description: "Try local wines and cheese",
+        merchant_id: 2,
+    },
+    {
+        name: "Texas Forever Tour",
+        price: 50.0,
+        quantity: 3,
+        description: "Tour of the Riggins farm",
+        merchant_id: 3,
+    },
+  ]
+
+  input_categories = [
+    {
+        category: "Tour",
+    },
+    {
+        category: "Food",
+    },
+  ]
+
+  input_order_items = [
+    {
+        quantity: 2,
+        order_id: 1,
+        product_id: 1,
+    },
+    {
+        quantity: 1,
+        order_id: 2,
+        product_id: 2,
+    },
+  ]
+
+  input_reviews = [
+    {
+        rating: 2,
+        review: "Boring and too long",
+        product_id: 1,
+    },
+    {
+        rating: 5,
+        review: "Delicious cheese!",
+        product_id: 2,
     },
   ]
   
@@ -63,4 +124,63 @@ input_orders = [
   
   puts "Added #{Merchant.count} merchant records"
   puts "#{merchants_failures.length} merchants failed to save"
+
+  products_failures = []
+  input_products.each do |input_products|
+    product = Product.new(name: input_products[:name], quantity: input_products[:quantity], description: input_products[:description], price: input_products[:price], merchant_id: input_products[:merchant_id])
+    successful = product.save
+    if successful
+      puts "Created product: #{product.inspect}"
+    else
+      products_failures << product
+      puts "Failed to save product: #{product.inspect}"
+    end
+  end
   
+  puts "Added #{Product.count} product records"
+  puts "#{products_failures.length} products failed to save"
+  
+  categories_failures = []
+  input_categories.each do |input_categories|
+    category = Category.new(category: input_categories[:category])
+    successful = category.save
+    if successful
+      puts "Created category: #{category.inspect}"
+    else
+      categories_failures << category
+      puts "Failed to save category: #{category.inspect}"
+    end
+  end
+  
+  puts "Added #{Category.count} category records"
+  puts "#{categories_failures.length} categories failed to save"
+
+  order_items_failures = []
+  input_order_items.each do |input_order_items|
+    order_items = OrderItem.new(quantity: input_order_items[:category], order_id: input_order_items[:order_id], product_id: input_order_items[:product_id])
+    successful = order_items.save
+    if successful
+      puts "Created order_item: #{order_item.inspect}"
+    else
+      order_items_failures << category
+      puts "Failed to save order_item: #{order_item.inspect}"
+    end
+  end
+  
+  puts "Added #{OrderItem.count} order_item records"
+  puts "#{order_items_failures.length} order_items failed to save"
+
+  reviews_failures = []
+  input_reviews.each do |input_reviews|
+    reviews = Review.new(rating: input_reviews[:reviews], product_id: input_reviews[:product_id], review: input_reviews[:reviews])
+    successful = reviews.save
+    if successful
+      puts "Created review: #{review.inspect}"
+    else
+      reviews_failures << review
+      puts "Failed to save review: #{review.inspect}"
+    end
+  end
+  
+  puts "Added #{Review.count} review records"
+  puts "#{reviews_failures.length} reviews failed to save"

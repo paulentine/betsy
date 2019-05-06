@@ -10,9 +10,9 @@
     </thead>
   
   <tbody>
-  <% @cart.each do |product, quanitity|%>
+  <% @cart[0].each do |product_id, quantity|%>
     <tr>
-        <td><%= product %></td>
+        <td><%= product_id %></td>
         <td><%= quantity%></td>
         <td><%= COST METHOD%></td>
         <td><%= link_to EDIT QUANITITY ADD LINK %></td>
