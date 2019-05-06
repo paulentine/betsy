@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
         if successful
             flash[:status] = :success
             flash[:message] = "Successfully created order with ID ##{@order.id}"
-            redirect_to order_confirmation_path(@order.id)
+            redirect_to order_confirmation_path
         else
             flash.now[:status] = :error
             flash.now[:message] = "Could not create order"
@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
     private
     
     def order_params
-        return params.require(:order).permit(:email, :name, :address, :zipcode, :cc_num, :cc_cvv, :cc_expiration)
+        return params.require(:order).permit(:email, :name, :address, :zipcode, :cc_num, :cc_cvv, :cc_expiration, :status)
     end
     
     def find_order
@@ -56,8 +56,4 @@ class OrdersController < ApplicationController
         return
         end
     end  
-
-    def cart
-        @cart = session[:cart]
-    end
 end
