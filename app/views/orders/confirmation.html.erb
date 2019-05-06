@@ -1,10 +1,10 @@
 <h2>Confirmation of Order #<%=@order.id%></h2>
 
-Each item in the order with a quantity and line-item subtotal
+<%#Each item in the order with a quantity and line-item subtotal
 A link to the item description page
 Order total price
 Date/time the order was placed
-The current status of the order
+The current status of the order %>
 
 <table class="confirmation_table">
     <thead>
@@ -19,16 +19,20 @@ The current status of the order
     </thead>
   
   <tbody>
-    <% order_items = OrderItem.where(id: @order.id)%>
+    <% order_total = 0%>
+    <% order_items = OrderItem.where(order_id: @order.id)%>
     <% order_items.each do |item|%>
     <tr>
         <td><%= item.id %></td>
         <td><%= link_to Product.find(item.product_id).name, product_path(item.product_id), method: :get %></td>
         <td><%= item.quantity%></td>
-        <td><% (Product.find(item.product_id).price * item.quantity) %></td>
+        <td><%= subtotal = Product.find(item.product_id).price * item.quantity %></td>
         <td><%= item.created_at %></td>
-        <td><%= Order.where(product_id: item.product_id).first.status %></td>
+        <td><%= Order.find(item.order_id).status %></td>
+        <% order_total += subtotal %>
     </tr>
   </tbody>
   <% end %>
 </table>
+
+<h4> Order Total: <%= order_total %>
