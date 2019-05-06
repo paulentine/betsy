@@ -97,7 +97,7 @@ class ProductsController < ApplicationController
 
   def product_params
     puts "product_prams totall called"
-    return params.require(:product).permit(:name, :price, :quantity, merchant_id: [])
+    return params.require(:product).permit(:name, :price, :description, merchant_id: [])
   end
 
   def find_product
