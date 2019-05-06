@@ -5,18 +5,22 @@ This page includes the option to add to cart and leave a review on a product %>
 <html>
     <body>
         <div class="container">
-            <h1 class = "product_title"><%= @product.name%></h1>
+            <h2 class="type">Are you interested in this experience?</h2>
+            <br>
+            <p class = "product_title"><%= @product.name%></p>
 
             <section class = "product-details">
-                <h3>Sold By:</h3>
+                <p>Product Details</p>
+                <p>Sold By:</p>
                 <p> <%=@product.merchant.username%> </p>
-                <h5> See More from this Merchant</h5>
+                <p><%= link_to "Go to this merchant's shop", merchants_path, class: "nav-link" %></p>
                 
-                <h3>Description</h3>
+                <p>Description</p>
                 <p> <%=@product.description%> </p>
                 <p> <%=@product.quantity%> in stock</p>
                 <h3><%=@product.price%>
             </section>
+            <p><%= link_to "Add to Cart", orders_path, class: "nav-link" %></p>
         </div>
     </body>
-</html>
+</html> 
