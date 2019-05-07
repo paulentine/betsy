@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :orders do
-    get "order-items-for-order", to: "orders#order_items_order", as: "items_order"
+    get "order_items_order", to: "orders#order_items_order", as: "items_order"
   end
 
   resources :merchants, except: [:destroy, :edit, :update] do
