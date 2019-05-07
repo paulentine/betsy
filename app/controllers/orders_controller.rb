@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
         if successful
             flash[:status] = :success
             flash[:message] = "Successfully created order with ID ##{@order.id}"
-            redirect_to order_confirmation_path
+            redirect_to order_confirmation_path(@order.id)
         else
             flash.now[:status] = :error
             flash.now[:message] = "Could not create order"
@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
     private
     
     def order_params
-        return params.require(:order).permit(:id, :email, :name, :address, :zipcode, :cc_num, :cc_cvv, :cc_expiration, :status)
+        return params.require(:order).permit(:email, :name, :address, :zipcode, :cc_num, :cc_cvv, :cc_expiration, :status)
     end
     
     def find_order

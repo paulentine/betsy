@@ -2,6 +2,11 @@
 
 class Order < ApplicationRecord
   has_many :order_items # plural
+  # validates :order_item, presence: true
+  validates :email, presence: true
+  validates :name, presence: true
+
+
 
   def self.last4_ccnum(cc_num)
     if cc_num.length < 4
@@ -9,7 +14,6 @@ class Order < ApplicationRecord
     end
     return cc_num[cc_num.length - 4,4]
   end
-  # validates :order_item, presence: true
 
   def self.total_revenue
     order_item_hash = {}

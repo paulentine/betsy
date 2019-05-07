@@ -34,15 +34,14 @@ describe OrdersController do
         post orders_path, params: order_data
       }.must_change "Order.count", +1
 
-      
+      order = Order.last
       must_respond_with :redirect
-      must_redirect_to order_confirmation_path
+      must_redirect_to order_confirmation_path(order)
 
       check_flash
 
-      order = Order.last
       expect(order.email).must_equal order_data[:order][:email]
-      expect(order.merchant).must_equal @merchant
+      expect(order.name).must_equal order_data[:order][:name]
 
     end
 
