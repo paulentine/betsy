@@ -12,6 +12,7 @@ order1:
   cc_num: 12345678910
   cc_cvv: 435
   cc_expiration: 08/19/20
+  status: pending
         
 
 
@@ -23,5 +24,6 @@ order2:
   cc_num: 10987654321
   cc_cvv: 689
   cc_expiration: 06/25/21
+  status: pending
 
 

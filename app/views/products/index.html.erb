@@ -2,3 +2,11 @@
 
 This is the Explore Experiences page from our design meeting.
 A few options to explore categories, with a random product list below. %>
+
+<div class="product">
+  <% @products.each do |product| %>
+    <article><%= link_to product.name, product_path(product.id) %>
+    </article>
+  <% end %>
+</div>
+

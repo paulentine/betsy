@@ -16,9 +16,112 @@
 /* Import scss content */
 @import "**/*";
 
-.blink {
-  animation: blink 0.5s infinite;
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: auto;
+  padding: auto;
+  background-color: #6c648B; /* For browsers that do not support gradients */
+  background-image: linear-gradient(#6c648b, #b6a19e); /* Standard syntax (must be last) */
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
-@keyframes blink{
-  to { opacity: .0; }
+
+
+header h1{
+  color: #FBA100;
+  font-family: 'Bungee Shade', cursive;
+  text-align: justify;
+  font-size: 10em;
 }
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+li {
+  list-style-type: none;
+  display: inline;
+}
+
+nav a {
+    color: #FBA100;
+    font-size: 1.5em;
+}
+
+.vertical-menu {
+	width: 200px;
+	float: left;
+	padding-top: 5%;
+}
+
+.vertical-menu a {
+  color: #FBA100;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+	color: #463b72;
+  text-decoration: none;
+}
+
+.vertical-menu .active {
+	color: #FBA100;
+  font-family: 'Bungee Shade', cursive;
+  text-align: justify;
+  font-size: 4em;
+}
+
+li {
+	display: block;
+	transition-duration: 0.5s;
+ }
+ 
+ li:hover {
+	 cursor: pointer;
+ }
+ 
+ ul li ul {
+	 visibility: hidden;
+	 opacity: 0;
+	 position: absolute;
+	 transition: all 0.5s ease;
+	 margin-top: 1rem;
+	 left: 0;
+	 display: none;
+ }
+ 
+ ul li:hover > ul,
+ ul li ul:hover {
+	 visibility: visible;
+	 opacity: 1;
+	 display: block;
+ }
+ 
+ ul li ul li {
+	 clear: both;
+	 width: 100%;
+ }
+
+ .title {
+  color: #FBA100;
+  font-family: 'Bungee Shade', cursive;
+  text-align: justify;
+  font-size: 2.5em;
+  padding-bottom: 6%;
+ }
+
+ .nav_item {
+   text-align: left;
+   font-size: 4em;
+ }
+
+ .dropdown {
+   background-color: transparent;
+ }

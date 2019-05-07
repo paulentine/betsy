@@ -1,0 +1,34 @@
+Filter orders displayed by status
+
+Link to each individual order
+A list of orders including at least one of my products:
+    Each order item sold by me with a quantity and line-item subtotal
+    A link to the item description page
+    DateTime the order was placed
+    Link to transition the order item to marked as shipped
+    The current status of the order ("pending", "paid", "complete", "cancelled")
+
+<table class="all_merchant_orders_table">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+  
+  <tbody>
+    <% all_order_items_for_merchant = OrderItem.where(product_id: product_id.where(merchant_id: session[:merchant_id])) %>
+    <% all_unique_orders = [] %>
+    <% all_order_items_for_merchant.each do |order_item| %>
+     <% if all_unique_orders.exclude(order_item.order_id) %>
+        <% all_unique_orders << order_item.order_id %>
+      <% end %>
+    <% end %>
+    <% all_unique_orders.each do |order|%>
+    <tr>
+        <td><%= link_to order.id, order_items_order_path(order), method: :get%></td>
+        <td><%= order.status%></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>

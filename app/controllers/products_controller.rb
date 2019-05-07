@@ -14,8 +14,9 @@ class ProductsController < ApplicationController
         else
           session[:cart] << { self.id => 1 }
         end
-      self.quantity -= 1
-    else 
+        self.quantity -= 1
+      end
+    else
       flash[:status] = :error
       flash[:message] = "This item is out of stock."
       redirect_to product_path(self)
@@ -32,6 +33,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.merchant_id = @current_merchant.id
 
     successful = @product.save
 
@@ -40,10 +42,9 @@ class ProductsController < ApplicationController
       flash[:message] = "Product added successfully"
       redirect_to product_path(@product.id)
     else
-      puts "AHHHHHHH"
-      # flash.now[:status] = :error
-      # flash.now[:message] = "Product could not be added. Try again."
-      # render :new, status: :bad_request
+      flash.now[:status] = :error
+      flash.now[:message] = "Product could not be added. Try again."
+      render :new, status: :bad_request
     end
   end
 
@@ -61,6 +62,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    @product.merchant_id = @current_merchant.id
     if @product.update(product_params)
       flash[:status] = :success
       flash[:message] = "Successfully updated #{@product.name}"
@@ -95,11 +97,10 @@ class ProductsController < ApplicationController
 
   def product_params
     puts "product_prams totall called"
-    return params.require(:product).permit(:name, :price, merchant_id: [])
+    return params.require(:product).permit(:name, :price, :description, merchant_id: [])
   end
 
   def find_product
-    puts "find_product totally called."
     @product = Product.find_by(id: params[:id])
 
     unless @product

@@ -2,3 +2,21 @@
 
 Show product details
 This page includes the option to add to cart and leave a review on a product %>
+<html>
+    <body>
+        <div class="container">
+            <h1 class = "product_title"><%= @product.name%></h1>
+
+            <section class = "product-details">
+                <h3>Sold By:</h3>
+                <p> <%=@product.merchant.username%> </p>
+                <h5> See More from this Merchant</h5>
+                
+                <h3>Description</h3>
+                <p> <%=@product.description%> </p>
+                <p> <%=@product.quantity%> in stock</p>
+                <h3><%=@product.price%>
+            </section>
+        </div>
+    </body>
+</html>
