@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-  before_action :require_login
-  before_action :list_categories, :current_merchant
+  before_action :require_login,
+  before_action :list_categories, 
+  before_action :current_merchant
 
   def list_categories
     @categories = Category.all
