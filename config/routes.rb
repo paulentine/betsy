@@ -19,13 +19,13 @@ Rails.application.routes.draw do
 
   get "merchant-orders-list", to: "orders#merchant_orders_list", as: "merchant_orders_list"
 
-
   get "/merchant/current", to: "merchants#current", as: "current_merchant"
 
-  get "/auth/github", as: "login"
   get "/auth/:provider/callback", to: "merchants#create", as: "callback"
 
   delete "/logout", to: "merchants#destroy", as: "logout"
+
+  get "/auth/github", as: "login"
 
   get "products/category/:id", to: "products#category", as: "category"
   resources :categories, :except => [:destroy]

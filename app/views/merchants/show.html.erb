@@ -7,17 +7,17 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
 <h3>Merchant Account Page</h3>
 
 <section class="merchant-info">
-  <% if @merchant.image %>
-  <%= image_tag @merchant.image %>
-  <% end %>
-  <% if @merchant.name %>
+  <%# <% if @merchant.image %>
+  <%# <%= image_tag @merchant.image %> 
+  <%# <% end %> 
+  <%# <% if @merchant.username %>
     <h4><%= @merchant.username %></h4>
-  <% end %>
+  <%# <% end %> 
 </section>
 
 <div class="add-buttons">
   <%= link_to "Add Categories", new_category_path, class: "button" %>
-  <%= link_to "Add Products", new_merchant_product_path(@user.id), class: "button" %>
+  <%= link_to "Add Products", new_product_path(@merchant.id), class: "button" %>
 </div>
 
 <h4>List of Products</h4>
@@ -32,25 +32,25 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
     </tr>
   </thead>
   <tbody>
-    <% @user.products.each do |product| %>
+    <% @merchant.products.each do |product| %>
     <tr>
       <td><%= link_to product.name, product_path(product) %></td>
-      <td>$<%= price_in_dollar(product.price) %></td>
-      <td class="hidden"><%= product.stock %></td>
+      <td>$<%=(product.price) %></td>
+      <td class="hidden"><%= product.quantity%></td>
       <td>
-        <% if product.is_active %>
+        <% if product %>
           <%= link_to "Update", edit_product_path(product.id), class: "button" %>
         <% else %>
           <span class="button disabled">Update</span>
         <% end %>
       </td>
-      <td>
-        <% if product.is_active %>
-          <%= link_to "Retire", product_set_status_path(product.id), method: :put, class: "button" %>
-        <% else %>
-          <%= link_to "Reactivate", product_set_status_path(product.id), method: :put, class: "button" %>
-        <% end %>
-      </td>
+      <%# <td> %>
+        <%# <% if product.is_active %> 
+          <%# <%= link_to "Retire", product_set_status_path(product.id), method: :put, class: "button" %> 
+        <%# <% else %>
+          <%# <%= link_to "Reactivate", product_set_status_path(product.id), method: :put, class: "button" %>
+        <%# <% end %> 
+      <%# </td> %>
 
     </tr>
     <% end %>
@@ -64,7 +64,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       <th>Order #</th>
       <th>
         <section class="status-container">
-          <%= form_tag(user_path(@user), method: :get) do %>
+          <%= form_tag(merchant_path(@merchant), method: :get) do %>
           <div class="status-box">
             <%= select_tag :term, "<option>pending</option><option>paid</option><option>complete</option><option>cancelled</option>".html_safe, :prompt => 'Select a status' %>
           </div>
@@ -81,31 +81,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       <th>Shipping Status</th>
     </tr>
   </thead>
-  <tbody>
-      <% @orders.each do |order| %>
-        <% order.order_items.each do |order_item| %>
-          <% if order_item.product.user == @user %>
-          <tr>
-            <td><%= link_to order.id, order_path(order.id) %></td>
-            <td><%= order.status %></td>
-            <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
-            <td class="hidden"><%= order_item.quantity %></td>
-            <td class="hidden">$<%= order_item.subtotal %></td>
-            <td class="hidden"><%= pretty_date(order_item.created_at) %></td>
-            <td>
-              <% if order_item.order.status == "pending" || order_item.order.status == "cancelled" %>
-                <span>N/A</span>
-              <% elsif order_item.is_shipped %>
-                <span>Shipped</span>
-              <% else %>
-                <%= link_to "Mark Shipped", order_item_set_status_path(order_item.id), method: :put, class: "button" %>
-              <% end %>
-            </td>
-          </tr>
-          <% end %>
-        <% end %>
-      <% end %>
-  </tbody>
+  
 </table>
 
 <h4>Order Statistics</h4>

@@ -1,9 +1,13 @@
 class MerchantsController < ApplicationController
-  before_action :find_merchant, only: [:show, :new]
-  skip_before_action :require_login, only: [:create]
+  # before_action :find_merchant, only: [:show, :new]
+  # skip_before_action :require_login, only: [:create]
 
   def index
     @merchants = Merchant.all
+  end
+
+  def show
+    @merchant = Merchant.first
   end
 
   def create
@@ -13,6 +17,8 @@ class MerchantsController < ApplicationController
     end
 
     merchant = Merchant.find_by(uid: auth_hash[:uid], provider: "github")
+    ## MADE MERCHANT.FIRST IN ORDER TO NAVIGATE SITE
+    # merchant = Merchant.first
     if merchant
       # Merchant was found in the database
       flash[:success] = "Logged in as returning merchant #{merchant.username}"
@@ -41,6 +47,8 @@ class MerchantsController < ApplicationController
 
   def current
     @merchant = Merchant.find_by(id: session[:merchant_id])
+    ## MADE MERCHANT.FIRST IN ORDER TO NAVIGATE SITE
+    # @merchant = Merchant.first
 
     unless @merchant
       flash[:status] = :error
@@ -67,6 +75,8 @@ class MerchantsController < ApplicationController
 
   def find_merchant
     @merchant = Merchant.find_by(id: params[:id])
+    ## MADE MERCHANT.FIRST IN ORDER TO NAVIGATE SITE
+    # @merchant = Merchant.first
     unless @merchant
       head :not_found
       return
