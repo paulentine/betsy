@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   resources :categories, except: [:destroy]
 
   # Merchants
-  resources :merchants, except: %i[destroy edit update] do
-    resources :orders, only: %i[index show]
+  resources :merchants, except: [:destroy, :edit, :update] do
+    resources :orders, only: [:index, :show]
   end
 
   get 'merchant-orders-list', to: 'orders#merchant_orders_list', as: 'merchant_orders_list'
@@ -34,5 +34,4 @@ Rails.application.routes.draw do
   end
 
   get 'products/category/:id', to: 'products#category', as: 'products_category'
-
 end
