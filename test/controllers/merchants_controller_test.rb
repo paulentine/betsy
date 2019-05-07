@@ -32,6 +32,18 @@ describe MerchantsController do
       session[:merchant_id].must_equal Merchant.last.id
     end
     
+    it "flashes an error & redirects, when failing to save new user" do
+      # Merchant data with bad username, to trigger failure case
+      merchant = Merchant.new(username: "", email: "test@user.com", uid: 99999, provider: "github")
+
+      expect {
+        perform_login(merchant)
+      }.wont_change "Merchant.count"
+
+      check_flash(:error)
+
+      must_redirect_to root_path
+    end
   end
 
   describe "current" do
@@ -43,7 +55,7 @@ describe MerchantsController do
       get current_merchant_path
 
       # Assert
-      must_respond_with :found
+      must_respond_with :ok
     end
   end
 end
