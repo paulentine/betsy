@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root "homepages#index"
   resources :products do
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:new, :create]
   end
   resources :orders do
     get "confirmation", to: "orders#confirmation", as: "confirmation"
