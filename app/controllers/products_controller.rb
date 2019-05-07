@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show, :edit, :update, :destroy]
-  skip_before_action :require_login, only: [:index, :show]
+  # before_action :find_product, only: [:show, :edit, :update, :destroy]
+  # skip_before_action :require_login, only: [:index, :show]
 
   def cart
     session[:cart] = []
@@ -51,14 +51,14 @@ class ProductsController < ApplicationController
   # def show; end
 
   def edit
-    unless @product.merchant_id == @current_merchant.id
-      # does this get handled here or should we handle it in the view instead?
-      # if a product doesn't belong to the current user, then they don't see the
-      # edit/delete button on their view?
-      flash[:status] = :error
-      flash[:message] = "You cannot delete a product that is not yours"
-      redirect_to product_path(@product)
-    end
+    # unless @product.merchant_id == @current_merchant.id
+    #   # does this get handled here or should we handle it in the view instead?
+    #   # if a product doesn't belong to the current user, then they don't see the
+    #   # edit/delete button on their view?
+    #   flash[:status] = :error
+    #   flash[:message] = "You cannot delete a product that is not yours"
+    #   redirect_to product_path(@product)
+    # end
   end
 
   def update

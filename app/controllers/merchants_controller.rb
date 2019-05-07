@@ -71,6 +71,15 @@ class MerchantsController < ApplicationController
 
   # Show is entirely handled by find_merchant helper method
 
+  def revenue
+    # TO DO 
+  end
+
+  def num_orders
+    # TO DO
+  end
+
+  def 
   private
 
   def merchant_params
