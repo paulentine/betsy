@@ -33,6 +33,6 @@ Rails.application.routes.draw do
     resources :reviews, only: %i[new create]
   end
 
-  get 'products/category/:id', to: 'products#category', as: 'category'
+  get 'products/category/:id', to: 'products#category', as: 'products_category'
 
 end
