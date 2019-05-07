@@ -35,11 +35,18 @@ describe Merchant do
 
   describe "Relations" do
     it "Has products" do
-    # Arrange: Load products
+    # Arrange: Load products, merchant starts with 0 product
+    @merchant.products.count.must_equal 0
+    product = products(:product1)
 
-    # Act: Add products
+    # Act: Assign product to merchant
+    @merchant.products << product
 
     # Assert: Check products count & attr
+    @merchant.products.last.name.must_equal product.name
+    @merchant.products.last.price.must_equal product.price
+    @merchant.products.last.merchant.must_equal @merchant
+    @merchant.products.last.quantity.must_equal product.quantity
     end
   end
 end

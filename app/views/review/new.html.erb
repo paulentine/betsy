@@ -1,0 +1,14 @@
+<%# Intent for this page
+
+create a new review for a product.  %>
+
+<h3>Add a New Review</h3>
+
+<div class="form">
+  <%= form_for @review, validate: true do |f| %>
+  <%= f.label :review_text_field %>
+  <%= f.text_field :name %>
+
+  <%= f.submit "Save", class: "button" %>
+  <% end %>
+</div>
