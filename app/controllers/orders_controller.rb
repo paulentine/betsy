@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
         @order = Order.new(order_params)
 
         successful = @order.save
+        
         if successful
             flash[:status] = :success
             flash[:message] = "Successfully created order with ID ##{@order.id}"
