@@ -1,6 +1,13 @@
 require "test_helper"
 
 describe ReviewsController do
+  describe "new" do
+    it "retruns status code 200" do
+      get new_product_review_path(products(:product1).id)
+      must_respond_with :ok
+    end
+  end
+
   describe "create" do
     it "creates a new review" do
       review_data = {
@@ -18,7 +25,7 @@ describe ReviewsController do
       new_review = Review.last
 
       must_respond_with :redirect
-      must_redirect_to product_path(new_review.id)
+      must_redirect_to product_path(products(:product1))
 
       check_flash
 
