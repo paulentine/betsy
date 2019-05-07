@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
     before_action :find_order, only: [:show, :destroy, :order_items_order, :confirmation]
-    skip_before_action :require_login, only: [:new, :create, :confirmation]
+    skip_before_action :require_login, only: [:new, :create, :confirmation, :order_items_order]
     
     def index
         if params[:merchant_id]

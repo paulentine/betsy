@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Root
   root 'homepages#index'
-
+  
   # Categories
   resources :categories, except: [:destroy]
 
