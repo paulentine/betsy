@@ -20,17 +20,17 @@ class Order < ApplicationRecord
     item_quantity = 0
     item_price = 0
     total_revenue = 0
-    all_products_of_merchant = Product.where(merchant_id: session[:merchant_id])
-    all_order_items = []
-    all_products_of_merchant.each do |product|
-      all_order_items << OrderItem.where(product_id: product.id)
+
+    array_of_arrays_oi = []
+
+    merchant = Merchant.find(session[:merchant_id])
+    all_merchant_products = merchant.products
+    all_merchant_products.each do |product|
+      array_of_arrays_oi << OrderItem.where(product_id: product.id)
     end
-    all_order_items.each do |order_item_array|
-      order_item_array.each do |order_item|
-      end
-
-
-      
+    all_merchants_order_items = array_of_arrays_oi.flatten
+    
+    all_merchants_order_items.each do |order_item|
       item_price = order_item.product_id.price
       item_quantity = order_item.quantity
       order_item_hash[:item_price] = quantity
@@ -46,9 +46,16 @@ class Order < ApplicationRecord
     item_quantity = 0
     item_price = 0
     total_revenue = 0
-    all_order_items_for_merchant = OrderItem.where(product_id: product_id.where(merchant_id: session[:merchant_id]))
+    array_of_arrays_oi = []
+
+    merchant = Merchant.find(session[:merchant_id])
+    all_merchant_products = merchant.products
+    all_merchant_products.each do |product|
+      array_of_arrays_oi << OrderItem.where(product_id: product.id)
+    end
+    all_merchants_order_items = array_of_arrays_oi.flatten
     order_items_with_status = []
-    all_order_items_for_merchant.each do |order_item|
+    all_merchants_order_items.each do |order_item|
       if order_item.order.pending == status
         order_items_with_status << order_item
       end
@@ -70,8 +77,16 @@ class Order < ApplicationRecord
     item_quantity = 0
     item_price = 0
     total_orders = 0
-    all_order_items_for_merchant = OrderItem.where(product_id: product_id.where(merchant_id: session[:merchant_id]))
-    all_order_items_for_merchant.each do |order_item|
+    array_of_arrays_oi = []
+
+    merchant = Merchant.find(session[:merchant_id])
+    all_merchant_products = merchant.products
+    all_merchant_products.each do |product|
+      array_of_arrays_oi << OrderItem.where(product_id: product.id)
+    end
+    all_merchants_order_items = array_of_arrays_oi.flatten
+    order_items_with_status = []
+    all_merchants_order_items.each do |order_item|
       if order_item.order.pending == status
         order_items_with_status << order_item
       end
