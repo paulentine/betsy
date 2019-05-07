@@ -53,11 +53,12 @@ nav a {
 }
 
 .vertical-menu {
-  position: absolute;
+  position: fixed;
   background-color: rgba(70, 59, 114, 0.35);
   width: 200px;
-  height: 125%;
+  height: 500%;
   top: 0;
+
 }
 
 .vertical-menu a {
@@ -82,6 +83,10 @@ nav a {
 
 .vertical-menu .dropdown-menu{
   background-color: rgba(70, 59, 114, 0.47);
+}
+
+.vertical-menu .dropdown{
+  color: #FBA100;
 }
 
 li {
