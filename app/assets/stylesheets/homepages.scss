@@ -7,6 +7,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  float: right;
 }
 
 .home a {
@@ -38,6 +39,7 @@
 .home a:visited {
   color: #FBA100;
 }
+
 #title {
   font-size: 1em;
 }
@@ -55,4 +57,10 @@ div .top a {
 
 video {
   height: 4em;
+}
+
+main {
+  position: absolute;
+  right: 5px;
+  width: 80%;
 }
