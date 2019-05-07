@@ -105,8 +105,9 @@ describe OrdersController do
       end
 
       it "will redirect for an invalid order" do
+        order_id = 12345
         # Act
-        get order_path(-1)
+        get order_path(order_id)
 
         # Assert
         must_respond_with :not_found
