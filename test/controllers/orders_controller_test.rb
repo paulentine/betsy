@@ -34,15 +34,14 @@ describe OrdersController do
         post orders_path, params: order_data
       }.must_change "Order.count", +1
 
-      
+      order = Order.last
       must_respond_with :redirect
-      must_redirect_to order_confirmation_path
+      must_redirect_to order_confirmation_path(order)
 
       check_flash
 
-      order = Order.last
       expect(order.email).must_equal order_data[:order][:email]
-      expect(order.merchant).must_equal @merchant
+      expect(order.name).must_equal order_data[:order][:name]
 
     end
 
@@ -50,12 +49,6 @@ describe OrdersController do
       order_data = {
         order: {
             email: "",
-            name: "",
-            address: "",
-            zipcode: "",
-            cc_num: "",
-            cc_cvv: "",
-            cc_expiration: "",
         },
       }
       expect(Order.new(order_data[:order])).wont_be :valid?
@@ -128,37 +121,5 @@ describe OrdersController do
   end
 
 
-  # describe "validations" do
-  #   before do
-  #     @merchant = Merchant.new(username: "Katie_Finch", email: "katie@gmail.com", uid: 34546, provider: "github")
-  #     @product = Product.new(id: 10, name: "John", price: 2.0, quantity: 3)
-  #     @order_item = OrderItem.new(quantity: 1, order_id: 4, product_id: 10)
-  #     @order = Order.new(
-  #       id: 4,
-  #       email: "julie@gmail.com",
-  #       name: "Julie Taylor",
-  #       address: "6805 De Paul Cove, Austin, Texas",
-  #       zipcode: "78723",
-  #       cc_num: "17285678",
-  #       cc_cvv: "455",
-  #       cc_expiration: "06/13/22",
-  #       order_item: 1
-  #     )
-  #   end
-  #   describe "validations" do
-  #     it "passes validations with good data" do
-  #       expect(@order).must_be :valid?
-  #     end
-
-  #     it "rejects orders without a order item" do
-  #       @order.order_item = nil
-  #       result = @order.valid?
   
-  #       # assert
-  #       expect(result).must_equal false
-  #       expect(@order.errors.messages).must_include :order_item
-  #     end
-  #   end
-  # end
-
 end

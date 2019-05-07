@@ -5,7 +5,7 @@ form for payment and shipping info %>
   <section class="error-messages">
     There were some issues with your submission
     <ul>
-      <% @trip.errors.messages.each do |column, problem_list| %>
+      <% @order.errors.messages.each do |column, problem_list| %>
         <% problem_list.each do |problem| %>
           <li>
             <%= column %>: <%= problem %>

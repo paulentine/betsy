@@ -16,24 +16,23 @@
 /* Import scss content */
 @import "**/*";
 
+html {
+  height: 100%;
+}
+  
 body {
   font-family: 'Open Sans', sans-serif;
   margin: auto;
   padding: auto;
   background-color: #6c648B; /* For browsers that do not support gradients */
   background-image: linear-gradient(#6c648b, #b6a19e); /* Standard syntax (must be last) */
-  height: 100%;
-  max-height: 100%;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
-
 
 header h1{
   color: #FBA100;
-  font-family: 'Bungee Shade', cursive;
+  font-family: 'Rock Salt', cursive;
   text-align: justify;
   font-size: 10em;
 }
@@ -54,9 +53,11 @@ nav a {
 }
 
 .vertical-menu {
-	width: 200px;
-	float: left;
-	padding-top: 5%;
+  position: absolute;
+  background-color: rgba(70, 59, 114, 0.35);
+  width: 200px;
+  height: 125%;
+  top: 0;
 }
 
 .vertical-menu a {
@@ -74,7 +75,7 @@ nav a {
 
 .vertical-menu .active {
 	color: #FBA100;
-  font-family: 'Bungee Shade', cursive;
+  font-family: 'Rock Salt', cursive;
   text-align: justify;
   font-size: 4em;
 }
@@ -116,7 +117,7 @@ li {
 
  .title {
   color: #FBA100;
-  font-family: 'Bungee Shade', cursive;
+  font-family: 'Rock Salt', cursive;
   text-align: justify;
   font-size: 2.5em;
   padding-bottom: 6%;
