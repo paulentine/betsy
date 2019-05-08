@@ -50,13 +50,13 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
               <span class="button disabled">Update</span>
             <% end %>
           </td>
-          <td> 
+          <%# <td> 
             <% if product.is_active %> 
-              <%= link_to "Retire", product_set_status_path(product.id), method: :put %>
-             <%= else %>
-              <%= link_to "Reactivate", product_set_status_path(product.id), method: :put %>
-            <% end %>
-          </td>
+              <%# <%= link_to "Retire", product_set_status_path(product.id), method: :put %> 
+             <%# <%= else %> 
+              <%# <%= link_to "Reactivate", product_set_status_path(product.id), method: :put %> 
+            <%# <% end %> 
+          <%# </td> %> 
 
         </tr>
         <% end %>
