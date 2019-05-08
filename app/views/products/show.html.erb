@@ -4,51 +4,53 @@ Show product details
 This page includes the option to add to cart and leave a review on a product %>
 <html>
     <body>
-        <div class="container">
-            <h2 class="type">Are you interested in this experience?</h2>
-            <br>
-            <p class = "product_title"><%= @product.name%></p>
+        <main>
+            <h3 class="title">Product Details</h3> 
+            <div class="container">
+                <h2 class="type">Are you interested in this experience?</h2>
+                <br>
+                <p class = "product_title"><%= @product.name%></p>
 
-            <section class = "product-details">
-                <p>Product Details</p>
-                <p>Sold By:</p>
-                <p> <%=@product.merchant.username%> </p>
-                <p><%= link_to "Go to this merchant's shop", merchants_path, class: "nav-link" %></p>
-                
-                <p>Description</p>
-                <p> <%=@product.description%> </p>
-                <p> <%=@product.quantity%> in stock</p>
-                <h3><%=@product.price%>
-            </section>
-            <p><%= link_to "Add to Cart", orders_path, class: "nav-link" %></p>
-        </div>
+                <section class = "product-details">
+                    <p>Product Details</p>
+                    <p>Sold By:</p>
+                    <p> <%=@product.merchant.username%> </p>
+                    <p><%= link_to "Go to this merchant's shop", merchants_path, class: "nav-link" %></p>
+                    
+                    <p>Description</p>
+                    <p> <%=@product.description%> </p>
+                    <p> <%=@product.quantity%> in stock</p>
+                    <h3><%=@product.price%>
+                </section>
+                <p><%= link_to "Add to Cart", orders_path, class: "nav-link" %></p>
+            </div>
 
-        <div class="review">
-            <h4>Write a Review</h4>
-            <section class="new-review">
-                <%= form_for @review, url: @action, validate: true do |f| %>
-                <%= f.select :rating, (1..5).to_a, :prompt => 'Select a rating'%>
+            <div class="review">
+                <h4>Write a Review</h4>
+                <section class="new-review">
+                    <%= form_for @review, url: @action, validate: true do |f| %>
+                    <%= f.select :rating, (1..5).to_a, :prompt => 'Select a rating'%>
 
-                <%= f.label :comment %>
-                <%= f.text_area :content %>
+                    <%= f.label :comment %>
+                    <%= f.text_area :content %>
 
-                <%= f.submit "Submit", class: "button" %>
+                    <%= f.submit "Submit", class: "button" %>
+                    <% end %>
+                </section>
+
+                <h4>Reviews</h4>
+                <% @product.reviews.reverse.each do |review| %>
+                <section class="existing-reviews">
+                    <p>
+                    <% review.rating.times do |i| %>
+                    ⭐️
+                    <% end %>
+                    </p>
+                    <p><%= review.content %></p>
+                </section>
                 <% end %>
-            </section>
-
-            <h4>Reviews</h4>
-            <% @product.reviews.reverse.each do |review| %>
-            <section class="existing-reviews">
-                <p>
-                <% review.rating.times do |i| %>
-                ⭐️
-                <% end %>
-                </p>
-                <p><%= review.content %></p>
-            </section>
-            <% end %>
-        </div>
-      
+            </div>
+        </main>
 
     </body>
 </html> 

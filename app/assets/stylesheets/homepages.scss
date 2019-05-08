@@ -59,11 +59,11 @@ video {
   height: 4em;
 }
 
-main {
-  position: absolute;
-  right: 8px;
-  width: 80%;
-}
+// main {
+//   position: absolute;
+//   right: 8px;
+//   width: 80%;
+// }
 
 .photo img {
   max-width: 90%;
@@ -87,7 +87,7 @@ main {
   padding-right: 2em;
 }
 
-.testimonials h2 {
+.testimonials h3 {
   font-family: 'Kaushan Script', cursive;
   font-size: 3.5em;
 }
@@ -120,3 +120,4 @@ main {
   padding-top: 1.5em;
   padding-bottom: 1.5em;
 }
+

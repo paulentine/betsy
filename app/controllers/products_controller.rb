@@ -48,8 +48,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # def show; end
-
   def edit
     unless @product.merchant_id == @current_merchant.id
       # does this get handled here or should we handle it in the view instead?

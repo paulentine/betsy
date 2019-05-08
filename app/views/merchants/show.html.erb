@@ -5,100 +5,109 @@ This page is meant to shows the merchant's products.
 Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible once logged in %>
 
 <main>
-  <h3 class="title">Merchant Account Page</h3>
-
+  
+  <h1 class="page-title">Merchant Dashboard</h1>
+  
   <section class="merchant-info">
+    <h2 class ="name">Username : <%= @merchant.username %><h2>
     <%# <% if @merchant.image %>
     <%# <%= image_tag @merchant.image %> 
     <%# <% end %> 
     <%# <% if @merchant.username %>
-      <h4>Merchant Username: <%= @merchant.username %></h4>
+    <h2 class="sub">Merchant Actions</h2>
+     
     <%# <% end %> 
   </section>
 
-  <div class="add-buttons">
-    <%= link_to "Add Categories", new_category_path, class: "button" %>
-    <%= link_to "Add Products", new_product_path(@merchant.id), class: "button" %>
-  </div>
+  <section>
+    <button type="button"><%= link_to "Add Categories", new_category_path %></button>
+    <button type="button"><%= link_to "Add Products", new_product_path(@merchant.id) %></button>
+  </section>
 
-  <h4>List of Products</h4>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th class="hidden">Stock</th>
-        <th>Update</th>
-        <th>Retire</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @merchant.products.each do |product| %>
-      <tr>
-        <td><%= link_to product.name, product_path(product) %></td>
-        <td>$<%=(product.price) %></td>
-        <td class="hidden"><%= product.quantity%></td>
-        <td>
-          <% if product %>
-            <%= link_to "Update", edit_product_path(product.id), class: "button" %>
-          <% else %>
-            <span class="button disabled">Update</span>
-          <% end %>
-        </td>
-        <%# <td> %>
-          <%# <% if product.is_active %> 
-            <%# <%= link_to "Retire", product_set_status_path(product.id), method: :put, class: "button" %> 
-          <%# <% else %>
-            <%# <%= link_to "Reactivate", product_set_status_path(product.id), method: :put, class: "button" %>
-          <%# <% end %> 
-        <%# </td> %>
+  <section>
+    <h2 class="sub">List of Products</h2>
+    <table>
 
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <h4>List of Orders</h4>
-  <table>
-    <thead>
-      <tr>
-        <th>Order #</th>
-        <th>
-          <section class="status-container">
-            <%= form_tag(merchant_path(@merchant), method: :get) do %>
-            <div class="status-box">
-              <%= select_tag :term, "<option>pending</option><option>paid</option><option>complete</option><option>cancelled</option>".html_safe, :prompt => 'Select a status' %>
-            </div>
-            <div class="status-button">
-              <%= submit_tag "Submit", class: "button" %>
-            </div>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th class="hidden">Stock</th>
+          <th>Update</th>
+          <th>Retire</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @merchant.products.each do |product| %>
+        <tr>
+          <td><%= link_to product.name, product_path(product) %></td>
+          <td>$<%=(product.price) %></td>
+          <td class="hidden"><%= product.quantity%></td>
+          <td>
+            <% if product %>
+              <button type="button"><%= link_to "Update", edit_product_path(product.id) %></button>
+            <% else %>
+              <span class="button disabled">Update</span>
             <% end %>
-          </section>
-        </th>
-        <th>Order Items</th>
-        <th class="hidden">Quantity</th>
-        <th class="hidden">Subtotal</th>
-        <th class="hidden">Date Placed</th>
-        <th>Shipping Status</th>
-      </tr>
-    </thead>
-    
-  </table>
+          </td>
+          <%# <td> %>
+            <%# <% if product.is_active %> 
+              <%# <%= link_to "Retire", product_set_status_path(product.id), method: :put %> 
+            <%# <% else %>
+              <%# <%= link_to "Reactivate", product_set_status_path(product.id), method: :put %>
+            <%# <% end %> 
+          <%# </td> %>
 
-  <h4>Order Statistics</h4>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Number of Orders</th>
-        <th>Total Revenue</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= @num_orders %></td>
-        <td>$<%= @revenue %></td>
-      </tr>
-    </tbody>
-  </table>
+  <section>
+    <h2 class="sub">List of Orders</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Order #</th>
+          <th>
+            <section class="status-container">
+              <%= form_tag(merchant_path(@merchant), method: :get) do %>
+              <div class="status-box">
+              <%= select_tag :term, "<option>pending</option><option>paid</option><option>complete</option><option>cancelled</option>".html_safe, :prompt => 'Select a status' %>
+              </div>
+              <div class="status-button">
+              <%= submit_tag "Submit" %>
+              </div>
+              <% end %>
+            </section>
+          </th>
+          <th>Order Items</th>
+          <th class="hidden">Quantity</th>
+          <th class="hidden">Subtotal</th>
+          <th class="hidden">Date Placed</th>
+          <th>Shipping Status</th>
+        </tr>
+      </thead>
+    </table>
+  </section>
+
+  <section>
+    <h2 class="sub">Order Statistics</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Number of Orders</th>
+          <th>Total Revenue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @num_orders %></td>
+          <td>$<%= @revenue %></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 </main>
