@@ -98,14 +98,14 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
     <table>
       <thead>
         <tr>
-          <th>Number of Orders</th>
+          <th>Total Number of Orders</th>
           <th>Total Revenue</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><%= @num_orders %></td>
-          <td>$<%= @revenue %></td>
+          <td><%= Order.total_number_of_orders %></td>
+          <td>$<%= Order.total_revenue %></td>
         </tr>
       </tbody>
     </table>
