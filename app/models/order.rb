@@ -2,20 +2,26 @@
 
 class Order < ApplicationRecord
   has_many :order_items # plural
-  # validates :order_item, presence: true
+  # validates :order_items, presence: true
   validates :email, presence: true
   validates :name, presence: true
-
-
+  validates :address, presence: true
+  validates :zipcode, presence: true
+  validates :cc_num, presence: true
+  validates :cc_cvv, presence: true
+  validates :cc_expiration, presence: true
 
   def self.last4_ccnum(cc_num)
-    if cc_num.length < 4
+    if cc_num.nil?
+      return nil
+    elsif cc_num.length < 4
       return cc_num
+    else
+      return cc_num[cc_num.length - 4,4]
     end
-    return cc_num[cc_num.length - 4,4]
   end
 
-  def self.total_revenue
+  def self.total_revenue(merchant)
     order_item_hash = {}
     item_quantity = 0
     item_price = 0
@@ -24,7 +30,8 @@ class Order < ApplicationRecord
     array_of_arrays_oi = []
 
     # merchant = Merchant.find(session[:merchant_id])
-    merchant = Merchant.find(1)
+    # merchant = Merchant.find(1)
+    # merchant = @current_merchant
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
       array_of_arrays_oi << OrderItem.where(product_id: product.id)

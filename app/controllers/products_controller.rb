@@ -1,3 +1,5 @@
+require "pry"
+
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
   skip_before_action :require_login, only: [:index, :show]
@@ -24,7 +26,10 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
+    @products = Product.where(nil)
+    filtering_params(params).each do |key, value|
+      @products = @products.public_send(key, value) if value.present?
+    end
   end
 
   def new
@@ -54,7 +59,7 @@ class ProductsController < ApplicationController
       # if a product doesn't belong to the current user, then they don't see the
       # edit/delete button on their view?
       flash[:status] = :error
-      flash[:message] = "You cannot delete a product that is not yours"
+      flash[:message] = "You cannot edit a product that is not yours"
       redirect_to product_path(@product)
     end
   end
@@ -91,11 +96,22 @@ class ProductsController < ApplicationController
     end
   end
 
+  def set_status
+    session[:status] = params[:status]
+    binding.pry
+    # render merchant_path(@current_merchant.id)
+    render merchant_path(@current_merchant)
+  end
+
   private
+
+  def filtering_params(params)
+    params.slice(:status)
+  end
 
   def product_params
     puts "product_prams totall called"
-    return params.require(:product).permit(:name, :price, :description, merchant_id: [])
+    return params.require(:product).permit(:name, :price, :description, :status, merchant_id: [])
   end
 
   def find_product
