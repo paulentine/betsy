@@ -91,7 +91,43 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       </thead>
     </table>
   </section>
-
+<section>
+<h2 class="sub">List of Orders</h2>
+  <table class="table table-borderless table-hover">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Status</th>
+        <th>Order Items</th>
+    </tr>
+    </thead>
+  
+  <tbody>
+    <%# all_order_items_for_merchant = OrderItem.where(product_id: product_id.where(merchant_id: session[:merchant_id])) %>
+    <%array_of_arrays_oi = []%>
+    <%merchant = Merchant.find(1)%>
+    <%all_merchant_products = merchant.products%>
+    <%all_merchant_products.each do |product|%>
+      <%array_of_arrays_oi << OrderItem.where(product_id: product.id)%>
+    <%end%>
+    <%all_merchants_order_items = array_of_arrays_oi.flatten%>
+    <% all_unique_orders = [] %>
+    <% all_merchants_order_items.each do |order_item| %>
+     <% if all_unique_orders.exclude?(order_item.order_id) %>
+        <% all_unique_orders << order_item.order_id %>
+      <% end %>
+    <% end %>
+    <% all_unique_orders.each do |order|%>
+    <tr>
+        <td><%= link_to order, order_path(order), method: :get%></td>
+        <td><%= Order.find(order).status%></td>
+        <td><%= link_to "view", order_items_order_path(order)%></td>
+        <%#= class="btn btn-primary" href="order_items_order_path" role="button">View%>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+</section>
   <section>
     <h2 class="sub">Order Statistics</h2>
 
@@ -110,4 +146,34 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       </tbody>
     </table>
   </section>
+
+   <section>
+    <h2 class="sub">Order Statistics by Status</h2>
+      <section class="status-container">
+        <%= form_tag(merchant_path(@merchant), method: :get) do %>
+        <div class="status-box">
+        <%= select_tag :term, "<option>pending</option><option>paid</option><option>complete</option><option>cancelled</option>".html_safe, :prompt => 'Select a status' %>
+        </div>
+        <div class="status-button">
+        <%= submit_tag "Submit" %>
+        </div>
+        <% end %>
+      </section>
+    <table>
+      <thead>
+        <tr>
+          <th>Total Number of Orders</th>
+          <th>Total Revenue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%#= Order.total_number_of_orders_by_status(status) %></td>
+          <td>$<%#= Order.total_revenue_by_status(status) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  </section>    
 </main>

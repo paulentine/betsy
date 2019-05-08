@@ -91,6 +91,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  def category
+    @category = [product_params][:category]
+  end
+
   private
 
   def product_params
