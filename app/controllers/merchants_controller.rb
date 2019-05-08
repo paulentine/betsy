@@ -1,6 +1,6 @@
 class MerchantsController < ApplicationController
-  # before_action :find_merchant, only: [:show, :new]
-  # skip_before_action :require_login, only: [:create]
+  before_action :find_merchant, only: [:show, :new]
+  skip_before_action :require_login, only: [:create]
 
   def index
     @merchants = Merchant.all
@@ -71,15 +71,6 @@ class MerchantsController < ApplicationController
 
   # Show is entirely handled by find_merchant helper method
 
-  def revenue
-    # TO DO 
-  end
-
-  def num_orders
-    # TO DO
-  end
-
-  def 
   private
 
   def merchant_params
