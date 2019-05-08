@@ -1,0 +1,25 @@
+<div class="review">
+                <h4>Write a Review</h4>
+                <section class="new-review">
+                    <%= form_for model: @review, url: @action, validate: true do |f| %>
+                    <%= f.select :rating, (1..5).to_a, :prompt => 'Select a rating'%>
+
+                    <%= f.label :comment %>
+                    <%= f.text_area :content %>
+
+                    <%= f.submit "Submit", class: "button" %>
+                    <% end %>
+                </section>
+
+                <h4>Reviews</h4>
+                <% @product.reviews.reverse.each do |review| %>
+                <section class="existing-reviews">
+                    <p>
+                    <% review.rating.times do |i| %>
+                    ⭐️
+                    <% end %>
+                    </p>
+                    <p><%= review.content %></p>
+                </section>
+                <% end %>
+            </div>

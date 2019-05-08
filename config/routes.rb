@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   root "homepages#index"
 
   # Categories
-  resources :categories, except: [:destroy]
+  resources :categories do
+    resources :products, only: [:index]
+  end
+
+  resources :categories, only: [:new, :create]
 
   # Merchants
   resources :merchants, except: [:destroy, :edit, :update] do
