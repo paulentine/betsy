@@ -1,3 +1,4 @@
+require 'pry'
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
   skip_before_action :require_login, only: [:index, :show]
@@ -92,9 +93,10 @@ class ProductsController < ApplicationController
   end
 
   def set_status
-    @current_merchant[:status] = 5
+    session[:status] = params[:status] 
+    binding.pry
     # render merchant_path(@current_merchant.id)
-    render merchant_path(1)
+    render merchant_path(@current_merchant)
   end
 
   private

@@ -9,7 +9,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
   <h1 class="page-title">Merchant Dashboard</h1>
   
   <section class="merchant-info">
-    <h2 class ="name">Username : <%= @merchant.username %><h2>
+    <h2 class ="name">Username : <%= @current_merchant.username %><h2>
     <%# <% if @merchant.image %>
     <%# <%= image_tag @merchant.image %> 
     <%# <% end %> 
@@ -21,7 +21,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
 
   <section>
     <button type="button"><%= link_to "Add Categories", new_category_path %></button>
-    <button type="button"><%= link_to "Add Products", new_product_path(@merchant.id) %></button>
+    <button type="button"><%= link_to "Add Products", new_product_path(@current_merchant.id) %></button>
   </section>
 
   <section>
@@ -38,7 +38,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
         </tr>
       </thead>
       <tbody>
-        <% @merchant.products.each do |product| %>
+        <% @current_merchant.products.each do |product| %>
         <tr>
           <td><%= link_to product.name, product_path(product) %></td>
           <td>$<%=(product.price) %></td>
@@ -72,7 +72,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
           <th>Order #</th>
           <th>
             <section class="status-container">
-              <%= form_tag(merchant_path(@merchant), method: :get) do %>
+              <%= form_tag(merchant_path(@current_merchant), method: :get) do %>
               <div class="status-box">
               <%= select_tag :term, "<option>pending</option><option>paid</option><option>complete</option><option>cancelled</option>".html_safe, :prompt => 'Select a status' %>
               </div>
@@ -105,7 +105,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
   <tbody>
     <%# all_order_items_for_merchant = OrderItem.where(product_id: product_id.where(merchant_id: session[:merchant_id])) %>
     <%array_of_arrays_oi = []%>
-    <%merchant = Merchant.find(1)%>
+    <%merchant = @current_merchant%>
     <%all_merchant_products = merchant.products%>
     <%all_merchant_products.each do |product|%>
       <%array_of_arrays_oi << OrderItem.where(product_id: product.id)%>
@@ -141,7 +141,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       <tbody>
         <tr>
           <td><%= Order.total_number_of_orders %></td>
-          <td>$<%= Order.total_revenue %></td>
+          <td>$<%= Order.total_revenue(@current_merchant) %></td>
         </tr>
       </tbody>
     </table>
@@ -150,20 +150,17 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
    <section>
     <h2 class="sub">Order Statistics by Status</h2>
       <section class="status-container">
-        <%= form_tag(product_set_status_path, method: :get) do %>
-        <div class="status-box">
-        <%= select_tag(:status, "<option>pending</option><option>paid</option><option>completed</option><option>cancelled</option>".html_safe, :prompt => 'Select a status') %>
-        </div>
-        <div class="status-button">
-        <%= submit_tag "Submit" %>
-        </div>
-        <% end %>
+      <%= form_with url: product_set_status_path(status) do |form| %>
+        <%= form.select :status, id: :status ["pending", "paid", "completed", "cancelled"]%>
+        <%= form.submit %>
+      <% end %>  
       </section>
+
     <table>
       <thead>
         <tr>
-          <th>Total Number of <%session[:status].capitalize%> Orders</th>
-          <th>Total Revenue of <%session[:status].capitalize%> Orders</th>
+          <th>Total Number of <#%session[:merchant_id]%> Orders</th>
+          <th>Total Revenue of <#%session[:status].capitalize%> Orders</th>
         </tr>
       </thead>
       <tbody>
