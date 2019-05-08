@@ -51,11 +51,11 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
             <% end %>
           </td>
           <td> 
-            <% if product.is_active %> 
-              <%= link_to "Retire", product_set_status_path(product.id), method: :put %>
-             <%= else %>
-              <%= link_to "Reactivate", product_set_status_path(product.id), method: :put %>
-            <% end %>
+            <%# if product.is_active %> 
+              <%#= link_to "Retire", product_set_status_path(product.id), method: :put %>
+             <%#= else %>
+              <%#= link_to "Reactivate", product_set_status_path(product.id), method: :put %>
+            <%# end %>
           </td>
 
         </tr>
@@ -150,9 +150,9 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
    <section>
     <h2 class="sub">Order Statistics by Status</h2>
       <section class="status-container">
-        <%= form_tag(merchant_path(@merchant), method: :get) do %>
+        <%= form_tag(product_set_status_path, method: :get) do %>
         <div class="status-box">
-        <%= select_tag :term, "<option>pending</option><option>paid</option><option>complete</option><option>cancelled</option>".html_safe, :prompt => 'Select a status' %>
+        <%= select_tag(:status, "<option>pending</option><option>paid</option><option>completed</option><option>cancelled</option>".html_safe, :prompt => 'Select a status') %>
         </div>
         <div class="status-button">
         <%= submit_tag "Submit" %>
@@ -162,8 +162,8 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
     <table>
       <thead>
         <tr>
-          <th>Total Number of Orders</th>
-          <th>Total Revenue</th>
+          <th>Total Number of <%session[:status].capitalize%> Orders</th>
+          <th>Total Revenue of <%session[:status].capitalize%> Orders</th>
         </tr>
       </thead>
       <tbody>

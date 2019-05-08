@@ -91,15 +91,17 @@ class ProductsController < ApplicationController
     end
   end
 
-  def category
-    @category = [product_params][:category]
+  def set_status
+    @current_merchant[:status] = 5
+    # render merchant_path(@current_merchant.id)
+    render merchant_path(1)
   end
 
   private
 
   def product_params
     puts "product_prams totall called"
-    return params.require(:product).permit(:name, :price, :description, merchant_id: [])
+    return params.require(:product).permit(:name, :price, :description, :status, merchant_id: [])
   end
 
   def find_product
