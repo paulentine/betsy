@@ -49,11 +49,11 @@ class MerchantsController < ApplicationController
   end
 
   def current
-    @merchant = Merchant.find_by(id: session[:merchant_id])
+    @current_merchant = Merchant.find_by(id: session[:merchant_id])
     ## MADE MERCHANT.FIRST IN ORDER TO NAVIGATE SITE
     # @merchant = Merchant.first
 
-    unless @merchant
+    unless @current_merchant
       flash[:status] = :error
       flash[:message] = "You must be logged in to see this page"
       redirect_to login_path
