@@ -1,13 +1,13 @@
 class MerchantsController < ApplicationController
-  # before_action :find_merchant, only: [:show, :new]
-  # skip_before_action :require_login, only: [:create]
+  before_action :find_merchant, only: [:show, :new]
+  skip_before_action :require_login, only: [:create, :show]
 
   def index
     @merchants = Merchant.all
   end
 
   def show
-    @merchant = Merchant.first
+    @current_merchant
   end
 
   def create
@@ -49,11 +49,11 @@ class MerchantsController < ApplicationController
   end
 
   def current
-    @merchant = Merchant.find_by(id: session[:merchant_id])
+    @current_merchant = Merchant.find_by(id: session[:merchant_id])
     ## MADE MERCHANT.FIRST IN ORDER TO NAVIGATE SITE
     # @merchant = Merchant.first
 
-    unless @merchant
+    unless @current_merchant
       flash[:status] = :error
       flash[:message] = "You must be logged in to see this page"
       redirect_to login_path
