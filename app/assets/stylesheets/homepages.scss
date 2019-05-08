@@ -59,8 +59,65 @@ video {
   height: 4em;
 }
 
-main {
-  position: absolute;
-  right: 5px;
-  width: 80%;
+// main {
+//   position: absolute;
+//   right: 8px;
+//   width: 80%;
+// }
+
+.photo img {
+  max-width: 90%;
+  padding-top: 5%;
+  padding-right: 0%;
+  padding-left: 8%;
+  align-content: center;
 }
+
+.home img {
+  align-content: center;
+  max-height: 500%;
+}
+
+
+.testimonials {
+  display: grid;
+  grid-template: 1 / 4;
+  grid-gap: 5%;
+  font-size: 1.25em;
+  padding-right: 2em;
+}
+
+.testimonials h3 {
+  font-family: 'Kaushan Script', cursive;
+  font-size: 3.5em;
+}
+
+.testimonials p {
+  font-family: 'Kaushan Script', cursive;
+  font-size: 2em;
+  text-align: center;
+  vertical-align: center;
+}
+
+.about li{
+  font-size: 4em;
+  text-align: left;
+  vertical-align: center;
+  padding-right: 5%;
+}
+
+.testimonials img {
+    height: 400px;
+    float: left;
+    padding: 0 40px 0 0;
+    border-right: 3px solid black;
+    margin: 0 40px 0 0;
+}
+
+.subtitle {
+  color: black;
+  font-size: 5em;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+

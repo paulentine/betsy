@@ -1,3 +1,69 @@
 // Place all the styles related to the Merchants controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.page-title {
+  text-align: center;
+  font-size: 4em;
+}
+
+.button {
+  padding: 10%;
+}
+
+section {
+  padding: 2%;
+}
+
+table {
+  font-size: 2em;
+}
+
+main h2 {
+  color: #FBA100;
+  font-family: 'Rock Salt', cursive;
+  text-align: justify;
+  // font-size: 2.5em;
+  // padding-bottom: 6%;
+  width: 100%;
+  vertical-align: center;
+ }
+
+.sub {
+  width: 100%;
+  border-bottom:2px solid #FBA100;
+  padding: 2px;
+}
+
+.name {
+  color: black;
+  text-align: center;
+  font-size: 2em;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th:nth-child(1) {
+  width: 30%;
+}
+
+thead th:nth-child(2) {
+  width: 20%;
+}
+
+thead th:nth-child(3) {
+  width: 15%;
+}
+
+thead th:nth-child(4) {
+  width: 35%;
+}
+
+th, td {
+  padding: 20px;
+}
+
