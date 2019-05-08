@@ -15,8 +15,4 @@ class ApplicationController < ActionController::Base
       redirect_to login_path
     end
   end
-
-  def current_order
-    @current_order ||= Order.find(session[:order_id]) if session[:order_id]
-  end
 end
