@@ -7,7 +7,7 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = Merchant.first
+    @current_merchant
   end
 
   def create
