@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
       # if a product doesn't belong to the current user, then they don't see the
       # edit/delete button on their view?
       flash[:status] = :error
-      flash[:message] = "You cannot delete a product that is not yours"
+      flash[:message] = "You cannot edit a product that is not yours"
       redirect_to product_path(@product)
     end
   end
