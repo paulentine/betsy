@@ -21,7 +21,7 @@ class Order < ApplicationRecord
     end
   end
 
-  def self.total_revenue
+  def self.total_revenue(merchant)
     order_item_hash = {}
     item_quantity = 0
     item_price = 0
@@ -30,7 +30,8 @@ class Order < ApplicationRecord
     array_of_arrays_oi = []
 
     # merchant = Merchant.find(session[:merchant_id])
-    merchant = Merchant.find(1)
+    # merchant = Merchant.find(1)
+    # merchant = @current_merchant
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
       array_of_arrays_oi << OrderItem.where(product_id: product.id)

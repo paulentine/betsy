@@ -5,7 +5,7 @@ describe Order do
   
   describe "validations" do
     before do
-      @merchant = merchants(:merchant1)
+      # @merchant = merchants(:merchant1)
       @product = products(:product1)
       # @order_item = order_items(:oi1)
       # @order = orders(:order1)
@@ -70,12 +70,13 @@ describe Order do
   end
 
   describe "total_revenue" do
-    before do
-      perform_login
-      binding.pry
-    end
+   
+
+
     it "returns the correct" do
-      puts Order.total_revenue
+      merchant = merchants(:merchant1)
+
+      puts Order.total_revenue(merchant)
     end
   end
 end
