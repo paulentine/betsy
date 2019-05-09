@@ -96,3 +96,10 @@ div {
   from, to { border-color: transparent }
   50% { border-color: #463b72}
 }
+
+
+.card-columns {
+  padding-top: 10%;
+  z-index: -1;
+  position: relative;
+}
