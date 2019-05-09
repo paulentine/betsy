@@ -2,10 +2,6 @@ class ProductsController < ApplicationController
   before_action :find_product, only: %i[show edit update destroy]
   skip_before_action :require_login, only: %i[index show]
 
-class ProductsController < ApplicationController
-  before_action :find_product, only: %i[show edit update destroy]
-  skip_before_action :require_login, only: %i[index show]
-
 
   def index
     @products = Product.where(nil)
