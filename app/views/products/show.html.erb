@@ -22,7 +22,13 @@ This page includes the option to add to cart and leave a review on a product %>
                     <p> <%=@product.quantity%> in stock</p>
                     <h3><%=@product.price%>
                 </section>
-                <p><%= link_to "Add to Cart", orders_path, class: "nav-link" %></p>
+                <p>
+                    <%= form_with model: @product.order_items.new do |f| %>
+                        <%= f.hidden_field :product_id, value: @product.id %>
+                        <%= f.number_field :quantity %>
+                        <%= f.submit "Add to cart" %>
+                    <% end %>
+                </p>
             </div>
 
             
