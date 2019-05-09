@@ -1,4 +1,6 @@
-# frozen_string_literal: true
+class ProductsController < ApplicationController
+  before_action :find_product, only: %i[show edit update destroy]
+  skip_before_action :require_login, only: %i[index show]
 
 class ProductsController < ApplicationController
   before_action :find_product, only: %i[show edit update destroy]
@@ -6,7 +8,10 @@ class ProductsController < ApplicationController
 
 
   def index
-    @products = Product.all
+    @products = Product.where(nil)
+    filtering_params(params).each do |key, value|
+      @products = @products.public_send(key, value) if value.present?
+    end
   end
 
   def new
@@ -73,10 +78,21 @@ class ProductsController < ApplicationController
     end
   end
 
+  def set_status
+    session[:status] = params[:status]
+    binding.pry
+    # render merchant_path(@current_merchant.id)
+    render merchant_path(@current_merchant)
+  end
+
   private
 
+  def filtering_params(params)
+    params.slice(:status)
+  end
+
   def product_params
-    params.require(:product).permit(:name, :price, :description, merchant_id: [])
+    return params.require(:product).permit(:name, :price, :description, :status, merchant_id: [])
   end
 
   def find_product

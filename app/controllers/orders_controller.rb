@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-    before_action :find_order, only: [:show, :destroy, :order_items_order, :confirmation]
-    skip_before_action :require_login, only: [:new, :create, :confirmation, :order_items_order]
+    before_action :find_order, only: [:destroy, :order_items_order, :confirmation]
+    skip_before_action :require_login, only: [:new, :create, :confirmation, :order_items_order, :show]
     
     def index
         if params[:merchant_id]
@@ -26,7 +26,14 @@ class OrdersController < ApplicationController
     end
     
     # Show is entirely the find_order helper
-     def show; end
+     def show
+        @order = Order.find(params[:id])
+    
+        unless @order
+        head :not_found
+        return
+        end
+     end
     
     private
     

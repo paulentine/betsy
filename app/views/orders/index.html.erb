@@ -16,20 +16,20 @@ A list of orders including at least one of my products:
     Link to transition the order item to marked as shipped
     The current status of the order ("pending", "paid", "complete", "cancelled")
 
-<table class="fulfillment_revenue_table">
-    <thead>
-    <tr>
-        <th>Total Revenue</th>
-        <th>Total Revenue by Status</th>
-        <th>Total Number of Orders by Status</th>
-    </tr>
-    </thead>
+<#table class="fulfillment_revenue_table">
+    <#thead>
+    <#tr>
+        <#th>Total Revenue</th>
+        <#th>Total Revenue by Status</th>
+        <#th>Total Number of Orders by Status</th>
+    </#tr>
+    <#/thead>
   
-  <tbody>
-    <tr>
-        <td><%= Order.total_revenue %></td>
-        <td><%= Order.total_revenue_by_status(status)%></td>
-        <td><%= Order.total_number_of_orders_by_status(status)%></td>
+  <#tbody>
+    <#tr>
+        <td><%#= Order.total_revenue %></td>
+        <td><%#= Order.total_revenue_by_status(status)%></td>
+        <td><%#= Order.total_number_of_orders_by_status(status)%></td>
     </tr>
   </tbody>
 </table>
@@ -43,6 +43,6 @@ A list of orders including at least one of my products:
   <option value="Completed">
   <option value="Cancelled">
 </datalist>
-<p>Sort orders by: <%%> </p>
+<p>Sort orders by: <%#%> </p>
 
-<p class="orders-button"> <%= link_to "List of All Orders", merchant_orders_list_path, method: :get %> </p>
+<p class="orders-button"> <%#= link_to "List of All Orders", merchant_orders_list_path, method: :get %> </p>
