@@ -105,7 +105,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
     <% else %>
     <% orders = @current_merchant.orders.where(status:@status) %>
     <% end %>
-    <% orders.each do |order|%>
+    <% orders.each do |order|%> 
     <tr>
         <td><%= link_to order, order_path(order), method: :get%></td>
         <td><%= Order.find(order).status%></td>
