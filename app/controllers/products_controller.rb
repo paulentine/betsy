@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 1ebdcca6cf07b9afb7dcddde6cf6207530c38e43
->>>>>>> master
 class ProductsController < ApplicationController
   before_action :find_product, only: %i[show edit update destroy]
   skip_before_action :require_login, only: %i[index show]
