@@ -61,6 +61,10 @@ class Order < ApplicationRecord
     total_revenue = 0
     array_of_arrays_oi = []
 
+    if status = "all"
+      return Order.total_revenue(merchant)
+    end
+
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
       array_of_arrays_oi << OrderItem.where(product_id: product.id)
@@ -91,6 +95,10 @@ class Order < ApplicationRecord
     item_quantity = 0
     total_orders = 0
     array_of_arrays_oi = []
+
+    if status = "all"
+      return Order.total_number_of_orders(merchant)
+    end
 
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
