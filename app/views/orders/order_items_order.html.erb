@@ -3,6 +3,9 @@
     DateTime the order was placed
     Link to transition the order item to marked as shipped
     The current status of the order ("pending", "paid", "complete", "cancelled") %>
-    <h3>My (the merchant) Order Items from the Order</h3>
+    <main>
+    <h2><%#=@current_merchant.username%>
+    <h2>Order Items from the Order</h2>
     
     <%= render partial: "ordertable" %>
+    </main>

@@ -71,10 +71,12 @@ class MerchantsController < ApplicationController
 
   # Show is entirely handled by find_merchant helper method
 
+  
+
   private
 
   def merchant_params
-    return params.require(:merchant).permit(:username, :email)
+    return params.require(:merchant).permit(:username, :email, :status)
   end
 
   def find_merchant

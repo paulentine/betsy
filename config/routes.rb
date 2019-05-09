@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     resources :reviews, only: %i[new create]
   end
 
-  put "products/:id/status", to: "products#set_status", as: "product_set_status"
+  put "products/:id/:status", to: "products#set_status", as: "product_set_status"
 
   get "products/category/:id", to: "products#category", as: "products_category"
 end
