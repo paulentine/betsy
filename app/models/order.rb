@@ -66,14 +66,14 @@ class Order < ApplicationRecord
     all_merchants_order_items = array_of_arrays_oi.flatten
     order_items_with_status = []
     all_merchants_order_items.each do |order_item|
-      if order_item.order.pending == status
+      if order_item.order.status == status
         order_items_with_status << order_item
       end
     end
-    all_order_items_with_status.each do |order_item|
-      item_price = order_item.product_id.price
+    order_items_with_status.each do |order_item|
+      item_price = order_item.product.price
       item_quantity = order_item.quantity
-      order_item_hash[item_price] = quantity
+      order_item_hash[item_price] = item_quantity
     end
     order_item_hash.each do |price, quantity|
       total_revenue += quantity * price
@@ -97,13 +97,13 @@ class Order < ApplicationRecord
     all_merchants_order_items = array_of_arrays_oi.flatten
     order_items_with_status = []
     all_merchants_order_items.each do |order_item|
-      if order_item.order.pending == status
+      if order_item.order.status == status
         order_items_with_status << order_item
       end
     end
     all_unique_orders = []
     order_items_with_status.each do |order_item|
-      if all_unique_orders.exclude(order_item.order_id)
+      if all_unique_orders.exclude?(order_item.order_id)
         all_unique_orders << order_item.order_id
       end
     end

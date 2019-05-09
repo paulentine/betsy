@@ -8,6 +8,7 @@ class MerchantsController < ApplicationController
 
   def show
     @current_merchant
+    @status = params[:status] || "all"
   end
 
   def create
@@ -63,6 +64,7 @@ class MerchantsController < ApplicationController
 
   def destroy # Destroy action = logout
     session[:merchant_id] = nil
+    session[:status] = nil
     flash[:status] = :success
     flash[:message] = "Successfully logged out!"
 
