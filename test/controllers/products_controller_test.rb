@@ -236,6 +236,7 @@ describe ProductsController do
     it "requires login for edit" do
       get edit_product_path(Product.first)
 
+      check_flash(:error)
       must_respond_with :redirect
       must_redirect_to login_path
     end
