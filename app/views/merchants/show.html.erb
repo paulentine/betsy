@@ -63,32 +63,6 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       </tbody>
     </table>
   </section>
-
-  
-<section>
-<h2 class="sub">List of Orders</h2>
-  <table class="table table-borderless table-hover">
-    <thead>
-    <tr>
-        <th>Order ID</th>
-        <th>Status</th>
-        <th>Order Items</th>
-    </tr>
-    </thead>
-  
-  <tbody>
-    <% orders = @current_merchant.orders.where(status:@status) %>
-    <% orders.each do |order|%>
-    <tr>
-        <td><%= link_to order, order_path(order), method: :get%></td>
-        <td><%= Order.find(order).status%></td>
-        <td><%= link_to "view", order_items_order_path(order)%></td>
-        <%#= class="btn btn-primary" href="order_items_order_path" role="button">View%>
-    </tr>
-  </tbody>
-  <% end %>
-</table>
-</section>
   <section>
     <h2 class="sub">Order Statistics</h2>
 
@@ -107,16 +81,44 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       </tbody>
     </table>
   </section>
-
-   <section>
-    <h2 class="sub">Order Statistics by Status</h2>
-      <section class="status-container">
+  <section class="status-container">
       <%= form_with url: product_set_status_path do |form| %>
         <%= form.select :status, options_for_select(["all", "pending", "paid", "completed", "cancelled"], @status)%>
         <%= form.submit %>
       <% end %>  
-      </section>
+  </section>
+<section>
+<h2 class="sub">List of Orders by Status</h2>
+  <table class="table table-borderless table-hover">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Status</th>
+        <th>Order Items</th>
+    </tr>
+    </thead>
+  
+  <tbody>
+    <% orders = 0%>
+    <% if @status == "all"%>
+    <% orders = @current_merchant.orders.all %>
+    <% else %>
+    <% orders = @current_merchant.orders.where(status:@status) %>
+    <% end %>
+    <% orders.each do |order|%>
+    <tr>
+        <td><%= link_to order, order_path(order), method: :get%></td>
+        <td><%= Order.find(order).status%></td>
+        <td><%= link_to "view", order_items_order_path(order)%></td>
+        <%#= class="btn btn-primary" href="order_items_order_path" role="button">View%>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+</section>
 
+   <section>
+    <h2 class="sub">Order Statistics by Status</h2>
     <table>
       <thead>
         <tr>
