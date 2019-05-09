@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_merchant
-    @current_merchant ||= Merchant.find(1)
+    @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
   end
 
   def require_login
