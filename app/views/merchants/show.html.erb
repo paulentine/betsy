@@ -75,7 +75,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       </thead>
       <tbody>
         <tr>
-          <td><%= Order.total_number_of_orders %></td>
+          <td><%= Order.total_number_of_orders(@current_merchant) %></td>
           <td>$<%= Order.total_revenue(@current_merchant) %></td>
         </tr>
       </tbody>
@@ -101,14 +101,14 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
   <tbody>
     <% orders = 0%>
     <% if @status == "all"%>
-    <% orders = @current_merchant.orders.all %>
+    <% orders = @current_merchant.orders %>
     <% else %>
     <% orders = @current_merchant.orders.where(status:@status) %>
     <% end %>
     <% orders.each do |order|%> 
     <tr>
-        <td><%= link_to order, order_path(order), method: :get%></td>
-        <td><%= Order.find(order).status%></td>
+        <td><%= link_to order.id, order_path(order), method: :get%></td>
+        <td><%= Order.find(order.id).status%></td>
         <td><%= link_to "view", order_items_order_path(order)%></td>
         <%#= class="btn btn-primary" href="order_items_order_path" role="button">View%>
     </tr>
@@ -128,8 +128,8 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       </thead>
       <tbody>
         <tr>
-          <td><%= Order.total_number_of_orders_by_status(@status) %></td>
-          <td>$<%= Order.total_revenue_by_status(@status) %></td>
+          <td><%= Order.total_number_of_orders_by_status(merchant: @current_merchant, status: @status) %></td>
+          <td>$<%= Order.total_revenue_by_status(merchant: @current_merchant, status: @status) %></td>
         </tr>
       </tbody>
     </table>
