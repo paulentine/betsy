@@ -78,6 +78,10 @@ class Order < ApplicationRecord
         order_items_with_status << order_item
       end
     end
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1ebdcca6cf07b9afb7dcddde6cf6207530c38e43
     order_items_with_status.each do |order_item|
       item_price = order_item.product.price
       item_quantity = order_item.quantity

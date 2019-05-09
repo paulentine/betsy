@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1ebdcca6cf07b9afb7dcddde6cf6207530c38e43
 class ProductsController < ApplicationController
   before_action :find_product, only: %i[show edit update destroy]
   skip_before_action :require_login, only: %i[index show]
@@ -75,12 +79,19 @@ class ProductsController < ApplicationController
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   def set_status 
 =======
   def set_status
     session[:status] = params[:status]
     binding.pry
 >>>>>>> 9a9dae16ea8e315b838d82a119dff36163e07c32
+=======
+
+  def set_status
+    session[:status] = params[:status]
+    binding.pry
+>>>>>>> 1ebdcca6cf07b9afb7dcddde6cf6207530c38e43
     # render merchant_path(@current_merchant.id)
     redirect_to merchant_path(@current_merchant, :status => params[:status])
   end
