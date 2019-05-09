@@ -19,6 +19,8 @@ describe Category do
 
   describe "relationship" do
     let(:product) { products(:art) }
+    # binding.pry
+
     it "belongs to product" do
       cat = product.category
 

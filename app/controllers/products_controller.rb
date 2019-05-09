@@ -74,6 +74,7 @@ class ProductsController < ApplicationController
     end
   end
 
+
   def set_status
     session[:status] = params[:status]
     redirect_to merchant_path(@current_merchant, :status => params[:status])

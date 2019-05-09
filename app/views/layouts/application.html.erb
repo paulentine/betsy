@@ -59,32 +59,37 @@
                     <%= link_to "Shop All", products_path, class: "nav-link" %>
                   </li>
                   </li>
-
-                  <li class="nav-item">
-                    <% if session[:merchant_id] %>
-                      <%= link_to "Dashboard: #{session[:username]}", merchant_path(session[:merchant_id]) %>
-                    <% end%>
-                  </li>
                   
                 </ul>
                 <ul class="navbar-nav mr-auto">
                   <% if session[:merchant_id] %>
+                  <li class="nav-item">
+                      <%= link_to "Dashboard", merchant_path(session[:merchant_id]) %></li>
+                       <li class="nav-item">
                     <li class="nav-item">
                       <%= link_to "Log Out", logout_path, method: "delete" %></li>
-                    <li class="nav-item">
-                      <%= link_to "Merchant Dashboard" %></li>
-                       <li class="nav-item">
                   <% else %>
                     <li class="nav-item">
                       <%= link_to "Merchant Login", login_path %></li>
                   <% end %>
+                  <li class="nav-item">
+                      <%= link_to "Sign Up", new_merchant_path %></li>
                   </ul>
+
+                   
                </div>
   </nav>
 
   <body>
-    
     <%= yield %>
+
+     <%# <footer id="footer">
+  
+        <p class="right">© Expionage 2019</p>
+      </div>
+    </div>   
+  </footer> %>
   </body>
 
+ 
 </html>

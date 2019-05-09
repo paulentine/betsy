@@ -14,26 +14,6 @@ class OrdersController < ApplicationController
             end
         end
     end
-    
-    def new
-        @order = Order.new
-    end
-    
-    def create
-        @order = Order.new(order_params)
-
-        successful = @order.save
-        
-        if successful
-            flash[:status] = :success
-            flash[:message] = "Successfully created order with ID ##{@order.id}"
-            redirect_to order_confirmation_path(@order.id)
-        else
-            flash.now[:status] = :error
-            flash.now[:message] = "Could not create order"
-            render :new, status: :bad_request
-        end
-    end
 
     def confirmation 
     end
