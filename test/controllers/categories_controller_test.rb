@@ -76,19 +76,34 @@ describe CategoriesController do
         check_flash(:error)
       end
     end
+
+
+
+
+
   end
 
+  describe "guest users" do
+    it "requires login for new" do
+      get new_category_path
 
+      must_respond_with :redirect
+      must_redirect_to login_path
+    end
 
+    it "requires login for create" do
+      category_data = {
+        category: {
+          category: "this is a new category",
+        },
+      }
 
+      expect {
+        post categories_path, params: category_data
+      }.wont_change "Category.count"
 
-  # it "should get new" do
-  #   get categories_new_url
-  #   value(response).must_be :success?
-  # end
-
-  # it "should get create" do
-  #   get categories_create_url
-  #   value(response).must_be :success?
-  # end
+      must_respond_with :redirect
+      must_redirect_to login_path
+    end
+  end
 end
