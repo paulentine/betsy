@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MerchantsController < ApplicationController
   before_action :find_merchant, only: [:show, :new]
   skip_before_action :require_login, only: [:create, :show]
@@ -6,20 +8,17 @@ class MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
+
   def show
     @current_merchant
     @status = params[:status] || "all"
   end
 
   def create
-    auth_hash = request.env["omniauth.auth"]
-    if auth_hash == nil
-      puts "auth_hash not initialized :'("
-    end
+    auth_hash = request.env['omniauth.auth']
+    puts "auth_hash not initialized :'(" if auth_hash.nil?
 
-    merchant = Merchant.find_by(uid: auth_hash[:uid], provider: "github")
-    ## MADE MERCHANT.FIRST IN ORDER TO NAVIGATE SITE
-    # merchant = Merchant.first
+    merchant = Merchant.find_by(uid: auth_hash[:uid], provider: 'github')
     if merchant
       # Merchant was found in the database
       flash[:status] = :success
@@ -46,17 +45,15 @@ class MerchantsController < ApplicationController
 
     # If we get here, we have a valid merchant instance
     session[:merchant_id] = merchant.id
-    return redirect_to root_path
+    redirect_to root_path
   end
 
   def current
     @current_merchant = Merchant.find_by(id: session[:merchant_id])
-    ## MADE MERCHANT.FIRST IN ORDER TO NAVIGATE SITE
-    # @merchant = Merchant.first
 
     unless @current_merchant
       flash[:status] = :error
-      flash[:message] = "You must be logged in to see this page"
+      flash[:message] = 'You must be logged in to see this page'
       redirect_to login_path
       return
     end
@@ -66,7 +63,7 @@ class MerchantsController < ApplicationController
     session[:merchant_id] = nil
     session[:status] = nil
     flash[:status] = :success
-    flash[:message] = "Successfully logged out!"
+    flash[:message] = 'Successfully logged out!'
 
     redirect_to root_path
   end

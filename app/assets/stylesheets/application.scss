@@ -55,6 +55,7 @@ li {
 nav a {
     color: #FBA100;
     font-size: 1.5em;
+    text-align: left;
 }
 
 .vertical-menu {
@@ -70,8 +71,8 @@ nav a {
 .vertical-menu a {
   color: #FBA100;
   display: block;
-  padding: 12px;
-  text-decoration: none;
+  // padding: 12px;
+  left: 0;
 }
 
 .vertical-menu a:hover {
@@ -128,7 +129,7 @@ li {
 	 width: 100%;
  }
 
- .title {
+.title {
   color: #FBA100;
   font-family: 'Rock Salt', cursive;
   text-align: justify;
@@ -137,16 +138,20 @@ li {
  }
 
 
- .nav_item {
-   text-align: left;
-   font-size: 4em;
+.nav_item {
+  text-align: left;
+  font-size: 4em;
  }
 
- .dropdown {
-   background-color: transparent;
+.nav-sub {
+  font-size: 1.5em;
  }
 
- main {
+.dropdown {
+  background-color: transparent;
+ }
+
+main {
   position: absolute;
   right: 8px;
   width: 80%;
