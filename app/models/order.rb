@@ -2,14 +2,19 @@
 
 class Order < ApplicationRecord
   has_many :order_items # plural
-  # validates :order_items, presence: true
-  validates :email, presence: true
-  validates :name, presence: true
-  validates :address, presence: true
-  validates :zipcode, presence: true
-  validates :cc_num, presence: true
-  validates :cc_cvv, presence: true
-  validates :cc_expiration, presence: true
+  
+# TODO: DON'T FORGET TO REAPPLY THESE WHEN ORDER STATUS IS NO LONGER PENDING
+# ALSO: DRY UP WITH BEFORE_ACTION: FIND_MERCHANT
+  
+# validates :order_items, presence: true
+  
+#   validates :email, presence: true
+#   validates :name, presence: true
+#   validates :address, presence: true
+#   validates :zipcode, presence: true
+#   validates :cc_num, presence: true
+#   validates :cc_cvv, presence: true
+#   validates :cc_expiration, presence: true
 
   def self.last4_ccnum(cc_num)
     if cc_num.nil?
@@ -28,6 +33,8 @@ class Order < ApplicationRecord
     total_revenue = 0
 
     array_of_arrays_oi = []
+
+    merchant = Merchant.find(session[:merchant_id])
 
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
@@ -55,6 +62,9 @@ class Order < ApplicationRecord
     item_price = 0
     total_revenue = 0
     array_of_arrays_oi = []
+
+
+    merchant = Merchant.find(session[:merchant_id])
 
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
@@ -88,6 +98,8 @@ class Order < ApplicationRecord
     total_orders = 0
     array_of_arrays_oi = []
 
+    merchant = Merchant.find(session[:merchant_id])
+
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
       array_of_arrays_oi << OrderItem.where(product_id: product.id)
@@ -115,6 +127,9 @@ class Order < ApplicationRecord
     total_orders = 0
     array_of_arrays_oi = []
 
+
+    merchant = Merchant.find(session[:merchant_id])
+
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
       array_of_arrays_oi << OrderItem.where(product_id: product.id)
@@ -128,4 +143,5 @@ class Order < ApplicationRecord
     end
     return all_unique_orders.length
   end
+
 end
