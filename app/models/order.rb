@@ -61,7 +61,7 @@ class Order < ApplicationRecord
     total_revenue = 0
     array_of_arrays_oi = []
 
-    if status = "all"
+    if status == "all"
       return Order.total_revenue(merchant)
     end
 
@@ -96,7 +96,7 @@ class Order < ApplicationRecord
     total_orders = 0
     array_of_arrays_oi = []
 
-    if status = "all"
+    if status == "all"
       return Order.total_number_of_orders(merchant)
     end
 
