@@ -47,8 +47,6 @@ class ActiveSupport::TestCase
 
   def perform_login(merchant = nil)
     merchant ||= Merchant.first
-    puts Merchant.first
-    puts "totally performed login"
 
     # Create mock data for this user as though it had come from github
     mock_auth_hash = {

@@ -2,14 +2,19 @@
 
 class Order < ApplicationRecord
   has_many :order_items # plural
-  # validates :order_items, presence: true
-  validates :email, presence: true
-  validates :name, presence: true
-  validates :address, presence: true
-  validates :zipcode, presence: true
-  validates :cc_num, presence: true
-  validates :cc_cvv, presence: true
-  validates :cc_expiration, presence: true
+  
+# TODO: DON'T FORGET TO REAPPLY THESE WHEN ORDER STATUS IS NO LONGER PENDING
+# ALSO: DRY UP WITH BEFORE_ACTION: FIND_MERCHANT
+  
+# validates :order_items, presence: true
+  
+#   validates :email, presence: true
+#   validates :name, presence: true
+#   validates :address, presence: true
+#   validates :zipcode, presence: true
+#   validates :cc_num, presence: true
+#   validates :cc_cvv, presence: true
+#   validates :cc_expiration, presence: true
 
   def self.last4_ccnum(cc_num)
     if cc_num.nil?
@@ -68,9 +73,8 @@ class Order < ApplicationRecord
         order_items_with_status << order_item
       end
     end
-
     order_items_with_status.each do |order_item|
-      item_price = Product.find(order_item.product_id).price
+      item_price = order_item.product.price
       item_quantity = order_item.quantity
       order_item_hash[item_price] = item_quantity
     end
@@ -115,6 +119,7 @@ class Order < ApplicationRecord
     total_orders = 0
     array_of_arrays_oi = []
 
+
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
       array_of_arrays_oi << OrderItem.where(product_id: product.id)
@@ -128,4 +133,5 @@ class Order < ApplicationRecord
     end
     return all_unique_orders.length
   end
+
 end

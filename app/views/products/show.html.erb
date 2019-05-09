@@ -2,31 +2,33 @@
 
 Show product details
 This page includes the option to add to cart and leave a review on a product %>
-<html>
-    <body>
-        <main>
-            <h3 class="title">Product Details</h3> 
-            <div class="container">
-                <h2 class="type">Are you interested in this experience?</h2>
-                <br>
-                <p class = "product_title"><%= @product.name%></p>
 
-                <section class = "product-details">
-                    <p>Product Details</p>
-                    <p>Sold By:</p>
-                    <p> <%=@product.merchant.username%> </p>
-                    <p><%= link_to "Go to this merchant's shop", merchants_path, class: "nav-link" %></p>
-                    
-                    <p>Description</p>
-                    <p> <%=@product.description%> </p>
-                    <p> <%=@product.quantity%> in stock</p>
-                    <h3><%=@product.price%>
-                </section>
-                <p><%= link_to "Add to Cart", orders_path, class: "nav-link" %></p>
-            </div>
 
-            
-        </main>
+<main>
 
-    </body>
-</html> 
+<article class="main-content container-fluid">
+  <div class="row">
+    <section class="col-sm-8 product-show">
+      <h2><%= @product.name %></h2>
+      <p>
+        <%= image_tag(@product.photo_url, height: "300", alt: @product.name) %>
+      </p>
+      <p><%= @product.description%></p>
+      <p><h4><strong>Price: <%= @product.price %></strong></h4></p>
+      <% if @product.stock < 1 %>
+        <strong>Out of Stock</strong>
+        <% else %>
+        <div>
+          <%= form_with model: @orderitem, url: product_orderitems_path(@product.id) do |f|%>
+          <%#= form_with model: @orderitem, url: product_orderitems_path(@product.id), method: :post do |f|%>
+            <strong><%= f.label :quantity%></strong>
+            <%= f.select :quantity, (1..@product.stock)  %><br>
+            <%= f.submit "Add Item to Cart", class: "btn btn-primary to-cart", method: :post %>
+          <% end %>
+        <% end %>
+    </div>
+    </section>
+  </div>
+</article>
+
+</main>

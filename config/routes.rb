@@ -33,23 +33,27 @@ Rails.application.routes.draw do
     get "order-items-for-order", to: "orders#order_items_order", as: "items_order"
   end
 
-  # Cart-Related (Grace wrote these feel free to adjust as needed)
-  put "order_items/:id/status", to: "order_items#set_status", as: "order_item_set_status"
-  resources :order_items, only: [:update]
+  # Order Items
+  resources :order_items
 
-  patch "/cart/place_order", to: "cart#update_to_paid", as: "update_to_paid"
-  get "/cart", to: "cart#access_cart", as: "cart"
-  patch "/cart", to: "cart#update_cart_info", as: "update_cart_info"
-  delete "/cart/:id/remove_single_item", to: "cart#remove_single_item", as: "remove_single_item"
-  delete "/cart/delete", to: "cart#destroy", as: "cart_destroy"
-  post "/products/:id/add_to_cart", to: "cart#add_to_cart", as: "add_to_cart"
+  # Cart-Related (Grace wrote these feel free to adjust as needed)
+  resource :cart, only: [:show]
+  # put "order_items/:id/status", to: "order_items#set_status", as: "order_item_set_status"
+  # resources :order_items, only: [:update]
+
+  # patch "/cart/place_order", to: "cart#update_to_paid", as: "update_to_paid"
+  # get "/cart", to: "cart#access_cart", as: "cart"
+  # patch "/cart", to: "cart#update_cart_info", as: "update_cart_info"
+  # delete "/cart/:id/remove_single_item", to: "cart#remove_single_item", as: "remove_single_item"
+  # delete "/cart/delete", to: "cart#destroy", as: "cart_destroy"
+  # post "/products/:id/add_to_cart", to: "cart#add_to_cart", as: "add_to_cart"
 
   # Products
   resources :products do
     resources :reviews, only: %i[new create]
   end
 
-  put "products/:id/:status", to: "products#set_status", as: "product_set_status"
+  post "products/status", to: "products#set_status", as: "product_set_status"
 
   get "products/category/:id", to: "products#category", as: "products_category"
 end
