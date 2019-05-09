@@ -80,7 +80,7 @@ class Order < ApplicationRecord
     end
 
     order_items_with_status.each do |order_item|
-      item_price = Product.find(order_item.product_id).price
+      item_price = order_item.product.price
       item_quantity = order_item.quantity
       order_item_hash[item_price] = item_quantity
     end

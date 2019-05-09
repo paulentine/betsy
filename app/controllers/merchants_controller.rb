@@ -8,6 +8,12 @@ class MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
+
+  def show
+    @current_merchant
+    @status = params[:status] || "all"
+  end
+
   def create
     auth_hash = request.env['omniauth.auth']
     puts "auth_hash not initialized :'(" if auth_hash.nil?
@@ -55,6 +61,7 @@ class MerchantsController < ApplicationController
 
   def destroy # Destroy action = logout
     session[:merchant_id] = nil
+    session[:status] = nil
     flash[:status] = :success
     flash[:message] = 'Successfully logged out!'
 

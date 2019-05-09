@@ -2,7 +2,9 @@
 
 class Merchant < ApplicationRecord
   has_many :products # plural
-
+  has_many :order_items, :through => :products
+  has_many :orders, :through => :order_items
+  
   validates :username, presence: true, uniqueness: true
 
   def self.build_from_github(auth_hash)

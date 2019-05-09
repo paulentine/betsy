@@ -1,3 +1,4 @@
+
 class ProductsController < ApplicationController
   before_action :find_product, only: %i[show edit update destroy]
   skip_before_action :require_login, only: %i[index show]
@@ -74,11 +75,12 @@ class ProductsController < ApplicationController
     end
   end
 
+
   def set_status
     session[:status] = params[:status]
     binding.pry
     # render merchant_path(@current_merchant.id)
-    render merchant_path(@current_merchant)
+    redirect_to merchant_path(@current_merchant, :status => params[:status])
   end
 
   private
