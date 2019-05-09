@@ -89,14 +89,12 @@ describe OrdersController do
       end
 
       it "returns a 404 error if merchant is not found" do
+
         @current_merchant = nil
         get orders_path
 
         must_respond_with :not_found
       end
-  
-
-
 
     end
 

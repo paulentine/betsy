@@ -51,95 +51,61 @@
         1,
         null,
         1,
-<<<<<<< HEAD
-        44,
+        54,
         null,
         null,
         1,
-        64,
+        81,
         null,
         null,
         1,
-        20,
-        6,
-        6,
-=======
-        32,
-        null,
-        null,
-        1,
-        40,
-        null,
-        null,
-        1,
+        27,
         8,
-        0,
-        0,
->>>>>>> master
+        8,
         null,
         null,
         null,
         1,
-<<<<<<< HEAD
-        44,
-        44,
-        16,
+        54,
+        54,
+        21,
         null,
-        28,
-        28,
-        null,
-        null,
-        43,
-=======
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
+        33,
+        33,
         null,
         null,
-        0,
->>>>>>> master
+        53,
         null,
         null
       ],
       "/Users/Riyo/ada/classroom/week-12/projects/betsy/app/controllers/categories_controller.rb": [
         1,
         1,
-        0,
+        2,
         null,
         null,
         1,
-        0,
+        1,
         null,
         null,
         1,
-        0,
+        2,
         null,
-        0,
-        0,
-        0,
-<<<<<<< HEAD
+        2,
+        1,
+        1,
+        1,
         null,
-        0,
-        0,
-        0,
-        null,
-=======
-        0,
-        null,
-        0,
-        0,
->>>>>>> master
-        0,
+        1,
+        1,
+        1,
         null,
         null,
         null,
         1,
         null,
         1,
-        0,
+        2,
         null,
         null
       ],
@@ -165,37 +131,20 @@
         null,
         null,
         1,
-<<<<<<< HEAD
-        19,
-        19,
+        24,
+        24,
         null,
-        19,
-        19,
+        24,
+        24,
         null,
-        17,
-        17,
+        22,
+        22,
         null,
         null,
         null,
         2,
         null,
         2,
-=======
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
-        null,
-        null,
-        0,
-        null,
-        0,
->>>>>>> master
         0,
         0,
         null,
@@ -204,38 +153,21 @@
         null,
         null,
         null,
-<<<<<<< HEAD
         2,
         2,
         2,
-=======
-        0,
-        0,
-        0,
->>>>>>> master
         null,
         null,
         null,
         null,
-<<<<<<< HEAD
-        17,
-        17,
+        22,
+        22,
         null,
         null,
         1,
         1,
         null,
         1,
-=======
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        0,
->>>>>>> master
         0,
         0,
         0,
@@ -305,27 +237,15 @@
         1,
         null,
         1,
-<<<<<<< HEAD
         2,
         2,
         2,
-=======
-        0,
-        null,
-        0,
-        0,
-        0,
->>>>>>> master
         null,
         0,
         null,
         null,
         null,
         null,
-<<<<<<< HEAD
-=======
-        null,
->>>>>>> master
         1,
         null,
         null,
@@ -336,18 +256,10 @@
         null,
         null,
         null,
-<<<<<<< HEAD
         1,
         3,
         null,
         2,
-=======
-        null,
-        1,
-        0,
-        null,
-        0,
->>>>>>> master
         0,
         null,
         null,
@@ -376,19 +288,13 @@
         null,
         null,
         1,
-<<<<<<< HEAD
         2,
         2,
-=======
-        0,
-        0,
->>>>>>> master
         0,
         null,
         null,
         null,
         1,
-<<<<<<< HEAD
         1,
         null,
         null,
@@ -406,34 +312,11 @@
         1,
         1,
         1,
-=======
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
->>>>>>> master
         null,
         null,
         null,
         1,
-<<<<<<< HEAD
         1,
-=======
-        0,
->>>>>>> master
         null,
         null,
         null,
@@ -444,7 +327,6 @@
         null,
         null,
         1,
-<<<<<<< HEAD
         2,
         2,
         1,
@@ -454,22 +336,10 @@
         1,
         1,
         1,
-=======
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
->>>>>>> master
         null,
         null,
         null,
         1,
-<<<<<<< HEAD
         2,
         1,
         1,
@@ -478,29 +348,13 @@
         1,
         null,
         1,
-=======
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
-        0,
->>>>>>> master
         null,
         null,
         null,
         null,
-<<<<<<< HEAD
         1,
         1,
         1,
-=======
-        0,
-        0,
-        0,
->>>>>>> master
         null,
         null,
         null,
@@ -514,7 +368,6 @@
         1,
         null,
         1,
-<<<<<<< HEAD
         2,
         null,
         null,
@@ -527,20 +380,6 @@
         null,
         9,
         3,
-=======
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        0,
-        0,
->>>>>>> master
         null,
         null,
         null,
@@ -551,7 +390,6 @@
         1,
         null,
         1,
-<<<<<<< HEAD
         1,
         1,
         null,
@@ -571,38 +409,13 @@
         1,
         1,
         1,
-=======
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
->>>>>>> master
         null,
         null,
         null,
         1,
         null,
         1,
-<<<<<<< HEAD
         2,
-=======
-        0,
->>>>>>> master
         null,
         null
       ],
@@ -628,7 +441,6 @@
         1,
         null,
         1,
-<<<<<<< HEAD
         2,
         2,
         2,
@@ -638,17 +450,6 @@
         null,
         null,
         2,
-=======
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        0,
->>>>>>> master
         null,
         null,
         null,
@@ -682,21 +483,12 @@
         null,
         null,
         1,
-<<<<<<< HEAD
         5,
         null,
         4,
         1,
         null,
         3,
-=======
-        3,
-        null,
-        2,
-        1,
-        null,
-        1,
->>>>>>> master
         null,
         null,
         null,
@@ -709,14 +501,6 @@
         2,
         null,
         2,
-<<<<<<< HEAD
-=======
-        2,
-        1,
-        null,
-        null,
-        2,
->>>>>>> master
         null,
         2,
         1,
@@ -743,20 +527,10 @@
         null,
         null,
         4,
-<<<<<<< HEAD
-=======
-        4,
-        4,
-        null,
->>>>>>> master
         null,
         4,
         4,
         4,
-<<<<<<< HEAD
-=======
-        4,
->>>>>>> master
         1,
         null,
         null,
@@ -786,14 +560,6 @@
         4,
         4,
         4,
-<<<<<<< HEAD
-=======
-        null,
-        null,
-        4,
-        4,
-        4,
->>>>>>> master
         4,
         1,
         null,
@@ -809,14 +575,6 @@
         null,
         1,
         2,
-<<<<<<< HEAD
-=======
-        2,
-        2,
-        2,
-        null,
-        2,
->>>>>>> master
         null,
         null,
         null
@@ -840,7 +598,6 @@
         null,
         1,
         null
-<<<<<<< HEAD
       ],
       "/Users/Riyo/ada/classroom/week-12/projects/betsy/app/mailers/application_mailer.rb": [
         0,
@@ -865,7 +622,7 @@
         0
       ]
     },
-    "timestamp": 1557441424
+    "timestamp": 1557441843
   },
   "Unit Tests": {
     "coverage": {
@@ -1300,7 +1057,6 @@
         0,
         0,
         0,
-        0,
         null,
         0,
         null,
@@ -1491,11 +1247,6 @@
         0
       ]
     },
-    "timestamp": 1557440827
-=======
-      ]
-    },
-    "timestamp": 1557441538
->>>>>>> master
+    "timestamp": 1557443066
   }
 }
