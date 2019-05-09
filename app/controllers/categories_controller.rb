@@ -11,14 +11,13 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save
-      flash[:success] = "Category was successfully created."
+      flash[:status] = :success
+      flash[:message] = "Category was successfully created."
       redirect_to categories_path
     else
-      flash.now[:warning] = "Category not created"
-      @category.errors.messages.each do |field, msg|
-        flash.now[field] = msg
-      end
-      render :new
+      flash.now[:status] = :error
+      flash.now[:message] = "Category not created"
+      render :new, status: :bad_request
     end
   end
 
