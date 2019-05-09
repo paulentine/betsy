@@ -43,7 +43,7 @@ describe OrdersController do
       expect(order.email).must_equal order_data[:order][:email]
       expect(order.name).must_equal order_data[:order][:name]
 
-      
+
     end
 
     it "sends back bad_request if no order data is sent" do
@@ -120,7 +120,5 @@ describe OrdersController do
       must_redirect_to login_path
     end
   end
-
-
   
 end
