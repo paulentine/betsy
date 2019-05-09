@@ -61,6 +61,10 @@ class Order < ApplicationRecord
     total_revenue = 0
     array_of_arrays_oi = []
 
+    if status == "all"
+      return Order.total_revenue(merchant)
+    end
+
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
       array_of_arrays_oi << OrderItem.where(product_id: product.id)
@@ -92,6 +96,10 @@ class Order < ApplicationRecord
     total_orders = 0
     array_of_arrays_oi = []
 
+    if status == "all"
+      return Order.total_number_of_orders(merchant)
+    end
+
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
       array_of_arrays_oi << OrderItem.where(product_id: product.id)
@@ -119,19 +127,7 @@ class Order < ApplicationRecord
     total_orders = 0
     array_of_arrays_oi = []
 
-
-    all_merchant_products = merchant.products
-    all_merchant_products.each do |product|
-      array_of_arrays_oi << OrderItem.where(product_id: product.id)
-    end
-    all_merchants_order_items = array_of_arrays_oi.flatten
-    all_unique_orders = []
-    all_merchants_order_items.each do |order_item|
-      if all_unique_orders.exclude?(order_item.order_id)
-        all_unique_orders << order_item.order_id
-      end
-    end
-    return all_unique_orders.length
+    return merchant.orders.length
   end
 
 end
