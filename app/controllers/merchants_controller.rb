@@ -8,7 +8,6 @@ class MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
-
   def show
     @current_merchant
     @status = params[:status] || "all"
