@@ -59,31 +59,32 @@ class Order < ApplicationRecord
     item_quantity = 0
     item_price = 0
     total_revenue = 0
-    array_of_arrays_oi = []
 
-<<<<<<< HEAD
-=======
+    # all_merchant_products = merchant.products
+    # all_merchant_products.each do |product|
+    #   array_of_arrays_oi << OrderItem.where(product_id: product.id)
+    # end
 
-    merchant = Merchant.find(session[:merchant_id])
+    # all_merchants_order_items = array_of_arrays_oi.flatten
+    # order_items_with_status = []
+    # all_merchants_order_items.each do |order_item|
+    #   if order_item.order.status == status
+    #     order_items_with_status << order_item
+    #   end
+    # end
+    # order_items_with_status.each do |order_item|
+    #   item_price = order_item.product.price
+    #   item_quantity = order_item.quantity
+    #   order_item_hash[item_price] = item_quantity
+    # end
 
->>>>>>> 1187aa766b89c87cd079a21e9147739fd1bcd8f8
-    all_merchant_products = merchant.products
-    all_merchant_products.each do |product|
-      array_of_arrays_oi << OrderItem.where(product_id: product.id)
-    end
+    # order_item_hash.each do |price, quantity|
+    #   total_revenue += quantity * price
+    # end
+    # return total_revenue
 
-    all_merchants_order_items = array_of_arrays_oi.flatten
-    order_items_with_status = []
-    all_merchants_order_items.each do |order_item|
-      if order_item.order.status == status
-        order_items_with_status << order_item
-      end
-    end
-<<<<<<< HEAD
-=======
-
->>>>>>> 1ebdcca6cf07b9afb7dcddde6cf6207530c38e43
-    order_items_with_status.each do |order_item|
+    
+    merchant.orders.where(status: status).each do |order_item|
       item_price = order_item.product.price
       item_quantity = order_item.quantity
       order_item_hash[item_price] = item_quantity
@@ -102,11 +103,6 @@ class Order < ApplicationRecord
     total_orders = 0
     array_of_arrays_oi = []
 
-<<<<<<< HEAD
-=======
-    merchant = Merchant.find(session[:merchant_id])
-
->>>>>>> 1187aa766b89c87cd079a21e9147739fd1bcd8f8
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
       array_of_arrays_oi << OrderItem.where(product_id: product.id)
@@ -134,12 +130,6 @@ class Order < ApplicationRecord
     total_orders = 0
     array_of_arrays_oi = []
 
-<<<<<<< HEAD
-=======
-
-    merchant = Merchant.find(session[:merchant_id])
-
->>>>>>> 1187aa766b89c87cd079a21e9147739fd1bcd8f8
     all_merchant_products = merchant.products
     all_merchant_products.each do |product|
       array_of_arrays_oi << OrderItem.where(product_id: product.id)
