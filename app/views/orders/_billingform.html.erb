@@ -1,0 +1,74 @@
+<%# Intent for this page:
+form for payment and shipping info %>
+
+
+
+
+<div class="row">
+<div class="col-25">
+    <div class="container">
+      <h4>Cart 
+        <span class="price" style="color:black">
+          <i class="fa fa-shopping-cart"></i> 
+          <b># of Items in Cart: <%= @current_order.order_items.length %></b>
+        </span>
+      </h4>
+      <% @current_order.order_items.each do |order_item| %>
+      <p><a href="#"> <%= order_item %></a> <span class="price"><%= (order_item.quantity * order_item.price) %></span></p>
+      <% end %>
+      <hr>
+      <p>Total <span class="price" style="color:black"><b>$<%=Order.cart_total(@current_order)%></b></span></p>
+    </div>
+  </div>
+  <div class="col-75">
+    <div class="container">
+      <form action="orders_path" method="post">
+
+        <div class="row">
+          <div class="col-50">
+            <h3>Billing Address</h3>
+            <label for="name"><i class="fa fa-user"></i> Full Name</label>
+            <input type="text" id="name" name="name" placeholder="John M. Doe">
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <input type="text" id="email" name="email" placeholder="john@example.com">
+            <label for="address"><i class="fa fa-address-card-o"></i> Address</label>
+            <input type="text" id="address" name="address" placeholder="542 W. 15th Street">
+
+            <div class="row">
+              <div class="col-50">
+                <label for="zipcode">Zipcode</label>
+                <input type="text" id="zipcode" name="zipcode" placeholder="10128">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-50">
+            <h3>Payment</h3>
+            <label for="fname">Accepted Cards</label>
+            <div class="icon-container">
+              <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+            </div>
+            <label for="cc_num">Credit Card Number</label>
+            <input type="text" id="cc_num" name="cc_num" placeholder="1111-2222-3333-4444">
+            <label for="cc_expiration">Expiration</label>
+            <input type="text" id="cc_expiration" name="cc_expiration" placeholder="08/20">
+
+            <div class="row">
+              <div class="col-50">
+                <label for="cc_cvv">CVV</label>
+                <input type="text" id="cc_cvv" name="cc_cvv" placeholder="352">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <input type="submit" value="Confirm Order" class="btn">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+

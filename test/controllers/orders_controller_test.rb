@@ -43,7 +43,7 @@ describe OrdersController do
       expect(order.email).must_equal order_data[:order][:email]
       expect(order.name).must_equal order_data[:order][:name]
 
-      
+
     end
 
     it "sends back bad_request if no order data is sent" do
@@ -87,6 +87,15 @@ describe OrdersController do
         # Assert
         must_respond_with :success
       end
+
+      it "returns a 404 error if merchant is not found" do
+
+        @current_merchant = nil
+        get orders_path
+
+        must_respond_with :not_found
+      end
+
     end
 
     describe "show" do
@@ -120,7 +129,5 @@ describe OrdersController do
       must_redirect_to login_path
     end
   end
-
-
   
 end

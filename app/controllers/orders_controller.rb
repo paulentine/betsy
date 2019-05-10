@@ -3,15 +3,12 @@ class OrdersController < ApplicationController
     skip_before_action :require_login, only: [:new, :create, :confirmation, :order_items_order, :show]
     
     def index
-        if params[:merchant_id]
-    
-        merchant = Merchant.find_by(id: params[:merchant_id])
-            if merchant
-                @orders = merchant.orders
-            else
-                head :not_found
-                return
-            end
+        merchant = @current_merchant
+        if merchant
+            @orders = merchant.orders
+        else
+            head :not_found
+            return
         end
     end
 
@@ -25,7 +22,6 @@ class OrdersController < ApplicationController
 
     end
     
-    # Show is entirely the find_order helper
      def show
         @order = Order.find(params[:id])
     

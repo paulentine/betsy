@@ -34,12 +34,7 @@ class Order < ApplicationRecord
 
     array_of_arrays_oi = []
 
-    all_merchant_products = merchant.products
-    all_merchant_products.each do |product|
-      array_of_arrays_oi << OrderItem.where(product_id: product.id)
-    end
-
-    all_merchants_order_items = array_of_arrays_oi.flatten
+    all_merchants_order_items = merchant.order_items
     
     all_merchants_order_items.each do |order_item|
       product = Product.find(order_item.product_id)
@@ -65,12 +60,8 @@ class Order < ApplicationRecord
       return Order.total_revenue(merchant)
     end
 
-    all_merchant_products = merchant.products
-    all_merchant_products.each do |product|
-      array_of_arrays_oi << OrderItem.where(product_id: product.id)
-    end
+    all_merchants_order_items = merchant.order_items
 
-    all_merchants_order_items = array_of_arrays_oi.flatten
     order_items_with_status = []
     all_merchants_order_items.each do |order_item|
       if order_item.order.status == status
@@ -100,12 +91,7 @@ class Order < ApplicationRecord
       return Order.total_number_of_orders(merchant)
     end
 
-    all_merchant_products = merchant.products
-    all_merchant_products.each do |product|
-      array_of_arrays_oi << OrderItem.where(product_id: product.id)
-    end
-
-    all_merchants_order_items = array_of_arrays_oi.flatten
+    all_merchants_order_items = merchant.order_items
     order_items_with_status = []
     all_merchants_order_items.each do |order_item|
       if order_item.order.status == status
@@ -122,12 +108,26 @@ class Order < ApplicationRecord
   end
 
   def self.total_number_of_orders(merchant)
-    order_item_hash = {}
-    item_quantity = 0
-    total_orders = 0
-    array_of_arrays_oi = []
-
     return merchant.orders.length
   end
 
+  def self.cart_total(cart)
+    total = 0
+    item_price = 0
+    item_quantity = 0
+    order_item_array = []
+    order_item_hash = {}
+
+    cart.order_items.each do |order_item|
+      item_price = order_item.product.price
+      item_quantity = order_item.quantity
+
+      order_item_hash[item_price] = item_quantity
+    end
+
+    order_item_hash.each do |price, quantity|
+      total += quantity * price
+    end
+    return total
+  end
 end

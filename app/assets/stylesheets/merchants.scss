@@ -41,10 +41,11 @@ main h2 {
   font-size: 2em;
 }
 
-table {
+.table {
   table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
+  font-size: 1.4em;
 }
 
 thead th:nth-child(1) {
