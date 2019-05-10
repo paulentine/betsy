@@ -25,22 +25,22 @@ form for payment and shipping info %>
           <div class="col-50">
             <h3>Billing Address</h3>
             <label><i class="fa fa-user"> <%= f.label :name %> </i></label>
-            <%= f.text_field :name %>
+            <%= f.text_field :name, :required => true %>
             <%# <label for="name"><i class="fa fa-user"></i> Full Name</label>
             <input type="text" id="name" name="name" placeholder="John M. Doe"> %>
              <label><i class="fa fa-envelope"> <%= f.label :email %> </i></label>
-            <%= f.text_field :email %>
+            <%= f.text_field :email, :required => true %>
             <%#label for="email"><i class="fa fa-envelope"></i> Email</label>
             <input type="text" id="email" name="email" placeholder="john@example.com">%>
             <label><i class="fa fa-address-card-o"> <%= f.label :address %> </i></label>
-            <%= f.text_field :address %>
+            <%= f.text_field :address, :required => true %>
             <%#<label for="address"><i class="fa fa-address-card-o"></i> Address</label>
             <input type="text" id="address" name="address" placeholder="542 W. 15th Street">%>
 
              <div class="row">
               <div class="col-50">
                 <label><%= f.label :zipcode %></label>
-                <%= f.text_field :zipcode %>
+                <%= f.text_field :zipcode, :required => true %>
                 <%#<label for="zipcode">Zipcode</label>
                 <input type="text" id="zipcode" name="zipcode" placeholder="10128">%>
               </div>
@@ -54,18 +54,18 @@ form for payment and shipping info %>
               <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
             </div>
             <label><%= f.label :cc_num %></label>
-            <%= f.text_field :cc_num %>
+            <%= f.text_field :cc_num, :required => true %>
             <%#<label for="cc_num">Credit Card Number</label>
             <input type="text" id="cc_num" name="cc_num" placeholder="1111-2222-3333-4444">%>
             <label><%= f.label :cc_expiration %></label>
-            <%= f.text_field :cc_expiration %>
+            <%= f.text_field :cc_expiration, :required => true %>
             <%#<label for="cc_expiration">Expiration</label>
             <input type="text" id="cc_expiration" name="cc_expiration" placeholder="08/20">%>
 
              <div class="row">
               <div class="col-50">
-                <label><%= f.label :cc_cvv %></label>
-                <%= f.text_field :cc_cvv %>
+                <label><%= f.label "Credit Card CVV" %></label>
+                <%= f.text_field :cc_cvv, :required => true %>
                 <%#<label for="cc_cvv">CVV</label>
                 <input type="text" id="cc_cvv" name="cc_cvv" placeholder="352">%>
               </div>
