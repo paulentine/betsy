@@ -2,7 +2,7 @@
 
 class OrdersController < ApplicationController
   before_action :find_order, only: %i[destroy order_items_order confirmation]
-  skip_before_action :require_login, only: %i[new create confirmation order_items_order show]
+  skip_before_action :require_login, only: %i[new create confirmation order_items_order show checkout]
 
   def index
     if params[:merchant_id]
@@ -13,13 +13,22 @@ class OrdersController < ApplicationController
       else
         head :not_found
         return
-        end
+      end
     end
   end
 
   def checkout
     current_order.update(order_params)
-    redirect_to confirmation_path(current_order)
+    complete = current_order.valid?
+    if complete
+      current_order.status = "paid"
+      redirect_to confirmation_path(current_order)
+      session[:order_id] = nil
+    else
+      # flash.now[:status] = :error
+      # flash.now[:message] = "Could not complete order, please fill all fields"
+      # render 'carts/checkout', status: :bad_request
+    end
   end
 
   def confirmation; end
