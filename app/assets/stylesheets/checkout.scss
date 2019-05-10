@@ -94,10 +94,15 @@
   .btn:hover {
     background-color: #45a049;
   }
+
+  span.link-order-item {
+    color: red;
+  }
   
   span.price {
     float: right;
-    color: grey;
+    color: black;
+    font-weight: bold;
   }
   
   /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
