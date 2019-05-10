@@ -4,40 +4,45 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Root
-  root "homepages#index"
-  get "/homepages", to: "homepages#index", as: "homepage"
+  root 'homepages#index'
+  get '/homepages', to: 'homepages#index', as: 'homepage'
 
   # Categories
   resources :categories do
     resources :products, only: [:index]
   end
 
-  resources :categories, only: [:new, :create]
+  resources :categories, only: %i[new create]
 
   # Merchants
-  resources :merchants, except: [:destroy, :edit, :update] do
-    resources :orders, only: [:index, :show]
+  resources :merchants, except: %i[destroy edit update] do
+    resources :orders, only: %i[index show]
   end
 
-  get "merchant-orders-list", to: "orders#merchant_orders_list", as: "merchant_orders_list"
+  get 'merchant-orders-list', to: 'orders#merchant_orders_list', as: 'merchant_orders_list'
 
   # Login-related
-  get "/merchant/current", to: "merchants#current", as: "current_merchant"
-  get "/auth/github", as: "login"
-  get "/auth/:provider/callback", to: "merchants#create", as: "callback"
-  delete "/logout", to: "merchants#destroy", as: "logout"
+  get '/merchant/current', to: 'merchants#current', as: 'current_merchant'
+  get '/auth/github', as: 'login'
+  get '/auth/:provider/callback', to: 'merchants#create', as: 'callback'
+  delete '/logout', to: 'merchants#destroy', as: 'logout'
 
   # Orders
   resources :orders do
-    get "confirmation", to: "orders#confirmation", as: "confirmation"
-    get "order-items-for-order", to: "orders#order_items_order", as: "items_order"
+    # get 'confirmation', to: 'orders#confirmation', as: 'confirmation'
+    get 'order-items-for-order', to: 'orders#order_items_order', as: 'items_order'
   end
+  patch 'checkout', to: 'orders#checkout', as: 'checkout'
+  get '/orders/:order_id/confirmation', to: 'orders#confirmation', as: 'confirmation'
 
   # Order Items
   resources :order_items
 
-  # Cart-Related (Grace wrote these feel free to adjust as needed)
-  resource :cart, only: [:show]
+  # Cart
+  resource :cart, only: [:show] do
+    get 'checkout', to: 'carts#checkout', as: 'checkout'
+  end
+
   # put "order_items/:id/status", to: "order_items#set_status", as: "order_item_set_status"
   # resources :order_items, only: [:update]
 
@@ -53,7 +58,7 @@ Rails.application.routes.draw do
     resources :reviews, only: %i[new create]
   end
 
-  post "products/status", to: "products#set_status", as: "product_set_status"
+  post 'products/status', to: 'products#set_status', as: 'product_set_status'
 
-  get "products/category/:id", to: "products#category", as: "products_category"
+  get 'products/category/:id', to: 'products#category', as: 'products_category'
 end
