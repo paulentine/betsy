@@ -14,55 +14,22 @@ describe OrdersController do
     end
   end
 
-
-  describe "create" do
-    it "creates a new order" do
-      order_data = {
-        order: {
-          email: "matt@gmail.com",
-          name: "Matt Saracen",
-          address: "3009 Kuhlman Ave., Austin, Texas",
-          zipcode: "78702",
-          cc_num: "10987654321",
-          cc_cvv: "689",
-          cc_expiration: "06/25/21",
-        },
-      }
-
-      # Act
-      expect {
-        post orders_path, params: order_data
-      }.must_change "Order.count", +1
-
-      order = Order.last
-      must_respond_with :redirect
-      must_redirect_to order_confirmation_path(order)
-
-      check_flash
-
-      expect(order.email).must_equal order_data[:order][:email]
-      expect(order.name).must_equal order_data[:order][:name]
-
-
-    end
-
-    it "sends back bad_request if no order data is sent" do
-      order_data = {
-        order: {
-            email: "",
-        },
-      }
-      expect(Order.new(order_data[:order])).wont_be :valid?
-
-      # Act
-      expect {
-        post orders_path, params: order_data
-      }.wont_change "Order.count"
+  describe "confirmation" do
+    it "can get a valid order" do
+      tim = orders(:order1)
+      get order_confirmation_path(tim.id)
 
       # Assert
-      must_respond_with :bad_request
+      must_respond_with :success
+    end
 
-      check_flash(:error)
+    it "will a 404 status code for invalid order" do
+      order_id = 12345
+      # Act
+      get order_confirmation_path(order_id)
+
+      # Assert
+      must_respond_with :not_found
     end
   end
 
@@ -107,10 +74,28 @@ describe OrdersController do
         must_respond_with :success
       end
 
-      it "will redirect for an invalid order" do
+      it "will a 404 status code for invalid order" do
         order_id = 12345
         # Act
         get order_path(order_id)
+
+        # Assert
+        must_respond_with :not_found
+      end
+    end
+    describe "order items order" do
+      it "can get a valid order" do
+        tim = orders(:order1)
+        get order_items_order_path(tim.id)
+
+        # Assert
+        must_respond_with :success
+      end
+
+      it "will a 404 status code for invalid order" do
+        order_id = 12345
+        # Act
+        get order_items_order_path(order_id)
 
         # Assert
         must_respond_with :not_found

@@ -4,6 +4,20 @@
     -ms-flex-wrap: wrap; /* IE10 */
     flex-wrap: wrap;
     margin: 0 -16px;
+    font-size: 1.2em;
+  }
+
+  .billing-header {
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+
+  .btn-outline-success {
+    height:40px;
+   }
+
+  b {
+    font-size: 1.5em;
   }
   
   .col-25 {
@@ -62,7 +76,7 @@
     width: 100%;
     border-radius: 3px;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 25px;
   }
   
   .btn:hover {
