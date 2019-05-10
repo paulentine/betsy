@@ -123,13 +123,6 @@ describe ProductsController do
 
         product.deleted.must_equal false
       end
-
-
-
-
-
-
-
     end
 
     describe "update" do
