@@ -17,7 +17,6 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require yarn
 //= require_tree .
 
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
