@@ -2,18 +2,15 @@
 
 class OrdersController < ApplicationController
   before_action :find_order, only: %i[destroy order_items_order confirmation]
-  skip_before_action :require_login, only: %i[new create confirmation order_items_order show checkout]
+  skip_before_action :require_login, only: [:new, :create, :confirmation, :order_items_order, :checkout]
 
   def index
-    if params[:merchant_id]
-
-      merchant = Merchant.find_by(id: params[:merchant_id])
-      if merchant
+    merchant = @current_merchant
+    if merchant
         @orders = merchant.orders
-      else
+    else
         head :not_found
         return
-      end
     end
   end
 
@@ -37,14 +34,17 @@ class OrdersController < ApplicationController
 
   def merchant_orders_list; end
 
-  # Show is entirely the find_order helper
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find_by(id: params[:id])
 
     unless @order
       head :not_found
       return
     end
+  end
+
+  def new
+    @order = Order.new
   end
 
   private
@@ -54,7 +54,7 @@ class OrdersController < ApplicationController
   end
 
   def find_order
-    @order = Order.find(params[:order_id])
+    @order = Order.find_by(id: params[:order_id])
 
     unless @order
       head :not_found
