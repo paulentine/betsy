@@ -23,3 +23,34 @@
                 </section>
                 <% end %>
             </div>
+
+
+
+
+<main>
+
+<article class="main-content container-fluid">
+  <div class="row">
+    <section class="col-sm-8 product-show">
+      <h2><%= @product.name %></h2>
+      <p>
+        <%= image_tag(@product.photo_url, height: "300", alt: @product.name) %>
+      </p>
+      <p><%= @product.description%></p>
+      <p><h4><strong>Price: <%= @product.price %></strong></h4></p>
+      <% if @product.quantity < 1 %>
+        <strong>Out of Stock</strong>
+        <% else %>
+        <div>
+          <%= form_with model: @orderitem, url: new_order_path(@product.id) do |f|%>
+            <strong><%= f.label :quantity%></strong>
+            <%= f.select :quantity, (1..@product.quantity)  %><br>
+            <%= f.submit "Add Item to Cart", class: "btn btn-primary to-cart", method: :post %>
+          <% end %>
+        <% end %>
+    </div>
+    </section>
+  </div>
+</article>
+
+</main>

@@ -14,7 +14,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
     <%# <%= image_tag @merchant.image %> 
     <%# <% end %> 
     <%# <% if @merchant.username %>
-    <h2 class="sub">Merchant Actions</h2>
+    <h2 class="dashboard-headers" class="sub">Merchant Actions</h2>
      
     <%# <% end %> 
   </section>
@@ -25,8 +25,8 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
   </section>
 
   <section>
-    <h2 class="sub">List of Products</h2>
-    <table>
+    <h2 class="dashboard-headers"> List of Products</h2>
+    <table class="table table-borderless table-hover">
 
       <thead>
         <tr>
@@ -40,7 +40,7 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       <tbody>
         <% @current_merchant.products.each do |product| %>
         <tr>
-          <td><%= link_to product.name, product_path(product) %></td>
+          <td><%= link_to product.name, product_path(product), class:"dashboard-links" %></td>
           <td>$<%=(product.price) %></td>
           <td class="hidden"><%= product.quantity%></td>
           <td>
@@ -64,9 +64,9 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
     </table>
   </section>
   <section>
-    <h2 class="sub">Order Statistics</h2>
+    <h2 class="dashboard-headers">Order Statistics</h2>
 
-    <table>
+    <table class="table table-borderless table-hover">
       <thead>
         <tr>
           <th>Total Number of Orders</th>
@@ -81,14 +81,16 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       </tbody>
     </table>
   </section>
-  <section class="status-container">
+  
+ <section class="status-container">
+   <p class="filter-label">Filter By Status:</p>
       <%= form_with url: product_set_status_path do |form| %>
         <%= form.select :status, options_for_select(["all", "pending", "paid", "completed", "cancelled"], @status)%>
         <%= form.submit %>
       <% end %>  
   </section>
 <section>
-<h2 class="sub">List of Orders by Status</h2>
+<h2 class="header-padding" class="dashboard-headers">List of Orders by Status - <%= @status %></h2>
   <table class="table table-borderless table-hover">
     <thead>
     <tr>
@@ -107,9 +109,9 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
     <% end %>
     <% orders.each do |order|%> 
     <tr>
-        <td><%= link_to order.id, order_path(order), method: :get%></td>
+        <td><%= link_to order.id, order_path(order), method: :get, class:"dashboard-links"%></td>
         <td><%= Order.find(order.id).status%></td>
-        <td><%= link_to "view", order_items_order_path(order)%></td>
+        <td><%= link_to "view", order_items_order_path(order), class:"dashboard-links"%></td>
         <%#= class="btn btn-primary" href="order_items_order_path" role="button">View%>
     </tr>
   </tbody>
@@ -118,8 +120,8 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
 </section>
 
    <section>
-    <h2 class="sub">Order Statistics by Status</h2>
-    <table>
+    <h2 class="dashboard-headers">Order Statistics by Status - <%= @status %></h2>
+    <table class="table table-borderless table-hover">
       <thead>
         <tr>
           <th>Total Number of <%= @status.capitalize %> Orders</th>

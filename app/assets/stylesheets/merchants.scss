@@ -7,8 +7,47 @@
   font-size: 4em;
 }
 
+.dashboard-links {
+  color: rgb(192, 31, 144);
+  text-decoration: none;
+}
+
+.dashboard-links:hover {
+  color: green;
+}
+
 .button {
   padding: 10%;
+}
+
+.status-container {
+  background: transparent;
+  width: 500px;
+  padding-bottom: 1em;
+  padding: 5px;
+  font-size: 20px;
+  line-height: 1;
+  text-align: right;
+  height: 34px;
+  -webkit-appearance: none;
+}
+
+.filter-label {
+  text-align: right;
+  font-size: 24px;
+}
+
+.dashboard-headers {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.header-padding {
+  padding-top: 2em;
+}
+
+tr {
+  font-size: 23px;
 }
 
 section {
@@ -41,10 +80,11 @@ main h2 {
   font-size: 2em;
 }
 
-table {
+.table {
   table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
+  font-size: 1.4em;
 }
 
 thead th:nth-child(1) {

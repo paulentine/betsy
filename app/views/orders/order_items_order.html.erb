@@ -5,7 +5,7 @@
     The current status of the order ("pending", "paid", "complete", "cancelled") %>
     <main>
     <h2><%#=@current_merchant.username%>
-    <h2>Order Items from the Order</h2>
+    <h2><%= @current_merchant.username %>'s Order Items from Order #<%= @order.id%></h2>
     
     <%= render partial: "ordertable" %>
     </main>

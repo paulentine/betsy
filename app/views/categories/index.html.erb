@@ -1,0 +1,11 @@
+<h2>All Categories</h2>
+
+<ul>
+<% @categories.each do |category| %>
+  <li>
+    <%= category.category %>
+  </li>
+<% end %>
+</ul>
+
+<%-# have form to add a new category here  -%>

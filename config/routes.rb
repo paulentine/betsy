@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Root
-  root 'homepages#index'
-  get '/homepages', to: 'homepages#index', as: 'homepage'
+
+  root "homepages#index"
+  get "/homepages", to: "homepages#index", as: "homepage"
+  get "/homepages/about", to: "homepages#about", as: "about"
+  get "/homepages/underconstruction", to: "homepages#underconstruction", as: "construction"
 
   # Categories
   resources :categories do

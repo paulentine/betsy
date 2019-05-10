@@ -58,6 +58,9 @@
                      <li class="nav-item">
                     <%= link_to "Shop All", products_path, class: "nav-link" %>
                   </li>
+                  <li class="nav-item">
+                    <%= link_to "Cart", cart_path, class: "nav-link" %>
+                  </li>
                   </li>
                   
                 </ul>
@@ -74,6 +77,8 @@
                   <% end %>
                   <li class="nav-item">
                       <%= link_to "Sign Up", new_merchant_path %></li>
+                  <li class="nav-item">
+                      <a href="/homepages/about">About Expy</a></li>
                   </ul>
 
                    
@@ -83,13 +88,32 @@
   <body>
     <%= yield %>
 
-     <%# <footer id="footer">
-  
-        <p class="right">© Expionage 2019</p>
-      </div>
-    </div>   
-  </footer> %>
-  </body>
+     <div class="footer">
+      <div id="button"></div>
+      <div id="container">
+      <div id="cont">
+      <div class="footer_center">
+        <div class="footer_list">
+          <ul>
+            <li>
+              <a href="/homepages/underconstruction">CONTACT US</a>
+            </li>
+            <li>
+              <a href="/homepages/about">ABOUT US</a>
+            </li>
+            <li>
+              <a href="/homepages/underconstruction">CAREERS</a>
+            </li>
+          </ul>
+          </div>
 
+                <h3>© 2019 Copyright: EXPY LLC</h3>
+      </div>
+      </div>
+      </div>
+    </div>
+
+    
+  </body>
  
 </html>
