@@ -99,6 +99,37 @@ describe ProductsController do
         get edit_product_path(product_id)
         must_respond_with :not_found
       end
+
+      it "doesn't allow a merchant to edit a product if it is not theirs" do
+        product_data = {
+          product: {
+            name: "product to be edited",
+            price: 10,
+            merchant_id: Merchant.last.id,
+          },
+        }
+        product = Product.create(product_data[:product])
+
+        expect {
+          get edit_product_path(product)
+        }.wont_change "Product.count"
+
+        check_flash(:error)
+
+        must_respond_with :redirect
+        must_redirect_to product_path(product)
+
+        product.reload
+
+        product.deleted.must_equal false
+      end
+
+
+
+
+
+
+
     end
 
     describe "update" do
