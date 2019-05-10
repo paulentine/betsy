@@ -4,7 +4,7 @@ form for payment and shipping info %>
 <div class="row">
 <div class="col-25">
     <div class="container">
-      <h4>Cart 
+      <h4><b>Cart</b> 
         <span class="price" style="color:black">
           <i class="fa fa-shopping-cart"></i> 
           <b># of Items in Cart: <%= @current_order.order_items.length %></b>
@@ -23,7 +23,7 @@ form for payment and shipping info %>
 
          <div class="row">
           <div class="col-50">
-            <h3>Billing Address</h3>
+            <h3 class= "column-titles">Billing Address</h3>
             <label><i class="fa fa-user"> <%= f.label :name %> </i></label>
             <%= f.text_field :name %>
             <%# <label for="name"><i class="fa fa-user"></i> Full Name</label>
@@ -48,23 +48,23 @@ form for payment and shipping info %>
           </div>
 
            <div class="col-50">
-            <h3>Payment</h3>
+            <h3 class= "column-titles">Payment</h3>
             <label for="fname">Accepted Cards</label>
             <div class="icon-container">
               <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
             </div>
-            <label><%= f.label :cc_num %></label>
+            <label><%= f.label :cc_num, "Credit Card Number" %></label>
             <%= f.text_field :cc_num %>
             <%#<label for="cc_num">Credit Card Number</label>
             <input type="text" id="cc_num" name="cc_num" placeholder="1111-2222-3333-4444">%>
-            <label><%= f.label :cc_expiration %></label>
+            <label><%= f.label :cc_expiration, "Card Expiration" %></label>
             <%= f.text_field :cc_expiration %>
             <%#<label for="cc_expiration">Expiration</label>
             <input type="text" id="cc_expiration" name="cc_expiration" placeholder="08/20">%>
 
              <div class="row">
               <div class="col-50">
-                <label><%= f.label :cc_cvv %></label>
+                <label><%= f.label :cc_cvv, "Card CVV" %></label>
                 <%= f.text_field :cc_cvv %>
                 <%#<label for="cc_cvv">CVV</label>
                 <input type="text" id="cc_cvv" name="cc_cvv" placeholder="352">%>
