@@ -84,10 +84,12 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
   
  <section class="status-container">
    <p class="filter-label">Filter By Status:</p>
+   <section class="filter">
       <%= form_with url: product_set_status_path do |form| %>
         <%= form.select :status, options_for_select(["all", "pending", "paid", "completed", "cancelled"], @status)%>
         <%= form.submit %>
       <% end %>  
+    </section>
   </section>
 <section>
 <h2 class="header-padding" class="dashboard-headers">List of Orders by Status - <%= @status %></h2>
