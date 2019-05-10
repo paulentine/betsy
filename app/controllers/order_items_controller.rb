@@ -22,7 +22,7 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  def update
+  def update 
     @item.quantity = order_item_params[:quantity].to_i
     @item.save
     redirect_to cart_path
