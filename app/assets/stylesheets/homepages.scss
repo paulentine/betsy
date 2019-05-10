@@ -134,8 +134,56 @@ div .featured {
   text-align: center;
 }
 
+
 p {
   font-size: 25px;
   font-weight: 400;
+  text-align: center;
+}
+
+
+.btn-primary {
+  color: white;
+  border: 1px #292F36 solid;
+}
+
+div.card-deck {
+  z-index: -1;
+}
+
+#featured-section {
+  display: flex;
+  flex-direction: row;  
+}
+
+.product-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #FBA100;
+}
+
+.featured-products {
+  display: flex;
+  justify-content: space-evenly;
+  padding-right: 7rem;
+  padding-left: 7rem;
+  padding-bottom: 4rem;
+}
+
+.featured-img {
+  margin-right: 10px;
+  margin-left: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: solid;
+  border-color: #FBA100;
+  border-width: 1px;
+  border-radius: 6px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.container p {
+  padding-top: 10px;
   text-align: center;
 }

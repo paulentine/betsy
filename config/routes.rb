@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   # Root
   root "homepages#index"
   get "/homepages", to: "homepages#index", as: "homepage"
+  get "homepages/about", to: "homepages#about", as: "about"
+  get "homepages/underconstruction", to: "homepages#underconstruction", as: "construction"
 
   # Categories
   resources :categories do
