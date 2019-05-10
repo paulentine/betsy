@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
     before_action :find_order, only: [:destroy, :order_items_order, :confirmation]
-    skip_before_action :require_login, only: [:new, :create, :confirmation, :order_items_order, :show]
+    skip_before_action :require_login, only: [:new, :confirmation, :order_items_order, :show]
     
     def index
         merchant = @current_merchant
@@ -17,19 +17,15 @@ class OrdersController < ApplicationController
 
     def order_items_order
     end
-
-    def merchant_orders_list
-
-    end
     
-     def show
+    def show
         @order = Order.find(params[:id])
-    
+
         unless @order
         head :not_found
         return
         end
-     end
+    end
     
     private
     
@@ -38,7 +34,7 @@ class OrdersController < ApplicationController
     end
     
     def find_order
-        @order = Order.find(params[:order_id])
+        @order = Order.find_by(id: params[:order_id])
     
         unless @order
         head :not_found
