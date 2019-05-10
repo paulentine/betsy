@@ -5,6 +5,11 @@ class OrderItemsController < ApplicationController
 
   def create
     item = current_order.order_items.find_by(product_id: order_item_params[:product_id], order_id: session[:order_id])
+    if order_item_params[:quantity].to_i < 1
+      flash.now[:status] = :error
+      flash.now[:message] = "Quantity must be 1 or greater"
+      render :create, status: :bad_request
+    end
     if item    
       item.quantity += order_item_params[:quantity].to_i
       item.save
@@ -16,6 +21,8 @@ class OrderItemsController < ApplicationController
       redirect_to cart_path
     end
   end
+
+  
 
   def destroy # Remove from cart
     unless @item
