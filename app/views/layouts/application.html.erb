@@ -91,6 +91,16 @@
   </nav>
 
   <body>
+    <section class="alert-container">
+      <% flash.each do |name, message| %>
+        <% if flash[:success] %>
+          <div class="alert alert-success" role="alert"><%= message %></div>
+        <% else %>
+          <div class="alert alert-warning" role="alert"><%= message %></div>
+        <% end %>
+      <% end %>
+    </section>
+
     <%= yield %>
 
      <div class="footer">
