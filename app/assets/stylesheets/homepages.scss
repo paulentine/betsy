@@ -125,13 +125,17 @@ video {
   content: url(https://www.authenticireland.com/wp-content/uploads/2018/04/TopTrust1.png);
   max-width: 80%;
   padding: 0;
-  margin: 0 0 0 0;
+  margin: 0 0 0 10;
   text-align: center;
+  align-content: center;
 }
 
 div .featured {
   width: 80%;
   text-align: center;
+  align-content: center;
+  margin-left: 15rem;
+  margin-top: 5rem;
 }
 
 
@@ -175,6 +179,7 @@ div.card-deck {
   padding-left: 7rem;
   padding-bottom: 4rem;
   text-align: center;
+  margin-left: 0rem;
 }
 
 .featured-img {
