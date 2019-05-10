@@ -1,3 +1,61 @@
+require "csv"
+
+# MERCHANTS
+
+input_merchants = Rails.root.join("db", "", "merchant_seeds.csv")
+puts "Loading raw merchant data from #{input_merchants}"
+
+merchant_failures = []
+
+CSV.foreach(input_merchants, :headers => true) do |row|
+  merchant = Merchant.new
+  merchant.username = row["username"]
+  merchant.email = row["email"]
+  merchant.uid = row["uid"]
+  merchant.provider = row["provider"]
+
+  successful = merchant.save
+  if !successful
+    merchant_failures << merchant
+    puts "Failed to save media: #{merchant.inspect}"
+  else
+    puts "Created merchant: #{merchant.inspect}"
+  end
+end
+
+puts "Added #{Merchant.count} merchant records"
+puts "#{merchant_failures.length} merchant failed to save"
+
+# PRODUCTS
+
+input_products = Rails.root.join("db", "", "product_seeds.csv")
+puts "Loading raw product data from #{input_products}"
+
+product_failures = []
+
+CSV.foreach(input_products, :headers => true) do |row|
+  product = Product.new
+  product.name = row["name"]
+  product.price = row["price"]
+  product.merchant_id = row["merchant_id"]
+  product.quantity = row["quantity"]
+  product.description = row["description"]
+  product.photo_url = row["photo_url"]
+
+  successful = product.save
+  if !successful
+    product_failures << product
+    puts "Failed to save product: #{product.inspect}"
+  else
+    puts "Created product: #{product.inspect}"
+  end
+end
+
+puts "Added #{Product.count} product records"
+puts "#{product_failures.length} product failed to save"
+
+# REMAINING
+
 input_orders = [
   {
     email: "tim@gmail.com",
@@ -10,7 +68,7 @@ input_orders = [
     status: "pending",
   },
   {
-    email: "matt@gmail.com", 
+    email: "matt@gmail.com",
     name: "Matt Saracen",
     address: "3009 Kuhlman Ave., Austin, Texas",
     zipcode: "78702",
@@ -20,46 +78,6 @@ input_orders = [
     status: "pending",
   },
 ]
-
-input_merchants = [
-  {
-    username: "blair_waldorf",
-    email: "blair@constance.com",
-    uid: "12345",
-    provider: "github",
-  },
-  {
-    username: "serena_vanderwoodsen",
-    email: "serena@constance.com",
-    uid: "56789",
-    provider: "github",
-  },
-]
-
-input_products = [
-  {
-    name: "Walking Tour of Pike Place Market",
-    price: 100.0,
-    quantity: 5,
-    description: "Stroll around Pike Place Market and learn about the history of the area",
-    merchant_id: 1,
-  },
-  {
-    name: "Wine and Cheese Tasting",
-    price: 200.0,
-    quantity: 5,
-    description: "Try local wines and cheese",
-    merchant_id: 2,
-  },
-  {
-    name: "Texas Forever Tour",
-    price: 50.0,
-    quantity: 3,
-    description: "Tour of the Riggins farm",
-    merchant_id: 1,
-  },
-]
-
 input_categories = [
   {
     category: "Tour",
@@ -119,36 +137,6 @@ input_merchants.each do |input_merchant|
   else
     merchants_failures << merchant
     puts "Failed to save merchant: #{merchant.inspect}"
-  end
-end
-
-puts "Added #{Merchant.count} merchant records"
-puts "#{merchants_failures.length} merchants failed to save"
-
-products_failures = []
-input_products.each do |input_product|
-  product = Product.new(name: input_product[:name], quantity: input_product[:quantity], description: input_product[:description], price: input_product[:price], merchant_id: input_product[:merchant_id])
-  successful = product.save
-  if successful
-    puts "Created product: #{product.inspect}"
-  else
-    products_failures << product
-    puts "Failed to save product: #{product.inspect}"
-  end
-end
-
-puts "Added #{Product.count} product records"
-puts "#{products_failures.length} products failed to save"
-
-categories_failures = []
-input_categories.each do |input_category|
-  category = Category.new(category: input_category[:category])
-  successful = category.save
-  if successful
-    puts "Created category: #{category.inspect}"
-  else
-    categories_failures << category
-    puts "Failed to save category: #{category.inspect}"
   end
 end
 
