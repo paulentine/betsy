@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
   end
 
   def checkout
-    current_order.update(order_params)
+    @current_order.update(order_params)
     redirect_to confirmation_path(current_order)
   end
 

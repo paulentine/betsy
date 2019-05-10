@@ -3,9 +3,10 @@
     <% @order_items.each do |item| %>
       <p><%= item.product.name %> </p>
       <p><%= link_to "Delete", order_item_path(item), :data => {:confirm => "Really really?", :method => "delete"} %></p>
-      <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %> | Total Price: </p>
+      <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %> | Total Price: $<%= item.product.price * item.quantity %> </p>
     <% end %>
-    <p>Your Total: </p>
+    <p>Your Total: $<%= OrderItem.cart_total(@order_items) %> </p>
+    <%= link_to "Checkout", checkout_cart_path, class: "btn" %>
   <% else %>
     <p>Your shopping cart is empty.</p>
   <% end %> 
