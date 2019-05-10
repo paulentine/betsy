@@ -19,8 +19,7 @@ This page includes the option to add to cart and leave a review on a product %>
         <strong>Out of Stock</strong>
         <% else %>
         <div>
-          <%= form_with model: @orderitem, url: product_orderitems_path(@product.id) do |f|%>
-          <%#= form_with model: @orderitem, url: product_orderitems_path(@product.id), method: :post do |f|%>
+          <%= form_with model: @orderitem, url: new_order_path(@product.id) do |f|%>
             <strong><%= f.label :quantity%></strong>
             <%= f.select :quantity, (1..@product.quantity)  %><br>
             <%= f.submit "Add Item to Cart", class: "btn btn-primary to-cart", method: :post %>
