@@ -18,13 +18,17 @@ class OrdersController < ApplicationController
     current_order.update(order_params)
     complete = current_order.valid?
     if complete
+      current_order.order_items.each do |item|
+        item.enough_stock?
+      end
       current_order.status = "paid"
       redirect_to confirmation_path(current_order)
       session[:order_id] = nil
     else
-      # flash.now[:status] = :error
-      # flash.now[:message] = "Could not complete order, please fill all fields"
-      # render 'carts/checkout', status: :bad_request
+      flash[:status] = :error
+      flash[:message] = "Could not complete order, please fill all fields"
+      redirect_to checkout_cart_path
+      # render :checkout, status: :bad_request
     end
   end
 
