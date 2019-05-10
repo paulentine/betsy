@@ -87,4 +87,4 @@ end
 
 gem "omniauth"
 gem "omniauth-github"
-# gem 'rb-readline'
+gem 'rb-readline'
