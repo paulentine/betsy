@@ -8,13 +8,13 @@ class Order < ApplicationRecord
   
 # validates :order_items, presence: true
   
-  validates :email, presence: true, on: :validate
-  validates :name, presence: true, on: :validate
-  validates :address, presence: true, on: :validate
-  validates :zipcode, presence: true, on: :validate
-  validates :cc_num, presence: true, on: :validate
-  validates :cc_cvv, presence: true, on: :validate
-  validates :cc_expiration, presence: true, on: :validate
+  validates :email, presence: true, on: :update
+  validates :name, presence: true, on: :update
+  validates :address, presence: true, on: :update
+  validates :zipcode, presence: true, on: :update
+  validates :cc_num, presence: true, on: :update
+  validates :cc_cvv, presence: true, on: :update
+  validates :cc_expiration, presence: true, on: :update
 
   def self.validate
     return
