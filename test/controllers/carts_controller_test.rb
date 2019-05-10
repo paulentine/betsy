@@ -15,20 +15,23 @@ describe CartsController do
         must_respond_with :ok
       end
 
-      it "returns a 404 status code if the cart doesn't exist" do
-        product_id = 1337
+      # it "returns a 404 status code if the cart doesn't exist" do
+      #   @current_order = nil
+
+      #   get cart_path
   
-        get product_path(product_id)
-  
-        must_respond_with :not_found
-      end
+      #   must_respond_with :not_found
+      # end
     end
 
-    # describe "checkout" do
-    #   it "can list the order items" do
-    #     current_order
-    #     puts current_order.id
-    #   end
-    # end
+    describe "checkout" do
+      it "can make the current order an order" do
+        order = orders(:order1)
+        
+        get cart_checkout_path
+
+        must_respond_with :ok
+      end
+    end
   end
 end
