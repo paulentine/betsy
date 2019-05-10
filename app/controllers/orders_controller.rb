@@ -16,7 +16,16 @@ class OrdersController < ApplicationController
 
   def checkout
     current_order.update(order_params)
-    redirect_to confirmation_path(current_order)
+    complete = current_order.valid?
+    if complete
+      current_order.status = "paid"
+      redirect_to confirmation_path(current_order)
+      session[:order_id] = nil
+    else
+      # flash.now[:status] = :error
+      # flash.now[:message] = "Could not complete order, please fill all fields"
+      # render 'carts/checkout', status: :bad_request
+    end
   end
 
   def confirmation; end

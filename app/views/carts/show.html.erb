@@ -2,7 +2,15 @@
   <% if @order_items.any? %>
     <% @order_items.each do |item| %>
       <p><%= item.product.name %> </p>
-      <p><%= link_to "Delete", order_item_path(item), :data => {:confirm => "Really really?", :method => "delete"} %></p>
+      <p><%= link_to "Delete", order_item_path(item), :data => {:confirm => "Are you sure?", :method => "delete"} %></p>
+        <%# Edit quantity form %>
+          <%= form_with model: item do |f|%>
+            <%= f.hidden_field :product_id, value: item.product.id %>
+            <%= f.number_field :quantity %>
+            <%= f.submit "Edit quantity" %>
+          <%end%>
+        <%# End of edit quantity form %>
+
       <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %> | Total Price: $<%= item.product.price * item.quantity %> </p>
     <% end %>
     <p>Your Total: $<%= OrderItem.cart_total(@order_items) %> </p>

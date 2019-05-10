@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
   before_action :find_product, only: %i[show edit update destroy]
   skip_before_action :require_login, only: %i[index show]
 
-
   def index
     @products = Product.where(nil)
     filtering_params(params).each do |key, value|
@@ -33,11 +32,8 @@ class ProductsController < ApplicationController
 
   def edit
     unless @product.merchant_id == @current_merchant.id
-      # does this get handled here or should we handle it in the view instead?
-      # if a product doesn't belong to the current user, then they don't see the
-      # edit/delete button on their view?
       flash[:status] = :error
-      flash[:message] = 'You cannot delete a product that is not yours'
+      flash[:message] = 'You cannot edit a product that is not yours'
       redirect_to product_path(@product)
     end
   end
@@ -73,8 +69,6 @@ class ProductsController < ApplicationController
       redirect_to product_path(@product)
     end
   end
-
-
 
   def set_status
     session[:status] = params[:status]

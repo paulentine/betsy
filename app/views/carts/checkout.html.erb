@@ -11,7 +11,7 @@ form for payment and shipping info %>
         </span>
       </h4>
       <% @current_order.order_items.each do |order_item| %>
-      <p> <%= order_item.product.name %> <span class="price"><%= (order_item.quantity * order_item.product.price) %></span></p>
+      <p><a href="#"> <%= order_item.product.name %></a> <span class="price"><%= (order_item.quantity * order_item.product.price) %></span></p>
       <% end %>
       <hr>
    

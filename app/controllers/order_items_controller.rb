@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
 class OrderItemsController < ApplicationController
-  before_action :find_item, only: %i[destroy edit]
+  before_action :find_item, only: %i[destroy edit update]
+  skip_before_action :require_login
 
   def create
     item = current_order.order_items.find_by(product_id: order_item_params[:product_id], order_id: session[:order_id])
+    if order_item_params[:quantity].to_i < 1
+      flash.now[:status] = :error
+      flash.now[:message] = "Quantity must be 1 or greater"
+      render :new, status: :bad_request
+    end
     if item    
       item.quantity += order_item_params[:quantity].to_i
       item.save
@@ -12,9 +18,16 @@ class OrderItemsController < ApplicationController
     else
       item = OrderItem.new(order_item_params)
       current_order.order_items << item
-      current_order.save # Is this nec?
+      current_order.save
       redirect_to cart_path
     end
+  end
+
+  def update
+    item = current_order.order_items.find_by(product_id: order_item_params[:product_id], order_id: session[:order_id])
+    item.quantity = order_item_params[:quantity].to_i
+    item.save
+    redirect_to cart_path
   end
 
   def destroy # Remove from cart

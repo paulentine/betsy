@@ -14,8 +14,6 @@ order1:
   cc_expiration: 08/19/20
   status: pending
         
-
-
 order2:
   email: matt@gmail.com 
   name: Matt Saracen
