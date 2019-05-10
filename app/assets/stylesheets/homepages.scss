@@ -156,6 +156,12 @@ div.card-deck {
   flex-direction: row;  
 }
 
+.img-container{
+  display: flex;
+  flex-direction: row;
+  // flex-direction: row;  
+}
+
 .product-name {
   font-size: 20px;
   font-weight: bold;
@@ -168,6 +174,7 @@ div.card-deck {
   padding-right: 7rem;
   padding-left: 7rem;
   padding-bottom: 4rem;
+  text-align: center;
 }
 
 .featured-img {
@@ -183,7 +190,7 @@ div.card-deck {
   padding-bottom: 10px;
 }
 
-.container p {
+.img-container p {
   padding-top: 10px;
   text-align: center;
 }
