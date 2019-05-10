@@ -17,7 +17,7 @@ describe OrdersController do
   describe "confirmation" do
     it "can get a valid order" do
       tim = orders(:order1)
-      get order_confirmation_path(tim.id)
+      get confirmation_path(tim.id)
 
       # Assert
       must_respond_with :success
@@ -26,7 +26,7 @@ describe OrdersController do
     it "will a 404 status code for invalid order" do
       order_id = 12345
       # Act
-      get order_confirmation_path(order_id)
+      get confirmation_path(order_id)
 
       # Assert
       must_respond_with :not_found
@@ -57,7 +57,7 @@ describe OrdersController do
 
       it "returns a 404 error if merchant is not found" do
 
-        @current_merchant = nil
+        @current_merchant = Merchant.find(565)
         get orders_path
 
         must_respond_with :not_found
