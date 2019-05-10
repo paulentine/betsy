@@ -6,11 +6,29 @@ describe OrdersController do
   end
 
   describe "new" do
-    it "can get the new order page" do
-
+    it "returns status code 200" do
       get new_order_path
+      must_respond_with :ok
+    end
+  end
 
-      must_respond_with :success
+  describe "checkout" do
+    it "redirect to confirmation page after checkout" do
+      @current_order = Order.new
+      order_params = {
+        order: {
+          email: "james.gmail.com",
+          name: "Jesse James",
+          address: "465 Prince St.",
+          zipcode: "10128",
+          cc_num: "2345786",
+          cc_cvv: "456",
+          cc_expiration: "8/20",
+        }
+      }
+      patch checkout_path(@current_order.id)
+
+      must_redirect_to confirmation_path(Order.last.id)
     end
   end
 
@@ -23,7 +41,7 @@ describe OrdersController do
       must_respond_with :success
     end
 
-    it "will a 404 status code for invalid order" do
+    it "will return a 404 status code for invalid order" do
       order_id = 12345
       # Act
       get confirmation_path(order_id)
@@ -44,20 +62,9 @@ describe OrdersController do
         must_respond_with :success
       end
 
-      it "renders even if there are no orders" do
-        # Arrange
-        Order.destroy_all
-
-        # Act
-        get orders_path
-
-        # Assert
-        must_respond_with :success
-      end
-
       it "returns a 404 error if merchant is not found" do
 
-        @current_merchant = Merchant.find(565)
+        @current_merchant = Merchant.find_by(id: 565)
         get orders_path
 
         must_respond_with :not_found
@@ -74,7 +81,7 @@ describe OrdersController do
         must_respond_with :success
       end
 
-      it "will a 404 status code for invalid order" do
+      it "will return a 404 status code for invalid order" do
         order_id = 12345
         # Act
         get order_path(order_id)
