@@ -83,9 +83,8 @@ end
 group :test do
   gem 'minitest-rails'
   gem 'minitest-reporters'
-  gem 'simplecov', require: false, group: :test
 end
 
 gem "omniauth"
 gem "omniauth-github"
-gem 'rb-readline'
+# gem 'rb-readline'
