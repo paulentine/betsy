@@ -33,11 +33,18 @@
   
       <nav class="vertical-menu">
 
-              <div class="collapse navbar-collapse">
+              <div class="collapse navbar-collapse" class="side-nav">
                 <ul class="navbar-nav mr-auto">
                  <li class="title">
                     <%= link_to "EXPY", root_path, class: "nav-link" %>
                   </li> 
+                  <li>
+                    <%= link_to "Shop All", products_path, class: "nav-link" %>
+                  </li>
+                  
+
+                  <%# #TO DO: FIX DROP DOWN %>
+
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Category</a>
                     <div class="dropdown-menu" >
@@ -56,11 +63,9 @@
                       <%end%>
                     </div>
                      <li class="nav-item">
-                    <%= link_to "Shop All", products_path, class: "nav-link" %>
-                  </li>
+
                   <li class="nav-item">
                     <%= link_to "Cart", cart_path, class: "nav-link" %>
-                  </li>
                   </li>
                   
                 </ul>

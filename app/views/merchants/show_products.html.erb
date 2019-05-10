@@ -1,0 +1,26 @@
+<main>
+
+  <article class="container">
+  <div>
+    <h1 class="category-heading"><%= @merchant.username.capitalize %>'s Expy Products</h1>
+    <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @merchant.products.each do |product| %>
+            <tr>
+              <td><img src="<%=product.photo_url%>" alt="Image of <%=product.name%>"></td>
+              <td><%= link_to product.name, product_path(product.id) %></td>
+              <td><%= product.price %></td>
+            </tr>
+            <% end %>
+          </tbody>
+      </table>
+  </div>
+  </article>
+
+</mainx>
