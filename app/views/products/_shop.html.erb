@@ -9,6 +9,14 @@
           <div class="card-text">
           Sold by: <%= link_to "#{product.merchant.username}", merchant_path(product.merchant.id)%><br>
           $<%= "#{product.price}" %><br>
+
+<%# Add to Cart %>
+
+          <%= form_with model: product.order_items.new do |f|%>
+          <%= f.hidden_field :product_id, value: product.id %>
+          <%= f.number_field :quantity %>
+          <%= f.submit "Add to Cart" %>
+          <%end%>
           </div>
         </div>
       </div>
