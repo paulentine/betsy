@@ -1,0 +1,58 @@
+ <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Category</a>
+                    <div class="dropdown-menu" >
+                      <% @categories.each do |category| %>
+                        <%= link_to "#{category.category}", products_category_path(category.id)%>
+                      <% end %>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Merchant</a>
+                    <div class="dropdown-menu" >
+                      <% unless @merchants == nil%>
+                        <% @merchants.each do |merchant| %>
+                          <%= link_to "#{merchant.username}", merchant_path(merchant.id) %>
+                        <% end %>
+                      <%end%>
+                    </div>
+                     <li class="nav-item">
+
+
+
+                      <div class="dropdown">
+                     <button class ="dropdown-btn"><li><%= link_to "Shop By Category", categories_path, class: "nav-link" %></li><i class="fa fa-caret-down"></i></button>
+                     <div class="dropdown-container">
+                      <% Category.all.each do |category| %>
+                        <li><%= link_to "#{category.name}", category_path(category.id) %></li>
+                      <% end %>
+                    </div>
+                 </div>
+
+                  <div class="dropdown">
+                    <button class ="dropdown-btn"><li><%= link_to "Shop By Merchant", merchants_path, class: "nav-link" %></li><i class="fa fa-caret-down"></i></button>
+                    <div class="dropdown-container">
+                      <% Merchant.all.each do |merchant| %>
+                        <li><%= link_to "#{merchant.username}", merchant_path(merchant.id) %></li>
+                      <% end %>
+                    </div>
+                  </div>
+
+
+<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Category</a>
+                    <div class="dropdown-menu" >
+                      <% @categories.each do |category| %>
+                        <%= link_to "#{category.category}", products_category_path(category.id)%>
+                      <% end %>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Merchant</a>
+                    <div class="dropdown-menu" >
+                      <% unless @merchants == nil%>
+                        <% @merchants.each do |merchant| %>
+                          <%= link_to "#{merchant.username}", merchant_path(merchant.id) %>
+                        <% end %>
+                      <%end%>
+                    </div>
+                     <li class="nav-item">

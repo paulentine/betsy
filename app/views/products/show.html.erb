@@ -7,7 +7,9 @@
   <%end%>
   <h2><%= @product.name%></h2>
   <section class="image">
+  <% if @product.photo_url != nil%>
     <%= image_tag(@product.photo_url, height: "400", alt: @product.name) %>
+    <% end %>
   </section>
   <section class = "product-details">
       <h2>Description:</h2>

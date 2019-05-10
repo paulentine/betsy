@@ -117,21 +117,23 @@ video {
 .subtitle {
   color: black;
   font-size: 5em;
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
+  padding-top: .5em;
+  padding-bottom: 1em;
 }
 
 .trustlogos {
   content: url(https://www.authenticireland.com/wp-content/uploads/2018/04/TopTrust1.png);
-  max-width: 80%;
-  padding: 0;
-  margin: 0 0 0 0;
-  text-align: center;
+  max-width: 200%;
+  padding-right: 100%;
+  padding-left: 20%;
 }
 
 div .featured {
   width: 80%;
   text-align: center;
+  align-content: center;
+  margin-left: 15rem;
+  margin-top: 5rem;
 }
 
 
@@ -139,6 +141,8 @@ p {
   font-size: 25px;
   font-weight: 400;
   text-align: center;
+  padding-left: 20%;
+  padding-top: 10%;
 }
 
 
@@ -153,7 +157,16 @@ div.card-deck {
 
 .featured-section {
   display: flex;
-  flex-direction: row;  
+  flex-direction: row; 
+  max-width: 50%; 
+  max-height: 25%;
+}
+
+.img-container{
+  display: flex;
+  flex-direction: row;
+  // flex-direction: row;  
+  padding-left: 18%;
 }
 
 .product-name {
@@ -165,9 +178,11 @@ div.card-deck {
 .featured-products {
   display: flex;
   justify-content: space-evenly;
-  padding-right: 7rem;
-  padding-left: 7rem;
+  padding-right: 60rem;
+  padding-left: 4rem;
   padding-bottom: 4rem;
+  text-align: center;
+  font-size: 1em;
 }
 
 .featured-img {
@@ -183,7 +198,7 @@ div.card-deck {
   padding-bottom: 10px;
 }
 
-.container p {
+.img-container p {
   padding-top: 10px;
   text-align: center;
 }
