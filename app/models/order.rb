@@ -8,13 +8,17 @@ class Order < ApplicationRecord
   
 # validates :order_items, presence: true
   
-#   validates :email, presence: true
-#   validates :name, presence: true
-#   validates :address, presence: true
-#   validates :zipcode, presence: true
-#   validates :cc_num, presence: true
-#   validates :cc_cvv, presence: true
-#   validates :cc_expiration, presence: true
+  validates :email, presence: true, on: :validate
+  validates :name, presence: true, on: :validate
+  validates :address, presence: true, on: :validate
+  validates :zipcode, presence: true, on: :validate
+  validates :cc_num, presence: true, on: :validate
+  validates :cc_cvv, presence: true, on: :validate
+  validates :cc_expiration, presence: true, on: :validate
+
+  def self.validate
+    return
+  end
 
   def self.last4_ccnum(cc_num)
     if cc_num.nil?
