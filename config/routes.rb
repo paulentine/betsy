@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     # get 'confirmation', to: 'orders#confirmation', as: 'confirmation'
     get 'order-items-for-order', to: 'orders#order_items_order', as: 'items_order'
   end
-  get 'checkout', to: 'orders#checkout', as: 'checkout'
+  patch 'checkout', to: 'orders#checkout', as: 'checkout'
   get '/orders/:order_id/confirmation', to: 'orders#confirmation', as: 'confirmation'
 
   # Order Items
