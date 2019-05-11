@@ -19,7 +19,7 @@ form for payment and shipping info %>
   </div>
   <div class="col-75">
     <div class="container">
-      <%= form_with model: @order, url: "/checkout" do |f|%>
+      <%= form_with model: @order, url: "/checkout", method: "get" do |f|%>
 
          <div class="row">
           <div class="col-50">
