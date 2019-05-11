@@ -18,10 +18,8 @@ class OrdersController < ApplicationController
     current_order.update(order_params)
     complete = current_order.valid?
     if complete
-    #   current_order.order_items.each do |item|
-    #     item.enough_stock?
-    #   end
       current_order.status = "paid"
+      current_order.save
       redirect_to confirmation_path(current_order)
       session[:order_id] = nil
     else
