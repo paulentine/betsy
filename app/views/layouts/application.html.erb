@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <title>Expy</title>
     <%= csrf_meta_tags %>
@@ -8,127 +7,77 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Open+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
-
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 
   </head>
-  
-  <div class="top">
-   <header>
-  
-      <nav class="vertical-menu">
-
-              <div class="collapse navbar-collapse" class="side-nav">
-                <ul class="navbar-nav mr-auto">
-                 <li class="title">
-                    <%= link_to "EXPY", root_path, class: "nav-link" %>
-                  </li> 
-                  <li>
-                    <%= link_to "Shop All", products_path, class: "nav-link" %>
-                  </li>
-                  
-
-                  <%# #TO DO: FIX DROP DOWN %>
-
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Category</a>
-                    <div class="dropdown-menu" >
-                      <% @categories.each do |category| %>
-                        <%= link_to "#{category.category}", products_category_path(category.id)%>
-                      <% end %>
-                    </div>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Shop by Merchant</a>
-                    <div class="dropdown-menu" >
-                      <% unless @merchants == nil%>
-                        <% @merchants.each do |merchant| %>
-                          <%= link_to "#{merchant.username}", merchant_path(merchant.id) %>
-                        <% end %>
-                      <%end%>
-                    </div>
-                     <li class="nav-item">
-
-                  <li class="nav-item">
-                    <%= link_to "Cart", cart_path, class: "nav-link" %>
-                  </li>
-                  
-                </ul>
-                <ul class="navbar-nav mr-auto">
-                  <% if session[:merchant_id] %>
-                  <li class="nav-item">
-                      <%= link_to "Dashboard", merchant_path(session[:merchant_id]) %></li>
-                       <li class="nav-item">
-                    <li class="nav-item">
-                      <%= link_to "Log Out", logout_path, method: "delete" %></li>
-                  <% else %>
-                    <li class="nav-item">
-                      <%= link_to "Merchant Login", login_path %></li>
-                  <% end %>
-                  <li class="nav-item">
-                      <%= link_to "Sign Up", new_merchant_path %></li>
-                  <li class="nav-item">
-                      <a href="/homepages/about">About Expy</a></li>
-                  </ul>
-
-                   
-               </div>
-  </nav>
 
   <body>
-    <section class="alert-container">
-      <% flash.each do |name, message| %>
-        <% if flash[:success] %>
-          <div class="alert alert-success" role="alert"><%= message %></div>
-        <% else %>
-          <div class="alert alert-warning" role="alert"><%= message %></div>
-        <% end %>
-      <% end %>
-    </section>
+    <div class="site-container">
+      <header>
 
-    <%= yield %>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <%= link_to image_tag('logo.png'), root_path, class: "navbar-brand" %></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-     <div class="footer">
-      <div id="button"></div>
-      <div id="container">
-      <div id="cont">
-      <div class="footer_center">
-        <div class="footer_list">
-          <ul>
-            <li>
-              <a href="/homepages/underconstruction">CONTACT US</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" href="/products_path" id="navbarDropdownMenuLink" data-toggle="dropdown">Shop</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/products">All products</a>
+                <a class="dropdown-item" href="/categories">By category</a>
+                <a class="dropdown-item" href="/merchants">By seller</a>
+              </div>
             </li>
-            <li>
-              <a href="/homepages/about">ABOUT US</a>
-            </li>
-            <li>
-              <a href="/homepages/underconstruction">CAREERS</a>
-            </li>
-          </ul>
+
+            <% if session[:order_id]%>
+            <li><%= link_to "Cart", order_path(session[:order_id]), class: "nav-link active" %></li>
+            <% end %>
+
+            <%if session[:merchant_id] %>
+              <li><%= link_to "Merchants", merchant_path(session[:merchant_id]), class: "nav-link active" %></li>
+            <%end%>
+
+          <%if session[:merchant_id] %>
+            <li><%= link_to "Logout", logout_path, class: "nav-link", method: :delete %></li>
+          <%else%>
+            <li><%= link_to "Login with GitHub", github_login_path, class: "nav-link active" %></li>
+          <%end%>
+            <li><%= link_to "Add New Product", new_product_path, class: "nav-link active" %></li>
           </div>
 
-                <h3>© 2019 Copyright: EXPY LLC</h3>
-      </div>
-      </div>
-      </div>
-    </div>
+        </nav>
+      </nav>
+    </header>
 
-    
+
+      <main>
+      <% if flash[:messages] or flash[:message] %>
+        <div class="alert alert-info">
+          <%= flash[:status].to_s == "error" ? "A problem occurred: " : "" %><span><%= flash[:message] %></span>
+          <% if flash[:messages] %>
+            <ul>
+              <% flash[:messages].each do |name, problems| %>
+                <% problems.each do |problem| %>
+                  <li><%= name %>: <%= problem %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+      </main>
+    </div>
   </body>
- 
+
+</div>
+
+
+ </div>
+
 </html>

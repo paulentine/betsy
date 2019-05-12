@@ -1,0 +1,7 @@
+<section class="list-of-filters">
+  <ul>
+  <% @categories.each do |cat| %>
+      <li><%= link_to "cat.name", products_path(:category=>"cat.name") %></li>
+  <%end%>
+  </ul>
+</section>

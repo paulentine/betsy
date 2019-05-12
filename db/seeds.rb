@@ -1,30 +1,27 @@
 require "csv"
 
-# MERCHANTS
+# CATEGORIES
 
-input_merchants = Rails.root.join("db", "", "merchant_seeds.csv")
-puts "Loading raw merchant data from #{input_merchants}"
+input_categories = Rails.root.join("db", "", "category_seeds.csv")
+puts "Loading raw category data from #{input_categories}"
 
-merchant_failures = []
+category_failures = []
 
-CSV.foreach(input_merchants, :headers => true) do |row|
-  merchant = Merchant.new
-  merchant.username = row["username"]
-  merchant.email = row["email"]
-  merchant.uid = row["uid"]
-  merchant.provider = row["provider"]
+CSV.foreach(input_categories, :headers => true) do |row|
+  category = Category.new
+  category.category = row["category"]
 
-  successful = merchant.save
+  successful = category.save
   if !successful
-    merchant_failures << merchant
-    puts "Failed to save media: #{merchant.inspect}"
+    category_failures << category
+    puts "Failed to save media: #{category.inspect}"
   else
-    puts "Created merchant: #{merchant.inspect}"
+    puts "Created category: #{category.inspect}"
   end
 end
 
-puts "Added #{Merchant.count} merchant records"
-puts "#{merchant_failures.length} merchant failed to save"
+puts "Added #{Category.count} category records"
+puts "#{category_failures.length} category failed to save"
 
 # PRODUCTS
 
@@ -54,6 +51,32 @@ end
 puts "Added #{Product.count} product records"
 puts "#{product_failures.length} product failed to save"
 
+# MERCHANTS
+
+input_merchants = Rails.root.join("db", "", "merchant_seeds.csv")
+puts "Loading raw merchant data from #{input_merchants}"
+
+merchant_failures = []
+
+CSV.foreach(input_merchants, :headers => true) do |row|
+  merchant = Merchant.new
+  merchant.username = row["username"]
+  merchant.email = row["email"]
+  merchant.uid = row["uid"]
+  merchant.provider = row["provider"]
+
+  successful = merchant.save
+  if !successful
+    merchant_failures << merchant
+    puts "Failed to save media: #{merchant.inspect}"
+  else
+    puts "Created merchant: #{merchant.inspect}"
+  end
+end
+
+puts "Added #{Merchant.count} merchant records"
+puts "#{merchant_failures.length} merchant failed to save"
+
 # REMAINING
 
 input_orders = [
@@ -78,14 +101,14 @@ input_orders = [
     status: "pending",
   },
 ]
-input_categories = [
-  {
-    category: "Tour",
-  },
-  {
-    category: "Food",
-  },
-]
+# input_categories = [
+#   {
+#     category: "Tour",
+#   },
+#   {
+#     category: "Food",
+#   },
+# ]
 
 input_order_items = [
   {
@@ -127,21 +150,6 @@ end
 
 puts "Added #{Order.count} order records"
 puts "#{orders_failures.length} orders failed to save"
-
-merchants_failures = []
-input_merchants.each do |input_merchant|
-  merchant = Merchant.new(username: input_merchant[:username], email: input_merchant[:email], uid: input_merchant[:uid], provider: input_merchant[:provider])
-  successful = merchant.save
-  if successful
-    puts "Created merchant: #{merchant.inspect}"
-  else
-    merchants_failures << merchant
-    puts "Failed to save merchant: #{merchant.inspect}"
-  end
-end
-
-puts "Added #{Category.count} category records"
-puts "#{categories_failures.length} categories failed to save"
 
 order_items_failures = []
 input_order_items.each do |input_order_item|

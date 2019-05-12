@@ -86,3 +86,4 @@ end
 gem "omniauth"
 gem "omniauth-github"
 gem 'rb-readline'
+gem 'font-awesome-rails'

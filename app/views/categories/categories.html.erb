@@ -1,0 +1,29 @@
+<main>
+
+  <h1><%= @category.name.capitalize %> Products</h1>
+  <% if @products_by_categories == [] %>
+    <p> No products are available in this category. </p>
+  <% end %>
+
+  <div class="container-fluid">
+    <div class="card-deck">
+      <% @products_by_categories.each do |product| %>
+      <div class="card" style="width: 30rem;">
+        <%= link_to product_path(product) do %>
+          <%= image_tag "#{product.photo_url}", alt: "product image", class: "card-img-top" %>
+        <% end %>
+        <h6 class="card-title"><%= link_to product.name, product_path(product) %></h6>
+          
+        <h6 class="card-subtitle mb-2 text-muted">Price: <%= number_to_currency(product.price) %></h6>
+          <%if product.quantity == 0%>
+            <p><a class="text-white bg-dark">Out of Stock</a></p>
+          <% else %>
+            <%= link_to "Add to cart", product_order_items_path(product), method: :post, class: "btn btn-primary" %>
+        </div>
+          <%end%>
+        <%end%>
+
+    </div>
+  </div>
+
+</main>

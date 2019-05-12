@@ -1,264 +1,368 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- */
-/* Custom bootstrap variables must be set or imported *before* bootstrap. */
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
+@import "font-awesome";
 
-html {
-  height: 100%;
-}
-  
+
+
 body {
-  font-family: 'Open Sans Condensed', sans-serif;
-  margin: auto;
-  padding: auto;
+  max-width: 100%;
+  font-family: 'Rajdhani', sans-serif;
   background-color: #6c648B; /* For browsers that do not support gradients */
   background-image: linear-gradient(#6c648b, #b6a19e); /* Standard syntax (must be last) */
   background-repeat: no-repeat;
   background-attachment: fixed;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  color: white;
+  letter-spacing: .65px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header header"
+    "main main"
 }
 
+div.site-container {
+  width: 100%;
+}
 main {
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 1.25em;
+  margin: 1rem;
+  grid-area: main;
 }
 
-header h1{
+header {
+  grid-area: header;
+}
+
+a {
   color: #FBA100;
-  font-family: 'Rock Salt', cursive;
-  text-align: justify;
-  font-size: 10em;
 }
 
-h1, h2, h3, h4, h5 {
-  font-family:'Open Sans Condensed', sans-serif;
+a:hover {
+  opacity: .6;
+    filter: alpha(opacity=60)
 }
 
+header {
+  background-color: transparent;
+}
+
+.navbar {
+  background-color: transparent;
+}
+
+.bg-light {
+  background-color: transparent;
+}
+
+.navbar-brand img {
+  width: 140px
+}
+
+footer {
+  grid-area: footer;
+}
+
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
 li {
   list-style-type: none;
-  display: inline;
+  align-self: auto;
+  margin-right: 10px;
 }
 
-nav a {
-    color: #FBA100;
-    font-size: 1.5em;
-    text-align: left;
-}
-
-.vertical-menu {
-  position: fixed;
-  background-color: rgba(70, 59, 114, 0.35);
-  width: 200px;
-  height: 500%;
-  top: 0;
-  font-size: 1.5em;
-
-}
-
-.vertical-menu a {
-  color: #FBA100;
-  display: block;
-  // padding: 12px;
-  left: 0;
-}
-
-.vertical-menu a:hover {
-	color: #463b72;
-  text-decoration: none;
-  transition: 350ms ease;
-}
-
-.vertical-menu .active {
-	color: #FBA100;
-  font-family: 'Rock Salt', cursive;
-  text-align: justify;
-  font-size: 4em;
-}
-
-.vertical-menu .dropdown-menu{
-  background-color: rgba(70, 59, 114, 0.47);
-  font-size: 1em;
-}
-
-.vertical-menu .dropdown{
-  color: #FBA100;
-}
-
-li {
-  font-family: 'Open Sans Condensed', sans-serif;
-	display: block;
-	transition-duration: 0.5s;
- }
- 
- li:hover {
-	 cursor: pointer;
- }
- 
- ul li ul {
-	 visibility: hidden;
-	 opacity: 0;
-	 position: absolute;
-	 transition: all 0.5s ease;
-	 margin-top: 1rem;
-	 left: 0;
-	 display: none;
- }
- 
- ul li:hover > ul,
- ul li ul:hover {
-	 visibility: visible;
-	 opacity: 1;
-	 display: block;
- }
- 
- ul li ul li {
-	 clear: both;
-	 width: 100%;
- }
-
-.title {
-  color: #FBA100;
-  font-family: 'Rock Salt', cursive;
-  text-align: justify;
-  font-size: 2em;
-  padding-top: 15%;
-  padding-bottom: 15%;
- }
-
-
-.nav_item {
-  text-align: left;
-  font-size: 4em;
- }
-
-.nav-sub {
-  font-size: 1.5em;
- }
-
-.dropdown {
-  background-color: transparent;
- }
-
-main {
-  position: absolute;
-  right: 8px;
-  width: 80%;
-}
-
-.main-container {
+.products {
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 2rem;
+  width: inherit;
+  height: auto;
 }
 
+.product {
+  margin: 2rem;
+}
 
-main h2 {
-  color: #FBA100;
-  font-family: 'Rock Salt', cursive;
-  text-align: justify;
-  // font-size: 2.5em;
-  // padding-bottom: 6%;
-  width: 100%;
-  vertical-align: center;
- }
+pre {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+}
 
+.card {
+  border-radius: 0;
+  border: none;
+  min-width: 30%;
+  max-width: 30%;
+}
 
-.footer #button{
-	width:35px;
-	height:35px;
-	border: #727172 12px solid;
-	border-radius:35px;
-	margin:0 auto;
-	position:relative;
-	-webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    transition: all 1s ease;
+.card-body {
+  padding: 1.25rem 0;
 }
-.footer #button:hover{
-	width:35px;
-	height:35px;
-	border: #3A3A3A 12px solid;
-	-webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    transition: all 1s ease;
-	position:relative;
+
+@media (min-width: 576px) {
+  .card-deck {
+    flex-flow: row wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  /* line 154, /Users/Amy/.rvm/gems/ruby-2.5.1/gems/bootstrap-4.1.3/assets/stylesheets/bootstrap/_card.scss */
+  .card-deck .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    margin-bottom: 2rem;
+    min-width: 30%;
+    max-width: 30%;
+  }
 }
-.footer {
-	bottom:0;
-	left:0;
-	position:fixed;
-    width: 100%;
-    height: 2em;
-    overflow:hidden;
-    margin:0 auto;
-	-webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    transition: all 1s ease;
-	z-index:999;
+
+.card-img-top {
+  border-radius: 0;
+  object-fit: fill;
 }
-.footer:hover {
-	-webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    transition: all 1s ease;
-	height: 15em;
+
+img {
+  margin: 0;
 }
-.footer #container{
-	margin-top:5px;
-	width:100%;
-  height:100%;
-  position:relative;
-  top:0;
-  left:0;
-	background: #3A3A3A;
+
+div {
+  margin: 0;
 }
-.footer #cont{
-  position:relative;
-  top:-70px;
-  right:190px;
-	width:150px;
-	height:auto;
-	margin:0 auto;
+
+.products ul {
+  display: block;
+  flex-flow: column wrap;  
+  width: 20%;
+  height: auto;
 }
-.footer_center{
-	width:500px;
-	float:left;
-  text-align:center;
+
+input.btn {
+  width: auto;
 }
-.footer h3{
-	font-size: 20px;
-	font-weight: 100;
-	margin-top:70px;
-  margin-left:40px;
+
+.btn {
+  vertical-align: baseline;
+  background-color: #FBA100;
   color: white;
-  padding-top: 30px;
+  border: none;
+  border-radius: 0;
 }
 
-.footer_list {
-  padding-top: 30px;
-  font-size: 15px;
-  float: left;
-  margin-top:70px;
-  margin-left:20px;
+.btn:hover {
+  background-color: #FBA100;
+}
+
+.list-group {
+  margin-bottom: 2rem;
+  list-style: none;
+}
+
+.list-group-item {
+  margin-left: 0px;
+  padding-left: .25rem;
+  border: 0px;
+  align-self: flex-start
+
+}
+
+.table {
+ margin-top: 2rem;
+ padding: 5rem;
+ border: 0;
+}
+
+.row {
+  text-align: right;
+}
+
+
+.table th {
+  color: #FBA100;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-style: regular;
+}
+
+.table th {
+  color: #FBA100;
+  text-transform: uppercase;
+  font-size: .75rem;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+strong {
+  font-weight: 600;
+}
+
+td.total {
+  border-top: 6px solid  black;
+  width: 23%;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+input[type=text] {
+  // background-color: rgba(255, 255, 255, 0.212);
+  border: 1px solid gray;
+  width: auto;
+  align-self: left;
+}
+
+input[id^="order-item"] {
+  text-align: center;
+}
+
+header#homepage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img.carousel {
+  object-fit: cover;
+  width: inherit;
+  height: 50vh;
+}
+
+div.carousel {
+  display: flex;
+  margin: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+div.carousel-item {
+  height: 20vh;
+  margin: 0
+}
+
+
+.value-button {
+  display: inline-block;
+  border: 0px;
+  margin: 0px;
+  text-align: center;
+  vertical-align: middle;
+  background: #FBA100;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.value-button:hover {
+  cursor: pointer;
+}
+
+form #decrease {
+  margin-right: -4px;
+  border-radius: 0 8px 8px 0;
+  font-size: 20px;
+}
+
+form #increase {
+  margin-left: -4px;
+  border-radius: 0 8px 8px 0;
+  font-size: 20px;
+}
+
+form #input-wrap {
+  margin: 0px;
+  padding: 0px;
+}
+
+input {
+  text-align: left;
+  border: none;
+  margin: 0px;
+  width: 40px;
+
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+section.logo {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+img.logo {
+  width: 30%;
+  height: 30%;
+}
+
+.fa-star {
+  color: #FBA100; 
+}
+
+.fa-star-o {
+  color: #FBA100; 
+}
+
+
+div.alert {
+  width: inherit;
+}
+
+div.category-index {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;  
+}
+
+div.category-container {
+  background-color: #FBA100;
+  opacity: .7;
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  height: 60vh;
+  padding: 3rem 1.5rem;
+}
+
+.category-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 175px;
+  height: 40px;
+  border: 4px solid black;
+  color:  black;
+  margin: 1rem;
+}
+
+.category-box > h5 {
+  color: black;
+  font-weight: 600;
+  margin-top: 7px;
+}
+
+.typing {
+  padding-left: 25%;
+  padding-top: 50%;
+  font-family: 'Rock Salt', cursive;
+  color:#FBA100;
 }

@@ -1,5 +1,6 @@
 class Review < ApplicationRecord
-  belongs_to :product   # singular
-
-  validates :rating, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
+  belongs_to :product
+  validates :name, presence: true
+  validates :comment, presence: true
+  validates :rating, numericality: { only_integer: true }, inclusion: 1..5
 end

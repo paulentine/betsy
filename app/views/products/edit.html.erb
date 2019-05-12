@@ -1,6 +1,16 @@
-<%# Intent for page:
+<h1>Edit Product</h1>
 
-Accessible only for merchants to edit their own products %>
-<%# Render form %>
 
-<%= render "form", locals: { button_text:"Edit Product"}%>
+<div class="container">
+    <div class="two-column-layout">
+        <%= render partial: 'form', locals: { button_text: "Save changes" } %>
+    </div>
+
+    <div class="two-column-layout">
+        <%= form_tag(product_categories_path(params[:id]), :method => "post") do%>
+     <%= label_tag(:name, "Add New Category") %>
+     <%= text_field_tag :name, "", class: "form-control" %>
+     <%= submit_tag("Create", class: "btn btn-primary") %>
+    <% end %>
+    </div>
+</div>

@@ -1,1 +1,8 @@
-<%= render partial: 'form' %>
+<h2>Add a Review</h2>
+<div class="form-group">
+<%=form_tag(product_reviews_path(@product), method: :post)%>
+Name<%=text_field(:review, :name, class: "form-control")%>
+Comment<%=text_field(:review, :comment, class: "form-control")%>
+Rating<%=text_field(:review, :rating, class: "form-control")%>
+
+<%= submit_tag "Create Review", class: "btn btn" %>

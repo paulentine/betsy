@@ -1,10 +1,11 @@
-<h3>Add a New Category</h3>
+<%= form_with model: @category do |f| %>
+  <h1>Create New Category</h1>
+  <div class="form-group">
+    <%= f.label :name, "Category name" %>
+    <%= f.text_field :name, placeholder: "Experience...", class: "form-control" %>
+    <div>
+    <%= f.submit "Create!", class: "btn btn-primary" %>
+    </div>
 
-<div class="form">
-  <%= form_for @category, validate: true do |f| %>
-  <%= f.label :category_name %>
-  <%= f.text_field :category %>
-
-  <%= f.submit "Save", class: "button" %>
-  <% end %>
-</div>
+  </div>
+  <%end%>

@@ -1,20 +1,23 @@
-# frozen_string_literal: true
-
 class Order < ApplicationRecord
-  has_many :order_items # plural
-  
-# TODO: DON'T FORGET TO REAPPLY THESE WHEN ORDER STATUS IS NO LONGER PENDING
-# ALSO: DRY UP WITH BEFORE_ACTION: FIND_MERCHANT
-  
-# validates :order_items, presence: true
-  
-  validates :email, presence: true, on: :update
-  validates :name, presence: true, on: :update
-  validates :address, presence: true, on: :update
-  validates :zipcode, presence: true, on: :update
-  validates :cc_num, presence: true, on: :update
-  validates :cc_cvv, presence: true, on: :update
-  validates :cc_expiration, presence: true, on: :update
+  has_many :order_items, inverse_of: :order
+  has_many :products, :through => :order_items
+
+  # TODO: DON'T FORGET TO REAPPLY THESE WHEN ORDER STATUS IS NO LONGER PENDING
+  # ALSO: DRY UP WITH BEFORE_ACTION: FIND_MERCHANT
+  validates :status, presence: true, inclusion: { in: %w(pending paid) }
+  validates :name, presence: true, if: :is_not_pending,
+                   format: { with: /[a-zA-Z]{2,}/, message: "name must be at least 2 characters long" }
+  validates :email, presence: true, if: :is_not_pending,
+                    format: { with: /\A[^@\s]+@[^@\s]+\z/, message: "email must contain no white spaces" }
+  validates :address, presence: true, if: :is_not_pending
+  validates :cc_num, presence: true, if: :is_not_pending,
+                     format: { with: /(\d{4}[- ]){4}\d{4}|\d{16}/, message: "card information must present 16 digits" }
+  validates :cc_expiration, presence: true, if: :is_not_pending,
+                            format: { with: /\A(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})\z/, message: "must be in format MMYYYY" }
+  validates :cc_cvv, presence: true, if: :is_not_pending,
+                     format: { with: /\A[0-9]{3}\z/, message: "must be 3 digits" }
+  validates :zip_code, presence: true, if: :is_not_pending,
+                       format: { with: /\A[0-9]{5}(?:-[0-9]{4})?\z/, message: "please input a valid postal code" }
 
   def self.validate
     return
@@ -26,32 +29,34 @@ class Order < ApplicationRecord
     elsif cc_num.length < 4
       return cc_num
     else
-      return cc_num[cc_num.length - 4,4]
+      return cc_num[cc_num.length - 4, 4]
     end
   end
 
-  def self.total_revenue(merchant)
-    order_item_hash = {}
-    item_quantity = 0
-    item_price = 0
-    total_revenue = 0
+  # I MOVED THIS METHOD TO MERCHANT MODEL FOR NOW -GRACE
 
-    array_of_arrays_oi = []
+  # def self.total_revenue(merchant)
+  #   order_item_hash = {}
+  #   item_quantity = 0
+  #   item_price = 0
+  #   total_revenue = 0
 
-    all_merchants_order_items = merchant.order_items
-    
-    all_merchants_order_items.each do |order_item|
-      product = Product.find(order_item.product_id)
-      item_price = product.price
-      item_quantity = order_item.quantity
-      order_item_hash[item_price] = item_quantity
-    end
-    
-    order_item_hash.each do |price, quantity|
-      total_revenue += price * quantity
-    end
-    return total_revenue
-  end
+  #   array_of_arrays_oi = []
+
+  #   all_merchants_order_items = merchant.order_items
+
+  #   all_merchants_order_items.each do |order_item|
+  #     product = Product.find(order_item.product_id)
+  #     item_price = product.price
+  #     item_quantity = order_item.quantity
+  #     order_item_hash[item_price] = item_quantity
+  #   end
+
+  #   order_item_hash.each do |price, quantity|
+  #     total_revenue += price * quantity
+  #   end
+  #   return total_revenue
+  # end
 
   def self.total_revenue_by_status(merchant: merchant, status: status)
     order_item_hash = {}
@@ -84,8 +89,7 @@ class Order < ApplicationRecord
     return total_revenue
   end
 
-  
-  def self.total_number_of_orders_by_status(merchant: merchant, status:status)
+  def self.total_number_of_orders_by_status(merchant: merchant, status: status)
     order_item_hash = {}
     item_quantity = 0
     total_orders = 0

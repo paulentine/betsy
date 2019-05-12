@@ -1,11 +1,13 @@
-<h2>All Categories</h2>
-
-<ul>
-<% @categories.each do |category| %>
-  <li>
-    <%= category.category %>
-  </li>
-<% end %>
-</ul>
-
-<%-# have form to add a new category here  -%>
+<div class="category-index">
+<h1>Shop by Category</h1>
+<div class="category-container">
+   
+    <% @categories.each do |category|%>
+    <%= link_to categories_products_path(category) do %>
+      <div class="category-box">
+        <h5><%= category.name %></h5>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+</div>

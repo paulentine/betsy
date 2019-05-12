@@ -1,7 +1,14 @@
-<%# Intent for this page:
 
-This page is only accessible for logged in merchants. 
-Add product, hard params %>
-<main>
-<%= render "form", locals: {button_text: "Create Product"}%>
-</main>
+<h1>Add a New Product</h1>
+<div class="container">
+    <div class="two-column-layout">
+        <%=render partial: "form", locals: { button_text: "Add new product" }%>
+    </div>
+
+    <div class="two-column-layout">
+        <%= form_with model: @category do |f| %>
+        <%end%>
+        <p>Not seeing your category? Make a new one!</p>
+        <%= link_to "Create New Category", new_category_path, class: "btn btn-primary" %>
+    </div>
+</div>

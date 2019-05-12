@@ -1,40 +1,76 @@
-// // Place all the styles related to the Products controller here.
-// // They will automatically be included in application.css.
-// // You can use Sass (SCSS) here: http://sass-lang.com/
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
 
+.two-column-layout {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  width: 40%;
+  padding: 2rem;
+     
+}
 
-div .container {
+.container {
+  display: inline-block;
+  position: relative;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: left;
   background-color: transparent;
-  border-color: transparent;
 }
 
-.new-product {
-  padding-bottom: 5em;
+.two-column-layout {
+  display: inline-block;
+  position: relative;
+  width: 40%;
+  padding: 2rem;
+     
 }
 
-.product {
+input[type="checkbox"] {
+ width: 25px;
+}
+
+li label {
+  padding-right: 0.5rem;
+  padding-left: 0;
+}
+
+ul.horizontal-group {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
-main h2 {
-  color: #FBA100;
-  font-family: 'Rock Salt', cursive;
-  text-align: center;
-  margin-left: 30%;
-  margin-bottom: 2%;
-  // font-size: 2.5em;
-  // padding-bottom: 6%;
-  width: 100%;
-  vertical-align: center;
- }
+.form-horizontal .control-label.text-left {
+  text-align: left;
+}
+// ul.horizontal-group > li {
+//     display: inline;
+//     height: 10vh;
+// }
 
-.image {
-   padding-left: 15%;
 
- }
+.comment-wrapper {
+  max-height:650px;
+}
 
- .product-details p {
-text-align: left;
- }
+
+.list-group {
+  align-items: flex-start;
+  border-bottom:1px dashed #efefef;
+  margin-bottom:25px;
+}
+        
+#reviews h5 {
+  margin-bottom: 50px;
+}
+
+.list-group-item {
+  background-color: transparent;
+}
+
+.list-group-item a {
+  background-color: #FBA100;
+  color: white;
+}

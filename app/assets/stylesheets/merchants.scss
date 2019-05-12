@@ -2,120 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.page-title {
-  text-align: center;
-  font-size: 4em;
+.btn.inactive {
+  background-color: #27AAE1;
 }
 
-.dashboard-links {
-  color: rgb(192, 31, 144);
-  text-decoration: none;
+.btn.inactive:hover {
+  background-color: #A0DAEF; 
 }
 
-.dashboard-links:hover {
-  color: green;
+li .btn {
+  background-color: lightgrey;
+  color: darkslategray;
 }
 
-.button {
-  padding: 10%;
-}
-
-.status-container {
-  background: transparent;
-  width: 500px;
-  padding-bottom: 1em;
-  padding: 5px;
-  padding-left: 2em;
-  font-size: 20px;
-  line-height: 1;
-  text-align: center;
-  height: 34px;
-  -webkit-appearance: none;
-}
-
-.filter{
-  padding-left: 5em;
-}
-
-.filter-label {
-  text-align: center;
-  font-size: 24px;
-}
-
-.dashboard-headers {
-  font-size: 2em;
-  font-weight: bold;
-}
-
-.header-padding {
-  padding-top: 2em;
-}
-
-tr {
-  font-size: 23px;
-}
-
-section {
-  padding: 2%;
-}
-
-table {
-  font-size: 2em;
-}
-
-main h2 {
-  color: #FBA100;
-  font-family: 'Rock Salt', cursive;
-  text-align: justify;
-  // font-size: 2.5em;
-  // padding-bottom: 6%;
-  width: 100%;
-  vertical-align: center;
- }
-
-.sub {
-  width: 100%;
-  border-bottom:2px solid #FBA100;
-  padding: 2px;
-}
-
-.name {
+li .btn:hover {
+  background-color: lightblue;
   color: black;
-  text-align: center;
-  font-size: 2em;
 }
 
-.table {
-  table-layout: fixed;
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 1.4em;
+ul.merchant-stats {
+margin-top: 1rem;
+display: block;
+font-size: 14px;
 }
 
-thead th:nth-child(1) {
-  width: 15%;
+.badge {
+margin-right: 1rem;
 }
-
-thead th:nth-child(2) {
-  width: 15%;
-}
-
-thead th:nth-child(3) {
-  width: 15%;
-}
-
-thead th:nth-child(4) {
-  width: 15%;
-}
-
-thead th:nth-child(5) {
-  width: 15%;
-}
-thead th:nth-child(6) {
-  width: 15%;
-}
-
-th, td {
-  padding: 20px;
-}
-

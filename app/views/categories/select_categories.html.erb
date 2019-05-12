@@ -1,0 +1,27 @@
+<%= form_with model: @product do |f| %>
+ Product is: <%= @product %>
+
+   <div>
+      <%= f.label :categories %>
+      <%if Category.all == []%>
+        No categories to display at the time. Add one!
+      <%else%>
+      <div class="col-md-4 checkbox-list">
+        <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name)%>
+        </div>
+        <%=f.submit "Add Selected", class: "btn btn-primary"%>
+</div>
+  <%end%> 
+
+
+<%end%>
+    <br>
+   <div class="form-group">
+     <%= form_tag(product_categories_path(params[:id]), :method => "post") do%>
+     <%= label_tag(:name, "Add New Category") %>
+     <%= text_field_tag :name, "", class: "form-control" %>
+     <%= submit_tag("Create", class: "btn btn-primary") %>
+    <% end %>
+  </div>
+
+  

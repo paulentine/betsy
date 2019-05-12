@@ -1,68 +1,76 @@
-<%# Intent for this page:
-May rename
+<h2><%= @merchant.username %></h2>
+  <p><%=@merchant.email %></p>
+  <ul class="merchant-stats">
+    <li><strong>Total revenue:</strong> <%= number_to_currency(@merchant.total_revenue) %></li>
+    <li><span class="badge badge-pill badge-info"><%= @merchant.orders.where(status: "paid").count %></span><strong>Completed Orders:</strong> <%= number_to_currency(@merchant.paid_order_items) %></li>
+    <li><span class="badge badge-pill badge-info"><%= @merchant.orders.where(status: "pending").count %></span><strong>Pending Orders:</strong> <%= number_to_currency(@merchant.pending_order_items) %></li>
+  </ul>
 
-This page is meant to shows the merchant's products.
-Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible once logged in %>
-
-<main>
-  
-  <h1 class="page-title">Merchant Dashboard</h1>
-  
-  <section class="merchant-info">
-    <h2 class ="name">Username : <%= @current_merchant.username %><h2>
-    <%# <% if @merchant.image %>
-    <%# <%= image_tag @merchant.image %> 
-    <%# <% end %> 
-    <%# <% if @merchant.username %>
-    <h2 class="dashboard-headers" class="sub">Merchant Actions</h2>
-     
-    <%# <% end %> 
-  </section>
-
-  <section>
-    <button type="button"><%= link_to "Add Categories", new_category_path %></button>
-    <button type="button"><%= link_to "Add Products", new_product_path(@current_merchant.id) %></button>
-  </section>
-
-  <section>
-    <h2 class="dashboard-headers"> List of Products</h2>
-    <table class="table table-borderless table-hover">
-
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-          <th class="hidden">Stock</th>
+<br><section class="merchant-products">
+  <table class="table">
+    <h4>My Products</h4>
+    <thead class="thead-light">
+      <tr>
+        <th>Name</th>
+        <th>Categories</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>In Stock</th>
+        <% session[:merchant_id] == @merchant.id %>
           <th>Update</th>
-          <th>Retire</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @current_merchant.products.each do |product| %>
+          <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @merchant.products.order(:id).each do |product| %>
         <tr>
-          <td><%= link_to product.name, product_path(product), class:"dashboard-links" %></td>
-          <td>$<%=(product.price) %></td>
-          <td class="hidden"><%= product.quantity%></td>
+          <td><%= product.name %></td>
           <td>
-            <% if product %>
-              <button type="button"><%= link_to "Update", edit_product_path(product.id) %></button>
+        
+            <% product.categories.each do |category| %>
+              <span class="badge badge-light"><%= category.name %></span>
+            <%end %>
+
+          </td>
+          <td><%= number_to_currency(product.price) %></td>
+          <td><%= product.description %></td>
+          <td><%= product.stock %></td>
+          <td><%= link_to "Update", edit_product_path(product), class: "btn btn-primary" %></td>
+          <td>
+            <% if product.active? %>
+            <%= link_to "Active", update_status_product_path(product), class: "btn btn-primary", method: :patch %>
             <% else %>
-              <span class="button disabled">Update</span>
+            <%= link_to "Inactive", update_status_product_path(product), class: "btn btn-primary inactive", method: :patch %>
             <% end %>
           </td>
-          <td> 
-            <%# if product.is_active %> 
-              <%#= link_to "Retire", product_set_status_path(product.id), method: :put %>
-             <%#= else %>
-              <%#= link_to "Reactivate", product_set_status_path(product.id), method: :put %>
-            <%# end %>
-          </td>
-
         </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </section>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+<br>
+<br>
+
+
+<h4>My Orders</h4>
+<table class="table">
+  <thead  class="thead-light">
+    <tr>
+      <th scope="col">Order #</th>
+      <th scope="col">Created On</th>
+      <th scope="col">Status</th>   
+    </tr>
+  </thead>
+  <tbody>
+    <% @merchant.orders.each do |order| %>
+      <tr>
+        <td scope="row"><%= link_to "#00000#{order.id}", order_confirmation_path(order) %></td>
+        <td><%= link_to order.created_at.strftime("%B %d, %Y"), order_path(order.id) %></td> 
+        <td><%= order.status %></td>   
+      </tr>
+    <% end %>
+
+
   <section>
     <h2 class="dashboard-headers">Order Statistics</h2>
 
@@ -138,6 +146,3 @@ Nav bar options for "Add Product" and "Order Fulfillment" becomes accessible onc
       </tbody>
     </table>
   </section>
-
-  </section>    
-</main>

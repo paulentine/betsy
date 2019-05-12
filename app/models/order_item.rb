@@ -1,7 +1,10 @@
 class OrderItem < ApplicationRecord
   belongs_to :order
   belongs_to :product
+  has_one :merchant, through: :product
 
+  validates :order, presence: true
+  validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
   def self.cart_total(order_items)
     total = 0
@@ -21,5 +24,10 @@ class OrderItem < ApplicationRecord
       total += quantity * price
     end
     return total
+  end
+
+  def reduce_product_stock
+    current_stock = self.product.quantity - self.quantity
+    return self.product.update(quantity: current_stock)
   end
 end

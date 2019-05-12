@@ -1,90 +1,40 @@
-<main>
-
-  <div class="container">
-
-  <%@product.categories.each do |category|%>
-      <%= link_to category.name, category_products_path(category_id:category.id) %>
-  <%end%>
-  <h2><%= @product.name%></h2>
-  <section class="image">
-  <% if @product.photo_url != nil%>
-    <%= image_tag(@product.photo_url, height: "400", alt: @product.name) %>
+<h2><%= @product.name %></h2>
+<div class="card" style="width: 30rem;">
+  <%= image_tag "#{@product.photo_url}", alt: "product image", class: "card-img-top" %>
+</div>
+<ul class="list-group">
+  <li class="list-group-item">Price: <%=number_to_currency(@product.price) %></li>
+  <li class="list-group-item">Quantity in stock: <%=@product.quantity%></li>
+  <li class="list-group-item">Description: <%=@product.description %></li>
+  <li class="list-group-item"><%= link_to "Add to cart", cart_path(@product), method: :post, class: "btn btn-primary btn-lg" %></li>
+</ul>
+<br>
+<br>
+<div class="comment-wrapper">
+  <div id="reviews">
+    <%if @product.reviews.count == 1%>
+      <h5><strong><%=@product.reviews.count%> customer review</strong></h5>
+    <%else%>
+      <h5><strong><%=@product.reviews.count%> customer reviews</strong></h5>
+    <%end%>
+    <%@product.reviews.each do |review|%>
+      <ul class="list-group">
+        <li class="text-success", class="list-group-item"><strong><%=review.name%></strong></li>
+        <span class="text-muted pull-right">
+          <small><%=review.created_at.strftime("%B %d, %Y at %I:%M %p")%></small>
+        </span>
+        <span><% review.rating.to_i.times do  %>
+          <i class="fa fa-star", aria-hidden="true"></i>
+        <% end %>
+        <% (5-review.rating).to_i.times do  %>
+          <i class="fa fa-star-o", aria-hidden="true"> </i>
+        <% end %></span>
+        <li class="list-group-item"><%=review.comment%></li>
+      </ul>
     <% end %>
-  </section>
-  <section class = "product-details">
-      <h2>Description:</h2>
-      <p> <%=@product.description%> </p>
-      <p> <%=@product.quantity%> in stock</p>
-      <h3>$<%= number_with_precision(@product.price, :precision => 2, :delimiter => ',')%></h3>
-
-      <div class = "add-to-cart">
-          <%= form_with model: @product.order_items.new do|f|%>
-              <%= f.label :quantity%>
-              <%= f.number_field :quantity, in: 1..20, step: 1 %>
-              <%= f.hidden_field :product_id, value: @product.id%>
-              <%= f.hidden_field :order_id, value: @current_order.id%>
-              <%= f.submit "Add to cart"%>
-          <% end %>
-      </div>
-  </section>
-
-  <section class="review">
-      <div class="review-form">
-          <%= form_with model: @review, url: product_reviews_path(product_id:@product.id), method: :post do |f|%>
-              <div class=field>
-                  <h4>Rate this product: </h4>
-                  <%= f.radio_button(:rating, 1) %>
-                  <%=f.label :rating, value:1 do %>
-                      ⭐️
-                  <%end%>
-                  <%= f.radio_button(:rating, 2) %>
-                  <%=f.label :rating, value:2 do %>
-                      ⭐️⭐️
-                  <%end%>
-                  <%= f.radio_button(:rating, 3, checked:true) %>
-                  <%=f.label :rating, value:3 do %>
-                      ⭐️⭐️⭐️
-                  <%end%>
-                  <%= f.radio_button(:rating, 4) %>
-                  <%=f.label :rating, value:4 do %>
-                      ⭐️⭐️⭐️⭐️
-                  <%end%>
-                  <%= f.radio_button(:rating, 5) %>
-                  <%=f.label :rating, value:5 do %>
-                      ⭐️⭐️⭐️⭐️⭐️
-                  <%end%>
-              </div>
-
-              <div class="field">
-                  <%=f.label :title, "Review Title"%>
-                  <%=f.text_field :title%>
-              </div>
-
-              <div class="field">
-                  <%=f.label :text, "Review:"%>
-                  <%=f.text_area :text%>
-              </div>
-
-              <div class="action">
-                  <%=f.submit "Review this product!"%>
-              </div>
-          <%end%>
-
-          <h2> All Reviews </h2>
-          <%unless @product.reviews.any?%>
-              <p>This product has yet to be reviewed!</p>
-          <%else%>
-              <% @product.reviews.each do |review|%>
-                  <h3><%=review.title ? review.title : "(untitled)"%></h3>
-                  <p><%=time_ago_in_words(review.created_at)%> ago</p>
-                  <% review.rating.times do%>
-          
-                  <%end%>
-                  <p><%=review.text%></p>
-              <%end%>
-          <%end%>
-      </div>
-      
-  </section>
+    <%=link_to "Write a customer review", new_product_review_path(@product), class: "btn btn-sm"%>
   </div>
-</main>
+</div>
+
+
+

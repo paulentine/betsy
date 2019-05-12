@@ -1,12 +1,9 @@
-<%# Intent for this page:
-
-This is the Explore Experiences page from our design meeting.
-A few options to explore categories, with a random product list below. %>
+<h1>Products</h1>
 
 
-<main>
 
-<h2> Expy Experiences </h2>
-  <%= render partial: "shop", locals: { product_list: @products } %>
-
-  </main>
+<div class="container-fluid">
+  <div class="card-deck">
+    <%= render @products %>
+  </div>
+</div>
