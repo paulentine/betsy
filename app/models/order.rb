@@ -3,10 +3,7 @@
 class Order < ApplicationRecord
   has_many :order_items # plural
   
-# TODO: DON'T FORGET TO REAPPLY THESE WHEN ORDER STATUS IS NO LONGER PENDING
-# ALSO: DRY UP WITH BEFORE_ACTION: FIND_MERCHANT
-  
-# validates :order_items, presence: true
+  validates :order_items, presence: true, on: :update
   
   validates :email, presence: true, on: :update
   validates :name, presence: true, on: :update
@@ -16,9 +13,6 @@ class Order < ApplicationRecord
   validates :cc_cvv, presence: true, on: :update
   validates :cc_expiration, presence: true, on: :update
 
-  def self.validate
-    return
-  end
 
   def self.last4_ccnum(cc_num)
     if cc_num.nil?

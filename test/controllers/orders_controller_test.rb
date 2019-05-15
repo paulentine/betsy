@@ -5,6 +5,51 @@ describe OrdersController do
     @merchant = Merchant.first
   end
 
+  describe "session has order id" do
+    it "add to cart creates a new order if session[:order_id] is empty" do
+      order_item_hash = {
+        order_item: {
+          product_id: Product.last.id,
+          quantity: 1,
+        },
+      }
+      expect {
+        post order_items_path, params: order_item_hash
+      }.must_change 'Order.count', 1
+
+      expect(session[:order_id]).must_equal Order.last.id
+    end
+
+    it "accesses the correct order if session has order_id" do
+      order_item_hash = {
+        order_item: {
+          product_id: Product.first.id,
+          quantity: 1,
+        },
+      }
+
+      expect {
+        post order_items_path, params: order_item_hash
+      }.must_change 'Order.count', 1
+      
+      expect(session[:order_id]).must_equal Order.last.id
+      
+      # Adding another order item to this order won't change Order count
+      order_item_two = {
+        order_item: {
+          product_id: Product.last.id,
+          quantity: 1,
+        },
+      }
+
+      expect {
+        post order_items_path, params: order_item_two
+      }.wont_change 'Order.count'
+
+      expect(session[:order_id]).must_equal Order.last.id
+    end
+  end
+
   describe "new" do
     it "returns status code 200" do
       get new_order_path
