@@ -8,10 +8,12 @@ class OrderItemsController < ApplicationController
   def create
     if @item
       if is_positive? && enough_stock?
-        @item.quantity += order_item_params[:quantity].to_i
+        @item.quantity = order_item_params[:quantity].to_i
         @item.save
         redirect_to cart_path
       else
+        flash[:status] = :error
+        flash[:message] = "This experience only has #{@item.product.quantity} left in stock"
         redirect_to request.referrer
       end
     else
@@ -23,9 +25,15 @@ class OrderItemsController < ApplicationController
   end
 
   def update 
-    @item.quantity = order_item_params[:quantity].to_i
-    @item.save
-    redirect_to cart_path
+    if is_positive? && enough_stock?
+      @item.quantity = order_item_params[:quantity].to_i
+      @item.save
+      redirect_to cart_path
+    else
+      flash[:status] = :error
+      flash[:message] = "This experience only has #{@item.product.quantity} left in stock"
+      redirect_to request.referrer
+    end
   end
 
   def destroy # Remove from cart
