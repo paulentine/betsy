@@ -4,24 +4,16 @@ class OrdersController < ApplicationController
   before_action :find_order, only: %i[destroy order_items_order confirmation]
   skip_before_action :require_login, only: [:new, :create, :confirmation, :order_items_order, :checkout]
 
-  def index
-    merchant = @current_merchant
-    if merchant
-        @orders = merchant.orders
-    else
-        head :not_found
-        return
-    end
-  end
 
   def checkout
-    current_order.update(order_params)
+    #current_order.update(order_params)
     complete = current_order.valid?
     if complete
     #   current_order.order_items.each do |item|
     #     item.enough_stock?
     #   end
       current_order.status = "paid"
+      current_order.save
       redirect_to confirmation_path(current_order)
       session[:order_id] = nil
     else
@@ -36,7 +28,7 @@ class OrdersController < ApplicationController
 
   def order_items_order; end
 
-  def merchant_orders_list; end
+  # def merchant_orders_list; end
 
   def show
     @order = Order.find_by(id: params[:id])

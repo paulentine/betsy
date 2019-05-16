@@ -1,9 +1,7 @@
 require "test_helper"
 
 describe OrdersController do
-  before do
-    @merchant = Merchant.first
-  end
+  
 
   describe "new" do
     it "returns status code 200" do
@@ -13,22 +11,34 @@ describe OrdersController do
   end
 
   describe "checkout" do
-    it "redirect to confirmation page after checkout" do
-      @current_order = Order.new
-      order_params = {
-        order: {
-          email: "james.gmail.com",
-          name: "Jesse James",
-          address: "465 Prince St.",
-          zipcode: "10128",
-          cc_num: "2345786",
-          cc_cvv: "456",
-          cc_expiration: "8/20",
-        }
-      }
-      patch checkout_path(@current_order.id)
+    before do
+      get cart_path 
+      @order = Order.last
+    end
 
-      must_redirect_to confirmation_path(Order.last.id)
+    it "redirects to confirmation page after checkout" do
+      @order.update(
+        email: "julie@gmail.com",
+        name: "Julie Taylor",
+        address: "6805 De Paul Cove, Austin, Texas",
+        zipcode: "78723",
+        cc_num: "17285678",
+        cc_cvv: "455",
+        cc_expiration: "06/13/22"
+      )   
+      patch checkout_path
+      @order.reload
+      must_redirect_to confirmation_path(@order)
+      expect(@order.status).must_equal "paid"
+    end
+
+    it "redirects to the cart if the order is not valid and returns error message" do
+      
+      patch checkout_path(@order.id)
+      @order.reload
+      must_redirect_to checkout_cart_path
+
+      expect(@order.status).must_equal "pending"
     end
   end
 
@@ -54,22 +64,6 @@ describe OrdersController do
   describe "Logged in users" do
     before do
       perform_login
-    end
-    describe "index" do
-      it "can get index" do
-        get orders_path
-
-        must_respond_with :success
-      end
-
-      it "returns a 404 error if merchant is not found" do
-
-        @current_merchant = Merchant.find_by(id: 565)
-        get orders_path
-
-        must_respond_with :not_found
-      end
-
     end
 
     describe "show" do
@@ -109,17 +103,4 @@ describe OrdersController do
       end
     end
   end
-
-  describe "guest users" do
-    it "requires login for index" do
-      get merchant_orders_path(@merchant.id)
-      must_redirect_to login_path
-    end
-
-    it "requires login for show" do
-      get merchant_order_path(id: Order.first.id, merchant_id: @merchant.id)
-      must_redirect_to login_path
-    end
-  end
-  
 end

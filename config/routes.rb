@@ -19,10 +19,8 @@ Rails.application.routes.draw do
 
   # Merchants
   resources :merchants, except: %i[destroy edit update] do
-    resources :orders, only: %i[index show]
+    resources :orders, only: %i[show]
   end
-
-  get 'merchant-orders-list', to: 'orders#merchant_orders_list', as: 'merchant_orders_list'
 
   # Login-related
   get '/merchant/current', to: 'merchants#current', as: 'current_merchant'

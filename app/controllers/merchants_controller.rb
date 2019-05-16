@@ -2,7 +2,7 @@
 
 class MerchantsController < ApplicationController
   before_action :find_merchant, only: [:show, :new]
-  skip_before_action :require_login, only: [:create, :show]
+  skip_before_action :require_login, only: [:create]
 
   def index
     @merchants = Merchant.all

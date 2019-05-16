@@ -62,4 +62,21 @@ describe MerchantsController do
       must_respond_with :ok
     end
   end
+
+  describe "guest users" do
+    before do
+      @merchant = Merchant.first
+    end
+
+    it "requires login for show" do
+      get merchant_path(@merchant.id)
+      must_redirect_to login_path
+    end
+
+    it "requires login for current" do
+      get current_merchant_path
+      must_redirect_to login_path
+    end
+  end
+
 end
