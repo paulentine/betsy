@@ -16,18 +16,26 @@ class OrdersController < ApplicationController
 
   def checkout
     current_order.update(order_params)
-    current_order.each do |order_item|
-      if !order_item.is_positive? || !order_item.enough_stock?
+
+    current_order.order_items.each do |order_item|
+      unless (order_item.check_quantity)
         flash[:status] = :error
         flash[:message] = "#{order_item} only has #{@item.product.quantity} left in stock"
         redirect_to checkout_cart_path
       end
     end
+
     complete = current_order.valid?
     if complete
+      # Update quantity in db
+      current_order.order_items.each do |order_item|
+        order_item.product.quantity -= order_item.quantity
+      end
+      # Mark as paid
       current_order.status = "paid"
       current_order.save
       redirect_to confirmation_path(current_order)
+      # Clears shopping cart
       session[:order_id] = nil
     else
       flash[:status] = :error
