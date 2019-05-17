@@ -9,8 +9,11 @@ class OrderItemsController < ApplicationController
     if @item
       if is_positive? && enough_stock?
         @item.quantity = order_item_params[:quantity].to_i
+        @item.product.quantity -= order_item_params[:quantity].to_i
+        @item.product.save
         @item.save
         redirect_to cart_path
+        raise
       else
         flash[:status] = :error
         flash[:message] = "This experience only has #{@item.product.quantity} left in stock"
@@ -27,6 +30,7 @@ class OrderItemsController < ApplicationController
   def update 
     if is_positive? && enough_stock?
       @item.quantity = order_item_params[:quantity].to_i
+      @item.product.quantity -= order_item_params[:quantity].to_i
       @item.save
       redirect_to cart_path
     else
@@ -48,23 +52,21 @@ class OrderItemsController < ApplicationController
   end
 
   def is_positive?
-    if order_item_params[:quantity].to_i < 1
-      flash[:status] = :error
-      flash[:message] = "Quantity must be 1 or greater"
-      return false
-    else
-      return true
-    end
+    order_item_params[:quantity].to_i > 1 ? true : false
   end
 
   def enough_stock?
-    if @item.product.quantity < order_item_params[:quantity].to_i
-      flash[:status] = :error
-      flash[:message] = "Not enough stock"
-      return false
-    else
-      return true
-    end
+    (@item.product.quantity) >= (order_item_params[:quantity].to_i) ? true : false
+  end
+
+  def flash_not_positive
+    flash[:status] = :error
+    flash[:message] = "Quantity must be 1 or greater"
+  end
+
+  def flash_not_enough_stock
+    flash[:status] = :error
+    flash[:message] = "Not enough stock"
   end
 
   private
