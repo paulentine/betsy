@@ -22,4 +22,8 @@ class OrderItem < ApplicationRecord
     end
     return total
   end
+
+  def check_quantity
+    return true if (self.quantity > 0) && (self.product.quantity > self.quantity)
+  end
 end
